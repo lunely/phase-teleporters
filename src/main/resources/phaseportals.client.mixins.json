@@ -1,7 +1,0 @@
-{
-  "required": true,
-  "package": "example.phaseportals.mixin",
-  "compatibilityLevel": "JAVA_21",
-  "client": ["DownloadingTerrainScreenMixin"],
-  "injectors": { "defaultRequire": 1 }
-}

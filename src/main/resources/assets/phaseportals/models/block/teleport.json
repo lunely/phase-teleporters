@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "side": "phaseportals:block/teleport_side",
-    "top": "phaseportals:block/teleport_top",
-    "bottom": "phaseportals:block/teleport_side"
-  }
-}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["POP", "OTO", "POP"],
+  "key": {
+    "P": { "item": "phaseteleports:phase_alloy" },
+    "O": { "item": "phaseteleports:refined_obsidian_ingot" },
+    "T": { "item": "phaseteleports:teleport" }
+  },
+  "result": { "id": "phaseteleports:interdimensional_teleport", "count": 1 }
+}

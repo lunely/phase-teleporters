@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "phaseteleports:block/crusher_side",
+    "top": "phaseteleports:block/crusher_top",
+    "bottom": "phaseteleports:block/crusher_side"
+  }
+}

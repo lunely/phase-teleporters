@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:crafting_shaped",
-  "pattern": ["OOO", "OGO", "OOO"],
-  "key": {
-    "O": { "item": "phaseportals:refined_obsidian_ingot" },
-    "G": { "item": "minecraft:glowstone_dust" }
-  },
-  "result": { "id": "phaseportals:teleportation_frame", "count": 1 }
-}

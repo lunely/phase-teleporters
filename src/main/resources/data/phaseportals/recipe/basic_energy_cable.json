@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:crafting_shaped",
-  "pattern": ["IRI"],
-  "key": {
-    "I": { "item": "minecraft:iron_ingot" },
-    "R": { "item": "minecraft:redstone" }
-  },
-  "result": { "id": "phaseportals:basic_energy_cable", "count": 1 }
-}

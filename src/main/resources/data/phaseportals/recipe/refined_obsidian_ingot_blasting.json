@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "category": "misc",
-  "ingredient": { "item": "phaseportals:purified_obsidian_dust" },
-  "result": { "id": "phaseportals:refined_obsidian_ingot", "count": 1 },
-  "experience": 0.1,
-  "cookingtime": 100
-}

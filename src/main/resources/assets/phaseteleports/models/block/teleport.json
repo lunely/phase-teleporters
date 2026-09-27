@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "phaseteleports:block/teleport_side",
+    "top": "phaseteleports:block/teleport_top",
+    "bottom": "phaseteleports:block/teleport_side"
+  }
+}

@@ -1,6 +1,0 @@
-{
-  "multipart": [
-    { "when": { "axis": "x" }, "apply": { "model": "phaseportals:block/interdimensional_portal_plane_x" } },
-    { "when": { "axis": "z" }, "apply": { "model": "phaseportals:block/interdimensional_portal_plane_z" } }
-  ]
-}
