@@ -5,4 +5,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'phase-portals'
+rootProject.name = 'phase-teleports'
