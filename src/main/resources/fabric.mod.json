@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "phaseportals",
   "version": "${version}",
-  "name": "Phase Portals",
+  "name": "Phase Teleports",
   "environment": "*",
   "mixins": ["phaseportals.client.mixins.json"],
   "entrypoints": {
