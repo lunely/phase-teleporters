@@ -6,6 +6,8 @@ Phase Teleports is designed for technology-focused modpacks with many dimensions
 
 The goal is simple: provide a compact technological progression around teleportation without requiring a huge technology mod just to get reliable interdimensional travel.
 
+> **Note:** Phase Teleports is not designed as a standalone mod. It is intended to be used alongside other technology and progression mods as part of a larger modpack.
+
 **Recommended:** Play with JEI installed to easily view Phase Teleports recipes.
 
 ## Features
