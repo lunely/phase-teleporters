@@ -1,6 +1,13 @@
 .gradle/
+.gradle-audit/
 build/
+out/
 run/
+runs/
 .idea/
 *.iml
+*.class
+*.log
 work/
+.DS_Store
+Thumbs.db
