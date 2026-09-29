@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "phaseteleporters:block/infusion_station",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "phaseteleporters:block/infusion_station"
+    },
+    "facing=west": {
+      "model": "phaseteleporters:block/infusion_station",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "phaseteleporters:block/infusion_station",
+      "y": 180
+    }
+  }
+}

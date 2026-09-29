@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [" R ", "IAI", "ICI"],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "A": { "item": "phaseteleporters:basic_alloy" },
+    "R": { "item": "minecraft:redstone" },
+    "C": { "item": "minecraft:coal" }
+  },
+  "result": { "id": "phaseteleporters:battery", "count": 1 }
+}

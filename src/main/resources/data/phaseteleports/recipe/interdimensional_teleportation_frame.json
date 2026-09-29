@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:crafting_shaped",
-  "pattern": ["OOO", "OFO", "OOO"],
-  "key": {
-    "O": { "item": "phaseteleports:refined_obsidian_ingot" },
-    "F": { "item": "phaseteleports:teleportation_frame" }
-  },
-  "result": { "id": "phaseteleports:interdimensional_teleportation_frame", "count": 1 }
-}

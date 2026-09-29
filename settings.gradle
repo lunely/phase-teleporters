@@ -5,4 +5,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'phase-teleports'
+rootProject.name = 'phase-teleporters'

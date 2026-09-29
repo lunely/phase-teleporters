@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for Phase Teleports
+about: Suggest an idea for Phase Teleporters
 title: "[Feature]"
 labels: enhancement
 assignees: ''
@@ -13,7 +13,7 @@ Describe your idea.
 
 ## Why would it be useful?
 
-Explain how it would improve Phase Teleports.
+Explain how it would improve Phase Teleporters.
 
 ## How should it work?
 

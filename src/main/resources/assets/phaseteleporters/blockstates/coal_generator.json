@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "y": 90,
+      "model": "phaseteleporters:block/coal_generator"
+    },
+    "facing=west": {
+      "y": 270,
+      "model": "phaseteleporters:block/coal_generator"
+    },
+    "facing=south": {
+      "y": 180,
+      "model": "phaseteleporters:block/coal_generator"
+    },
+    "facing=north": {
+      "model": "phaseteleporters:block/coal_generator"
+    }
+  }
+}

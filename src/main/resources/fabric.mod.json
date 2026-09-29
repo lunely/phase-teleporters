@@ -1,19 +1,19 @@
 {
   "schemaVersion": 1,
-  "id": "phaseteleports",
+  "id": "phaseteleporters",
   "version": "${version}",
-  "name": "Phase Teleports",
+  "name": "Phase Teleporters",
   "environment": "*",
-  "mixins": ["phaseteleports.client.mixins.json"],
+  "mixins": ["phaseteleporters.client.mixins.json"],
   "entrypoints": {
     "main": [
-      "example.phaseteleports.PhaseTeleportsMod"
+      "example.phaseteleporters.PhaseTeleportersMod"
     ],
     "client": [
-      "example.phaseteleports.PhaseTeleportsClient"
+      "example.phaseteleporters.PhaseTeleportersClient"
     ],
     "jei_mod_plugin": [
-      "example.phaseteleports.jei.InfusionJeiPlugin"
+      "example.phaseteleporters.jei.InfusionJeiPlugin"
     ]
   },
   "depends": {

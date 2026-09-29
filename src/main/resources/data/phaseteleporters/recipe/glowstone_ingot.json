@@ -1,0 +1,5 @@
+{
+  "type": "phaseteleporters:enrichment",
+  "ingredient": { "item": "minecraft:glowstone_dust" },
+  "result": { "id": "phaseteleporters:glowstone_ingot", "count": 1 }
+}

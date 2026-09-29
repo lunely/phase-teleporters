@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "phaseteleporters:block/coal_generator_top",
+    "front": "phaseteleporters:block/coal_generator_front",
+    "bottom": "phaseteleporters:block/coal_generator",
+    "side": "phaseteleporters:block/coal_generator"
+  }
+}

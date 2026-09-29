@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IGI",
+    "GXG",
+    "IGI"
+  ],
+  "key": {
+    "I": { "item": "phaseteleporters:steel_ingot" },
+    "G": { "item": "minecraft:glass" },
+    "X": { "item": "phaseteleporters:steel_ingot" }
+  },
+  "result": {
+    "id": "phaseteleporters:machine_casing",
+    "count": 1
+  }
+}

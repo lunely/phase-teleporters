@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [" B ", "CTC", " B "],
+  "key": {
+    "B": { "item": "phaseteleporters:battery" },
+    "C": { "item": "phaseteleporters:basic_control_circuit" },
+    "T": { "item": "phaseteleporters:teleportation_core" }
+  },
+  "result": { "id": "phaseteleporters:portable_teleporter", "count": 1 }
+}

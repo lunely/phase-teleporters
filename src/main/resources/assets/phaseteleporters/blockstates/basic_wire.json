@@ -1,0 +1,11 @@
+{
+  "multipart": [
+    { "apply": { "model": "phaseteleporters:block/basic_energy_cable_core" } },
+    { "when": { "north": "true" }, "apply": { "model": "phaseteleporters:block/basic_energy_cable_arm" } },
+    { "when": { "south": "true" }, "apply": { "model": "phaseteleporters:block/basic_energy_cable_arm", "y": 180 } },
+    { "when": { "east": "true" }, "apply": { "model": "phaseteleporters:block/basic_energy_cable_arm", "y": 90 } },
+    { "when": { "west": "true" }, "apply": { "model": "phaseteleporters:block/basic_energy_cable_arm", "y": 270 } },
+    { "when": { "up": "true" }, "apply": { "model": "phaseteleporters:block/basic_energy_cable_arm_up" } },
+    { "when": { "down": "true" }, "apply": { "model": "phaseteleporters:block/basic_energy_cable_arm_down" } }
+  ]
+}

@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "phaseteleports:block/creative_energy_cube"
-  }
-}

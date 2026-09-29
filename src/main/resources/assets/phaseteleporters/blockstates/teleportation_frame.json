@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "phaseteleporters:block/teleportation_frame" }
+  }
+}

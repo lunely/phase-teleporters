@@ -1,0 +1,5 @@
+{
+  "type": "phaseteleporters:enrichment",
+  "ingredient": { "item": "minecraft:coal" },
+  "result": { "id": "phaseteleporters:enriched_coal", "count": 1 }
+}

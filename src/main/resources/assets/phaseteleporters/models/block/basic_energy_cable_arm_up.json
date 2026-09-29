@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": { "all": "phaseteleporters:block/basic_energy_cable", "particle": "phaseteleporters:block/basic_energy_cable" },
+  "elements": [
+    {
+      "from": [6, 11, 6], "to": [10, 16, 10],
+      "faces": {
+        "north": { "texture": "#all" }, "south": { "texture": "#all" },
+        "east": { "texture": "#all" }, "west": { "texture": "#all" },
+        "up": { "texture": "#all" }, "down": { "texture": "#all" }
+      }
+    }
+  ]
+}

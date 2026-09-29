@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a problem with Phase Teleports
+about: Report a problem with Phase Teleporters
 title: "[Bug]"
 labels: bug
 assignees: ''
@@ -22,7 +22,7 @@ Describe the bug clearly.
 - Minecraft version:
 - Fabric Loader version:
 - Fabric API version:
-- Phase Teleports version:
+- Phase Teleporters version:
 
 ## Other mods
 

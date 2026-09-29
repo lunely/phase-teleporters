@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["LGL", "PDP", "LGL"],
+  "key": {
+    "L": { "item": "minecraft:lapis_lazuli" },
+    "G": { "item": "minecraft:gold_ingot" },
+    "P": { "item": "phaseteleporters:phase_alloy" },
+    "D": { "item": "minecraft:diamond" }
+  },
+  "result": { "id": "phaseteleporters:teleportation_core", "count": 1 }
+}

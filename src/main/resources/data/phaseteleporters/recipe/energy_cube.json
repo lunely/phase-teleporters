@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["RBR", "ICI", "RBR"],
+  "key": {
+    "R": { "item": "minecraft:redstone" },
+    "I": { "item": "minecraft:iron_ingot" },
+    "B": { "item": "phaseteleporters:battery" },
+    "C": { "item": "phaseteleporters:machine_casing" }
+  },
+  "result": { "id": "phaseteleporters:energy_cube", "count": 1 }
+}

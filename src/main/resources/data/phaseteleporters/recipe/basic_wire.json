@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["WIW"],
+  "key": {
+    "W": { "tag": "minecraft:wool" },
+    "I": { "item": "minecraft:iron_ingot" }
+  },
+  "result": { "id": "phaseteleporters:basic_wire", "count": 3 }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=west": {
+      "y": 270,
+      "model": "phaseteleporters:block/crusher"
+    },
+    "facing=north": {
+      "model": "phaseteleporters:block/crusher"
+    },
+    "facing=south": {
+      "y": 180,
+      "model": "phaseteleporters:block/crusher"
+    },
+    "facing=east": {
+      "y": 90,
+      "model": "phaseteleporters:block/crusher"
+    }
+  }
+}

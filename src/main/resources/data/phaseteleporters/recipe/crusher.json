@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["RCR", "LHL", "RCR"],
+  "key": {
+    "R": { "item": "minecraft:redstone" },
+    "C": { "item": "phaseteleporters:basic_control_circuit" },
+    "L": { "item": "minecraft:lava_bucket" },
+    "H": { "item": "phaseteleporters:machine_casing" }
+  },
+  "result": {
+    "id": "phaseteleporters:crusher",
+    "count": 1
+  }
+}

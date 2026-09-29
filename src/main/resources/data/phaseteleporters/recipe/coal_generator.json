@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["CCC", "IFI", "IKI"],
+  "key": {
+    "C": { "item": "minecraft:copper_ingot" },
+    "I": { "item": "minecraft:iron_ingot" },
+    "F": { "item": "minecraft:furnace" },
+    "K": { "item": "phaseteleporters:basic_wire" }
+  },
+  "result": { "id": "phaseteleporters:coal_generator", "count": 1 }
+}
