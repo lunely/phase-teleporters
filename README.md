@@ -18,9 +18,6 @@ The goal is simple: provide a compact teleportation-focused progression without 
 - **Quantum Teleporter** — transfers energy, items and fluids between linked locations.
 - **Emergency Teleporter**
 
-### Chunk Loader Upgrade
-Keeps the chunk containing a teleport controller loaded.
-
 ## Modpack Use
 Phase Teleporters is intended to work well in modpacks with many dimensions.
 
