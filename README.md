@@ -15,7 +15,7 @@ The goal is simple: provide a compact teleportation-focused progression without 
 - **Local Teleporter** — teleports players between linked locations within the same dimension.
 - **Interdimensional Teleporter** — teleports players between linked locations across different dimensions.
 - **Portable Teleporter** — lets the player teleport to linked frequencies without needing a portal at their current location.
-- **Quantum Teleporter** — transfers energy, items and fluids between linked locations and can pull items directly from adjacent chests.
+- **Quantum Teleporter** — transfers energy, items and fluids between linked locations. It can also pull items directly from adjacent chests.
 - **Emergency Teleporter**
 
 ## Compatibility
