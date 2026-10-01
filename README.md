@@ -18,6 +18,13 @@ The goal is simple: provide a compact teleportation-focused progression without 
 - **Quantum Teleporter** — transfers energy, items and fluids between linked locations.
 - **Emergency Teleporter**
 
+## Compatibility
+
+Phase Teleporters supports:
+
+- **Team Reborn Energy API** for energy compatibility
+- **Fabric Transfer API** for item and fluid compatibility
+
 ## Modpack Use
 Phase Teleporters is intended to work well in modpacks with many dimensions.
 
