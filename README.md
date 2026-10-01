@@ -10,29 +10,13 @@ The goal is simple: provide a compact teleportation-focused progression without 
 
 **Recommended:** Play with JEI installed to easily view Phase Teleporters recipes.
 
-## Features
+## Teleports
 
-### Local Teleports
-Create teleport networks for fast travel within the same dimension.
-
-- Public and private frequencies
-- Custom frequency colors
-- Multiple teleports can share the same frequency
-- Configurable portal sizes
-
-### Interdimensional Teleports
-Connect teleports between different dimensions.
-
-- Separate frequency system from Local Teleports
-- Works with vanilla and modded dimensions
-- Public and private frequencies
-- Custom frequency colors
-
-### Portable Teleporter
-Carry teleportation with you and travel to linked frequencies without needing a portal at your current location.
-
-### Energy
-Teleports and supporting technology use energy to operate.
+- Local Teleporter
+- Interdimensional Teleporter
+- Portable Teleporter
+- Quantum Teleporter
+- Emergency Teleporter
 
 ### Chunk Loader Upgrade
 Keeps the chunk containing a teleport controller loaded.
