@@ -16,7 +16,7 @@ The goal is simple: provide a compact teleportation-focused progression without 
 - **Interdimensional Teleporter** — teleports players between linked locations across different dimensions.
 - **Portable Teleporter** — lets the player teleport to linked frequencies without needing a portal at their current location.
 - **Quantum Teleporter** — transfers energy, items and fluids between linked locations.
-- **Emergency Teleporter** — automatically teleports a player to safety when their health becomes critically low.
+- **Emergency Teleporter**
 
 ### Chunk Loader Upgrade
 Keeps the chunk containing a teleport controller loaded.
