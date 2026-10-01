@@ -10,7 +10,7 @@ The goal is simple: provide a compact teleportation-focused progression without 
 
 **Recommended:** Play with JEI installed to easily view Phase Teleporters recipes.
 
-## Teleports
+## Teleporters
 
 - Local Teleporter
 - Interdimensional Teleporter
