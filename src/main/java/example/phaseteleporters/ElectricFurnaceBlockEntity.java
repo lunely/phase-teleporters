@@ -30,7 +30,7 @@ import example.phaseteleporters.energy.PEMachineInventory;
 public final class ElectricFurnaceBlockEntity extends PEBlockEntity implements PEMachineInventory, NamedScreenHandlerFactory {
     public static final int PROCESS_TIME = 160;
     public static final long PE_PER_TICK = 20;
-    private final DefaultedList<ItemStack> items = DefaultedList.ofSize(2, ItemStack.EMPTY);
+    private final DefaultedList<ItemStack> items = DefaultedList.ofSize(3, ItemStack.EMPTY);
     private int progress;
     private Identifier currentRecipeId;
     private final PropertyDelegate properties = new PropertyDelegate() {
@@ -50,6 +50,7 @@ public final class ElectricFurnaceBlockEntity extends PEBlockEntity implements P
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, ElectricFurnaceBlockEntity furnace) {
+        example.phaseteleporters.energy.PEEnergyItemTransfer.discharge(furnace, furnace.items.get(2));
         furnace.transferConfiguredItems();
         furnace.sendConfiguredOutput();
         if (!furnace.canWork()) return;
@@ -108,7 +109,7 @@ public final class ElectricFurnaceBlockEntity extends PEBlockEntity implements P
     @Override public void clear() { items.clear(); markDirty(); }
     @Override public boolean canPlayerUse(PlayerEntity player) { return Inventory.canPlayerUse(this, player); }
     @Override public boolean isValid(int slot, ItemStack stack) {
-        return slot == 0;
+        return slot == 2 && stack.getItem() instanceof example.phaseteleporters.energy.PEChargeableItem || slot == 0;
     }
 
     @Override

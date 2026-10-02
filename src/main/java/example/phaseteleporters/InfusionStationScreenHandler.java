@@ -19,13 +19,13 @@ public final class InfusionStationScreenHandler extends ScreenHandler implements
     private final PropertyDelegate sideProperties;
 
     public InfusionStationScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(3), new ArrayPropertyDelegate(8));
+        this(syncId, playerInventory, new SimpleInventory(4), new ArrayPropertyDelegate(8));
     }
 
     public InfusionStationScreenHandler(int syncId, PlayerInventory playerInventory,
                                         Inventory inventory, PropertyDelegate properties) {
         super(PhaseTeleportersMod.INFUSION_STATION_SCREEN_HANDLER, syncId);
-        checkSize(inventory, 3);
+        checkSize(inventory, 4);
         checkDataCount(properties, 8);
         this.inventory = inventory;
         this.properties = properties;
@@ -40,6 +40,8 @@ public final class InfusionStationScreenHandler extends ScreenHandler implements
         addSlot(new Slot(inventory, 2, 129, 31) {
             @Override public boolean canInsert(ItemStack stack) { return false; }
         });
+        addSlot(new example.phaseteleporters.energy.PEEnergyItemSlot(inventory, 3, 8, 62));
+
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 9; col++) {
                 addSlot(new Slot(playerInventory, col + row * 9 + 9, 8 + col * 18, 84 + row * 18));
@@ -105,16 +107,12 @@ public final class InfusionStationScreenHandler extends ScreenHandler implements
         if (!slot.hasStack()) return ItemStack.EMPTY;
         ItemStack stack = slot.getStack();
         ItemStack original = stack.copy();
-        if (index < 3) {
-            if (!insertItem(stack, 3, 39, true)) return ItemStack.EMPTY;
-        } else if (InfusionResource.fromStack(stack) != InfusionResource.NONE) {
-            if (!insertItem(stack, 0, 1, false)) return ItemStack.EMPTY;
-        } else if (stack.isOf(Items.IRON_INGOT) || stack.isOf(Items.GOLD_INGOT)
-                || stack.isOf(PhaseTeleportersMod.BASIC_ALLOY)
-                || stack.isOf(PhaseTeleportersMod.ADVANCED_ALLOY)
-                || stack.isOf(PhaseTeleportersMod.OBSIDIAN_DUST)) {
-            if (!insertItem(stack, 1, 2, false)) return ItemStack.EMPTY;
-        } else {
+        int machineSlots = 4;
+        if (index < machineSlots) {
+            if (!insertItem(stack, machineSlots, slots.size(), true)) return ItemStack.EMPTY;
+        } else if (stack.getItem() instanceof example.phaseteleporters.energy.PEChargeableItem) {
+            if (!insertItem(stack, 3, machineSlots, false)) return ItemStack.EMPTY;
+        } else if (!insertItem(stack, 0, 3, false)) {
             return ItemStack.EMPTY;
         }
         if (stack.isEmpty()) slot.setStack(ItemStack.EMPTY);

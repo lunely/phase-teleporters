@@ -30,7 +30,7 @@ public final class EnrichmentChamberBlockEntity extends PEBlockEntity
     public static final int PROCESS_TIME = 100;
     public static final long PE_PER_TICK = 60;
 
-    private final DefaultedList<ItemStack> items = DefaultedList.ofSize(2, ItemStack.EMPTY);
+    private final DefaultedList<ItemStack> items = DefaultedList.ofSize(3, ItemStack.EMPTY);
     private int progress;
     private Identifier currentRecipeId;
     private final PropertyDelegate properties = new PropertyDelegate() {
@@ -52,6 +52,7 @@ public final class EnrichmentChamberBlockEntity extends PEBlockEntity
 
     public static void tick(World world, BlockPos pos, BlockState state,
             EnrichmentChamberBlockEntity chamber) {
+        example.phaseteleporters.energy.PEEnergyItemTransfer.discharge(chamber, chamber.items.get(2));
         chamber.transferConfiguredItems();
         chamber.sendConfiguredOutput();
         if (!chamber.canWork()) {
@@ -124,7 +125,7 @@ public final class EnrichmentChamberBlockEntity extends PEBlockEntity
     @Override public void setStack(int slot, ItemStack stack) { items.set(slot, stack); markDirty(); }
     @Override public void clear() { items.clear(); markDirty(); }
     @Override public boolean canPlayerUse(PlayerEntity player) { return Inventory.canPlayerUse(this, player); }
-    @Override public boolean isValid(int slot, ItemStack stack) { return slot == 0; }
+    @Override public boolean isValid(int slot, ItemStack stack) { return slot == 2 && stack.getItem() instanceof example.phaseteleporters.energy.PEChargeableItem || slot == 0; }
 
     @Override protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup lookup) {
         super.readNbt(nbt, lookup);

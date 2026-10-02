@@ -25,7 +25,7 @@ public final class CoalGeneratorScreenHandler extends ScreenHandler implements E
         this(
                 syncId,
                 playerInventory,
-                new SimpleInventory(1),
+                new SimpleInventory(2),
                 new ArrayPropertyDelegate(7)
         );
     }
@@ -41,7 +41,7 @@ public final class CoalGeneratorScreenHandler extends ScreenHandler implements E
                 syncId
         );
 
-        checkSize(inventory, 1);
+        checkSize(inventory, 2);
         checkDataCount(properties, 7);
 
         this.inventory = inventory;
@@ -63,6 +63,8 @@ public final class CoalGeneratorScreenHandler extends ScreenHandler implements E
         });
 
         // Инвентарь игрока.
+        addSlot(new example.phaseteleporters.energy.PEEnergyItemSlot(inventory, 1, 8, 62));
+
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 9; col++) {
                 addSlot(new Slot(
@@ -161,46 +163,21 @@ public final class CoalGeneratorScreenHandler extends ScreenHandler implements E
     }
 
     @Override
-    public ItemStack quickMove(
-            PlayerEntity player,
-            int index
-    ) {
+    public ItemStack quickMove(PlayerEntity player, int index) {
         Slot slot = slots.get(index);
-
-        if (!slot.hasStack()) {
-            return ItemStack.EMPTY;
-        }
-
+        if (!slot.hasStack()) return ItemStack.EMPTY;
         ItemStack stack = slot.getStack();
         ItemStack original = stack.copy();
-
-        if (index == 0) {
-            if (!insertItem(
-                    stack,
-                    1,
-                    37,
-                    true
-            )) {
-                return ItemStack.EMPTY;
-            }
-        } else if (
-                !inventory.isValid(0, stack)
-                        || !insertItem(
-                        stack,
-                        0,
-                        1,
-                        false
-                )
-        ) {
+        int machineSlots = 2;
+        if (index < machineSlots) {
+            if (!insertItem(stack, machineSlots, slots.size(), true)) return ItemStack.EMPTY;
+        } else if (stack.getItem() instanceof example.phaseteleporters.energy.PEChargeableItem) {
+            if (!insertItem(stack, 1, machineSlots, false)) return ItemStack.EMPTY;
+        } else if (!insertItem(stack, 0, 1, false)) {
             return ItemStack.EMPTY;
         }
-
-        if (stack.isEmpty()) {
-            slot.setStack(ItemStack.EMPTY);
-        } else {
-            slot.markDirty();
-        }
-
+        if (stack.isEmpty()) slot.setStack(ItemStack.EMPTY);
+        else slot.markDirty();
         return original;
     }
 

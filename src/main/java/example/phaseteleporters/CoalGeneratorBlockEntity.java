@@ -57,7 +57,7 @@ public final class CoalGeneratorBlockEntity extends PEBlockEntity
     private static final int MAX_HEAT = 240;
 
     private final DefaultedList<ItemStack> items =
-            DefaultedList.ofSize(1, ItemStack.EMPTY);
+            DefaultedList.ofSize(2, ItemStack.EMPTY);
 
     private int burnTime;
     private int fuelTime;
@@ -114,6 +114,7 @@ public final class CoalGeneratorBlockEntity extends PEBlockEntity
             CoalGeneratorBlockEntity generator
     ) {
         generator.generation = 0;
+        example.phaseteleporters.energy.PEEnergyItemTransfer.charge(generator, generator.items.get(1));
         generator.transferConfiguredItems();
         if (!generator.canWork()) return;
         EnergyCableNetwork.distribute(world, pos, generator);
@@ -217,14 +218,14 @@ public final class CoalGeneratorBlockEntity extends PEBlockEntity
 
     @Override
     public int size() {
-        return 1;
+        return items.size();
     }
 
     @Override public int[] itemInputSlots() { return new int[] {0}; }
 
     @Override
     public boolean isEmpty() {
-        return items.get(0).isEmpty();
+        return items.stream().allMatch(ItemStack::isEmpty);
     }
 
     @Override
@@ -275,7 +276,7 @@ public final class CoalGeneratorBlockEntity extends PEBlockEntity
 
     @Override
     public boolean isValid(int slot, ItemStack stack) {
-        return slot == 0 && fuelTime(stack) > 0;
+        return slot == 1 && stack.getItem() instanceof example.phaseteleporters.energy.PEChargeableItem || slot == 0 && fuelTime(stack) > 0;
     }
 
     @Override

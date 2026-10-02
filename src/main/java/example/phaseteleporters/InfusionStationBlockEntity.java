@@ -44,7 +44,7 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
                     PhaseTeleportersMod.SOLAR_ELEMENT),
             new InfusionRecipe(PhaseTeleportersMod.ADVANCED_ALLOY, InfusionResource.PURIFIED_OBSIDIAN_DUST, 40,
                     PhaseTeleportersMod.PHASE_ALLOY));
-    private final DefaultedList<ItemStack> items = DefaultedList.ofSize(3, ItemStack.EMPTY);
+    private final DefaultedList<ItemStack> items = DefaultedList.ofSize(4, ItemStack.EMPTY);
     private int progress;
     private InfusionRecipe currentRecipe;
     private int infusionAmount;
@@ -76,6 +76,7 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, InfusionStationBlockEntity station) {
+        example.phaseteleporters.energy.PEEnergyItemTransfer.discharge(station, station.items.get(3));
         station.transferConfiguredItems();
         station.sendConfiguredOutput();
         if (!station.canWork()) return;
@@ -186,6 +187,7 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
         return switch (slot) {
             case 0 -> RECIPES.stream().anyMatch(recipe -> stack.isOf(recipe.input()));
             case 1 -> InfusionResource.fromStack(stack) != InfusionResource.NONE;
+            case 3 -> stack.getItem() instanceof example.phaseteleporters.energy.PEChargeableItem;
             default -> false;
         };
     }

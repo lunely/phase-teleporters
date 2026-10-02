@@ -23,7 +23,7 @@ public final class CrusherScreenHandler extends ScreenHandler implements EnergyS
         this(
                 syncId,
                 playerInventory,
-                new SimpleInventory(2),
+                new SimpleInventory(3),
                 new ArrayPropertyDelegate(6)
         );
     }
@@ -36,7 +36,7 @@ public final class CrusherScreenHandler extends ScreenHandler implements EnergyS
     ) {
         super(PhaseTeleportersMod.CRUSHER_SCREEN_HANDLER, syncId);
 
-        checkSize(inventory, 2);
+        checkSize(inventory, 3);
         checkDataCount(properties, 6);
 
         this.inventory = inventory;
@@ -61,6 +61,8 @@ public final class CrusherScreenHandler extends ScreenHandler implements EnergyS
         });
 
         // Инвентарь игрока
+        addSlot(new example.phaseteleporters.energy.PEEnergyItemSlot(inventory, 2, 8, 62));
+
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 9; col++) {
                 addSlot(new Slot(
@@ -148,32 +150,19 @@ public final class CrusherScreenHandler extends ScreenHandler implements EnergyS
     @Override
     public ItemStack quickMove(PlayerEntity player, int index) {
         Slot slot = slots.get(index);
-
-        if (!slot.hasStack()) {
-            return ItemStack.EMPTY;
-        }
-
+        if (!slot.hasStack()) return ItemStack.EMPTY;
         ItemStack stack = slot.getStack();
         ItemStack original = stack.copy();
-
-        if (index < 2) {
-            if (!insertItem(stack, 2, 38, true)) {
-                return ItemStack.EMPTY;
-            }
-        } else if (stack.isOf(Items.OBSIDIAN)) {
-            if (!insertItem(stack, 0, 1, false)) {
-                return ItemStack.EMPTY;
-            }
-        } else {
+        int machineSlots = 3;
+        if (index < machineSlots) {
+            if (!insertItem(stack, machineSlots, slots.size(), true)) return ItemStack.EMPTY;
+        } else if (stack.getItem() instanceof example.phaseteleporters.energy.PEChargeableItem) {
+            if (!insertItem(stack, 2, machineSlots, false)) return ItemStack.EMPTY;
+        } else if (!insertItem(stack, 0, 2, false)) {
             return ItemStack.EMPTY;
         }
-
-        if (stack.isEmpty()) {
-            slot.setStack(ItemStack.EMPTY);
-        } else {
-            slot.markDirty();
-        }
-
+        if (stack.isEmpty()) slot.setStack(ItemStack.EMPTY);
+        else slot.markDirty();
         return original;
     }
 

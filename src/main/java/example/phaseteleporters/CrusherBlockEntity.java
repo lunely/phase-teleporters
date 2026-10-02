@@ -30,7 +30,7 @@ public final class CrusherBlockEntity extends PEBlockEntity implements PEMachine
     public record CrusherRecipe(Item input, Item output) {}
     public static final List<CrusherRecipe> RECIPES = List.of(
             new CrusherRecipe(Items.OBSIDIAN, PhaseTeleportersMod.OBSIDIAN_DUST));
-    private final DefaultedList<ItemStack> items = DefaultedList.ofSize(2, ItemStack.EMPTY);
+    private final DefaultedList<ItemStack> items = DefaultedList.ofSize(3, ItemStack.EMPTY);
     private int progress;
     private final PropertyDelegate properties = new PropertyDelegate() {
         @Override public int get(int index) {
@@ -49,6 +49,7 @@ public final class CrusherBlockEntity extends PEBlockEntity implements PEMachine
     }
 
     public static void tick(World world, BlockPos pos, BlockState state, CrusherBlockEntity crusher) {
+        example.phaseteleporters.energy.PEEnergyItemTransfer.discharge(crusher, crusher.items.get(2));
         crusher.transferConfiguredItems();
         crusher.sendConfiguredOutput();
         if (!crusher.canWork()) return;
@@ -100,7 +101,7 @@ public final class CrusherBlockEntity extends PEBlockEntity implements PEMachine
     @Override public void setStack(int slot, ItemStack stack) { items.set(slot, stack); markDirty(); }
     @Override public void clear() { items.clear(); markDirty(); }
     @Override public boolean canPlayerUse(PlayerEntity player) { return Inventory.canPlayerUse(this, player); }
-    @Override public boolean isValid(int slot, ItemStack stack) { return slot == 0 && recipeFor(stack) != null; }
+    @Override public boolean isValid(int slot, ItemStack stack) { return slot == 2 && stack.getItem() instanceof example.phaseteleporters.energy.PEChargeableItem || slot == 0 && recipeFor(stack) != null; }
 
     @Override
     protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup lookup) {
