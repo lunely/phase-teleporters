@@ -16,7 +16,7 @@ The goal is simple: provide a compact teleportation-focused progression without 
 - **Interdimensional Teleporter** — teleports players between linked locations across different dimensions.
 - **Portable Teleporter** — lets the player teleport to linked frequencies without needing a portal at their current location.
 - **Quantum Teleporter** — transfers energy, items and fluids between linked locations. It can also pull items directly from adjacent chests.
-- **Emergency Teleporter**
+- **Emergency Teleporter** — automatically teleports the player to a linked Emergency Teleporter when their health drops below a configurable threshold *(requires a Portable Teleporter in the inventory).*
 
 ## Compatibility
 
