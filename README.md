@@ -25,6 +25,8 @@ Phase Teleporters supports:
 - **Team Reborn Energy API** for energy compatibility
 - **Fabric Transfer API** for item and fluid compatibility
 
+*Confirmed working with Ad Astra pipes and energy, Galacticraft 5 energy and oxygen (oxygen can be transferred through Quantum Teleporters), and Tech Reborn energy.*
+
 ## Modpack Use
 Phase Teleporters is intended to work well in modpacks with many dimensions.
 
