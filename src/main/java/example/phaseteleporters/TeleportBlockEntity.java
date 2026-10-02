@@ -20,6 +20,7 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.world.World;
 
 public final class TeleportBlockEntity extends AnchoredTeleportBlockEntity implements NamedScreenHandlerFactory {
+    public static final long MAX_INPUT_PER_TICK = 2_000;
     private static final long ACTIVATION_ENERGY = 500;
     private String frequency = "";
     private boolean privateFrequency;
@@ -32,6 +33,8 @@ public final class TeleportBlockEntity extends AnchoredTeleportBlockEntity imple
     public TeleportBlockEntity(BlockPos pos, BlockState state) {
         super(PhaseTeleportersMod.TELEPORT_BLOCK_ENTITY, pos, state, 1_000_000);
     }
+
+    @Override protected long getMaxInputPerTick() { return MAX_INPUT_PER_TICK; }
 
     public String getFrequency() { return frequency; }
     public boolean isPrivateFrequency() { return privateFrequency; }

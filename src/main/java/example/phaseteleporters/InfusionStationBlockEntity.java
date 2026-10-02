@@ -32,12 +32,16 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
     public static final List<InfusionRecipe> RECIPES = List.of(
             new InfusionRecipe(Items.IRON_INGOT, InfusionResource.COAL, 10, PhaseTeleportersMod.STEEL_INGOT),
             new InfusionRecipe(Items.IRON_INGOT, InfusionResource.REDSTONE, 10, PhaseTeleportersMod.BASIC_ALLOY),
-            new InfusionRecipe(PhaseTeleportersMod.STEEL_INGOT, InfusionResource.REDSTONE, 20,
+            new InfusionRecipe(Items.GOLD_INGOT, InfusionResource.REDSTONE, 20,
                     PhaseTeleportersMod.BASIC_CONTROL_CIRCUIT),
+            new InfusionRecipe(PhaseTeleportersMod.BASIC_CONTROL_CIRCUIT,
+                    InfusionResource.PURIFIED_OBSIDIAN_DUST, 20, PhaseTeleportersMod.PHASE_CONTROL_CIRCUIT),
             new InfusionRecipe(PhaseTeleportersMod.BASIC_ALLOY, InfusionResource.DIAMOND, 20,
                     PhaseTeleportersMod.ADVANCED_ALLOY),
             new InfusionRecipe(PhaseTeleportersMod.OBSIDIAN_DUST, InfusionResource.DIAMOND, 10,
                     PhaseTeleportersMod.PURIFIED_OBSIDIAN_DUST),
+            new InfusionRecipe(Items.LAPIS_LAZULI, InfusionResource.DIAMOND, 100,
+                    PhaseTeleportersMod.SOLAR_ELEMENT),
             new InfusionRecipe(PhaseTeleportersMod.ADVANCED_ALLOY, InfusionResource.PURIFIED_OBSIDIAN_DUST, 40,
                     PhaseTeleportersMod.PHASE_ALLOY));
     private final DefaultedList<ItemStack> items = DefaultedList.ofSize(3, ItemStack.EMPTY);
@@ -133,6 +137,20 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
         currentRecipe = null;
         markDirty();
         return true;
+    }
+
+    public void writeStoredInfusion(NbtCompound data) {
+        if (infusionAmount <= 0 || infusionResource == InfusionResource.NONE) return;
+        data.putInt("InfusionAmount", infusionAmount);
+        data.putInt("InfusionResource", infusionResource.id());
+    }
+
+    public void readStoredInfusion(NbtCompound data) {
+        infusionResource = InfusionResource.byId(data.getInt("InfusionResource"));
+        infusionAmount = infusionResource == InfusionResource.NONE ? 0
+                : Math.clamp(data.getInt("InfusionAmount"), 0, MAX_INFUSION);
+        if (infusionAmount == 0) infusionResource = InfusionResource.NONE;
+        markDirty();
     }
 
     private boolean canAccept(Item result) {

@@ -81,7 +81,8 @@ public final class EnergyCubeRenderer<T extends BlockEntity> implements BlockEnt
         // Stationary glazing sits inside the existing frame, behind the six ports.
         matrices.push();
         matrices.translate(0.5, 0.5, 0.5);
-        matrices.scale(1.625f, 1.625f, 1.625f);
+        // Leave a little depth between the glass and the inner frame faces.
+        matrices.scale(1.60f, 1.60f, 1.60f);
         glass.render(matrices, consumers.getBuffer(RenderLayer.getEntityTranslucent(GLASS)),
                 light, overlay, creative ? 0xFF6DDFEA : 0xFF7BDE8A);
         matrices.pop();

@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 
 public final class EnergyCubeBlockEntity extends PEChargingCubeBlockEntity implements NamedScreenHandlerFactory {
     public static final long CAPACITY = 1_600_000;
+    public static final long MAX_INPUT_PER_TICK = 10_000;
 
     private final PropertyDelegate properties = new PropertyDelegate() {
         @Override public int get(int index) { return PEPropertyCodec.part(EnergyCubeBlockEntity.this, index); }
@@ -25,6 +26,8 @@ public final class EnergyCubeBlockEntity extends PEChargingCubeBlockEntity imple
     public EnergyCubeBlockEntity(BlockPos pos, BlockState state) {
         super(PhaseTeleportersMod.ENERGY_CUBE_BLOCK_ENTITY, pos, state, CAPACITY);
     }
+
+    @Override protected long getMaxInputPerTick() { return MAX_INPUT_PER_TICK; }
 
     public static void tick(World world, BlockPos pos, BlockState state, EnergyCubeBlockEntity cube) {
         if (!cube.canWork()) return;

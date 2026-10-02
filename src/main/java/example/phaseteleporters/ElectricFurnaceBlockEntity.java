@@ -28,7 +28,7 @@ import example.phaseteleporters.energy.PESideMode;
 import example.phaseteleporters.energy.PEMachineInventory;
 
 public final class ElectricFurnaceBlockEntity extends PEBlockEntity implements PEMachineInventory, NamedScreenHandlerFactory {
-    public static final int PROCESS_TIME = 100;
+    public static final int PROCESS_TIME = 160;
     public static final long PE_PER_TICK = 20;
     private final DefaultedList<ItemStack> items = DefaultedList.ofSize(2, ItemStack.EMPTY);
     private int progress;

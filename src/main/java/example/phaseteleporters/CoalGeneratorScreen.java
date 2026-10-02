@@ -162,8 +162,9 @@ public final class CoalGeneratorScreen
 
         if (mouseX >= x + ENERGY_X && mouseX < x + ENERGY_X + ENERGY_WIDTH
                 && mouseY >= y + ENERGY_Y && mouseY < y + ENERGY_Y + ENERGY_HEIGHT) {
-            context.drawTooltip(textRenderer,
-                    Text.literal(PEGuiText.energy(handler.getEnergy(), handler.getMaxEnergy())),
+            context.drawTooltip(textRenderer, java.util.List.of(
+                    Text.literal(handler.getGeneration() + " J/t").formatted(net.minecraft.util.Formatting.GREEN),
+                    Text.literal(PEGuiText.energy(handler.getEnergy(), handler.getMaxEnergy()))),
                     mouseX, mouseY);
         }
         sidePanel.tooltip(context, textRenderer, x, y, backgroundWidth, mouseX, mouseY, handler);

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["RCR", "IHI", "RCR"],
+  "key": {
+    "R": { "item": "minecraft:redstone" },
+    "C": { "item": "phaseteleporters:basic_control_circuit" },
+    "I": { "item": "minecraft:iron_ingot" },
+    "H": { "item": "phaseteleporters:machine_casing" }
+  },
+  "result": { "id": "phaseteleporters:enrichment_chamber", "count": 1 }
+}

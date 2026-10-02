@@ -21,6 +21,7 @@ public abstract class DownloadingTerrainScreenMixin extends Screen {
             CallbackInfo ci) {
         if (!InterdimensionalTerrainClient.isActive()) return;
         Screen.renderBackgroundTexture(context, PHASETELEPORTERS_DIRT, 0, 0, 0, 0, width, height);
+        context.fill(0, 0, width, height, 0x99000000);
         ci.cancel();
     }
 

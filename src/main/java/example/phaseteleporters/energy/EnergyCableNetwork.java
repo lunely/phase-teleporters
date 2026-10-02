@@ -50,11 +50,33 @@ public final class EnergyCableNetwork {
     public static long stored(World world, BlockPos pos) { return scan(world, pos, null).stored(); }
     public static long capacity(World world, BlockPos pos) { return scan(world, pos, null).capacity(); }
 
+    public static List<BasicEnergyCableBlockEntity> members(World world, BlockPos pos) {
+        return scan(world, pos, null).cables();
+    }
+
+    private static long remainingTransfer(Component component, long tick, boolean input) {
+        long remaining = 0;
+        for (BasicEnergyCableBlockEntity cable : component.cables())
+            remaining += cable.remainingTransfer(tick, input);
+        return remaining;
+    }
+
+    private static void consumeTransfer(Component component, long tick, boolean input, long amount) {
+        for (BasicEnergyCableBlockEntity cable : component.cables()) {
+            long part = Math.min(amount, cable.remainingTransfer(tick, input));
+            cable.consumeTransfer(tick, input, part);
+            amount -= part;
+            if (amount == 0) break;
+        }
+    }
+
     public static long insert(World world, BlockPos pos, long amount, boolean simulate) {
         if (amount <= 0) return 0;
         Component component = scan(world, pos, null);
-        long accepted = Math.min(amount, component.capacity() - component.stored());
+        long accepted = Math.min(Math.min(amount, component.capacity() - component.stored()),
+                remainingTransfer(component, world.getTime(), true));
         if (!simulate) {
+            consumeTransfer(component, world.getTime(), true, accepted);
             long left = accepted;
             for (BasicEnergyCableBlockEntity cable : component.cables()) {
                 long part = Math.min(left, 500 - cable.localStored());
@@ -69,8 +91,10 @@ public final class EnergyCableNetwork {
     public static long extract(World world, BlockPos pos, long amount, boolean simulate) {
         if (amount <= 0) return 0;
         Component component = scan(world, pos, null);
-        long extracted = Math.min(amount, component.stored());
+        long extracted = Math.min(Math.min(amount, component.stored()),
+                remainingTransfer(component, world.getTime(), false));
         if (!simulate) {
+            consumeTransfer(component, world.getTime(), false, extracted);
             long left = extracted;
             for (BasicEnergyCableBlockEntity cable : component.cables()) {
                 long part = Math.min(left, cable.localStored());
@@ -124,13 +148,42 @@ public final class EnergyCableNetwork {
         return source.transferTo(receiver, Long.MAX_VALUE);
     }
 
-    private record Route(BlockPos position, Direction sourceSide) {}
+    private record Route(BlockPos position, Direction sourceSide, Component network) {}
 
-    /** Sources fill connected cable storage and every receiver reachable through it. */
+    private static long transferThroughNetwork(World world, Component component,
+            PEStorage source, PEStorage receiver, Direction sourceSide, Direction receiverSide) {
+        if (source == receiver || !canOutput(source, sourceSide) || !canInput(receiver, receiverSide)) return 0;
+        long tick = world.getTime();
+        long limit = Math.min(remainingTransfer(component, tick, true),
+                remainingTransfer(component, tick, false));
+        long sent = source.transferTo(receiver, limit);
+        // Flow can pass through without fitting in the small persistent cable buffer.
+        consumeTransfer(component, tick, true, sent);
+        consumeTransfer(component, tick, false, sent);
+        return sent;
+    }
+
+    private static boolean hasAcceptingReceiver(World world, Component component, PEStorage source) {
+        for (BlockPos cablePos : component.positions()) {
+            for (Direction direction : Direction.values()) {
+                BlockPos neighbor = cablePos.offset(direction);
+                if (component.positions().contains(neighbor) || !loaded(world, neighbor)) continue;
+                if (world.getBlockEntity(neighbor) instanceof PEStorage receiver
+                        && receiver != source && canInput(receiver, direction.getOpposite())
+                        && receiver.insert(1, true) > 0) return true;
+                if (!(world.getBlockEntity(neighbor) instanceof PEStorage)
+                        && EnergyApiCompat.accepts(world, neighbor, direction.getOpposite())) return true;
+            }
+        }
+        return false;
+    }
+
+    /** Consumers receive stored and incoming energy before any surplus is buffered. */
     public static void distribute(World world, BlockPos sourcePos, PEStorage source) {
         ArrayDeque<Route> pending = new ArrayDeque<>();
         Set<BlockPos> handledCables = new HashSet<>();
-        pending.add(new Route(sourcePos, null));
+        List<Route> networks = new ArrayList<>();
+        pending.add(new Route(sourcePos, null, null));
         while (!pending.isEmpty()) {
             Route route = pending.removeFirst();
             BlockPos current = route.position();
@@ -144,16 +197,39 @@ public final class EnergyCableNetwork {
                     Component component = scan(world, neighbor, null);
                     handledCables.addAll(component.positions());
                     if (!component.cables().isEmpty()) {
-                        transfer(source, component.cables().getFirst(), sourceSide, direction.getOpposite());
+                        networks.add(new Route(neighbor, sourceSide, component));
                         for (BlockPos cablePos : component.positions())
-                            pending.addLast(new Route(cablePos, sourceSide));
+                            pending.addLast(new Route(cablePos, sourceSide, component));
                     }
                 } else {
                     BlockEntity blockEntity = world.getBlockEntity(neighbor);
-                    if (blockEntity instanceof PEStorage receiver)
-                        transfer(source, receiver, sourceSide, direction.getOpposite());
+                    if (blockEntity instanceof PEStorage receiver) {
+                        if (route.network() == null)
+                            transfer(source, receiver, sourceSide, direction.getOpposite());
+                        else {
+                            transfer(route.network().cables().getFirst(), receiver,
+                                    direction, direction.getOpposite());
+                            transferThroughNetwork(world, route.network(), source, receiver,
+                                    sourceSide, direction.getOpposite());
+                        }
+                    } else if (route.network() == null) {
+                        EnergyApiCompat.push(world, neighbor, direction.getOpposite(), source, Long.MAX_VALUE);
+                    } else {
+                        PEStorage buffer = route.network().cables().getFirst();
+                        EnergyApiCompat.push(world, neighbor, direction.getOpposite(), buffer, Long.MAX_VALUE);
+                        long tick = world.getTime();
+                        long limit = Math.min(remainingTransfer(route.network(), tick, true),
+                                remainingTransfer(route.network(), tick, false));
+                        long sent = EnergyApiCompat.push(world, neighbor, direction.getOpposite(), source, limit);
+                        consumeTransfer(route.network(), tick, true, sent);
+                        consumeTransfer(route.network(), tick, false, sent);
+                    }
                 }
             }
+        }
+        for (Route network : networks) {
+            if (!hasAcceptingReceiver(world, network.network(), source))
+                transfer(source, network.network().cables().getFirst(), network.sourceSide(), null);
         }
     }
 
@@ -173,6 +249,9 @@ public final class EnergyCableNetwork {
                 if (blockEntity instanceof PEStorage receiver) {
                     if (transfer(cable, receiver, direction, direction.getOpposite()) > 0)
                         receivers.add(neighbor);
+                } else if (EnergyApiCompat.push(world, neighbor, direction.getOpposite(),
+                        cable, Long.MAX_VALUE) > 0) {
+                    receivers.add(neighbor);
                 }
             }
         }

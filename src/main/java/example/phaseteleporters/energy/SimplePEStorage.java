@@ -13,6 +13,11 @@ public final class SimplePEStorage implements PEStorage {
     @Override public long getStored() { return stored; }
     @Override public long getCapacity() { return capacity; }
 
+    @Override public Runnable createEnergySnapshot() {
+        long saved = stored;
+        return () -> stored = saved;
+    }
+
     public void setStored(long amount) {
         stored = Math.clamp(amount, 0L, capacity);
     }

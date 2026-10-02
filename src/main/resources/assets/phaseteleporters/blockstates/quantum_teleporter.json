@@ -1,0 +1,1 @@
+{"variants":{"facing=north":{"model":"phaseteleporters:block/quantum_teleporter"},"facing=east":{"model":"phaseteleporters:block/quantum_teleporter","y":90},"facing=south":{"model":"phaseteleporters:block/quantum_teleporter","y":180},"facing=west":{"model":"phaseteleporters:block/quantum_teleporter","y":270}}}

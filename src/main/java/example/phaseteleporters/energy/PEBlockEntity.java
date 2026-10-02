@@ -15,7 +15,11 @@ import java.util.UUID;
 /** Passive, persistent PE buffer. Machines decide separately if energy affects their work. */
 public abstract class PEBlockEntity extends BlockEntity implements PEStorage {
     public static final long DEFAULT_CAPACITY = 100_000;
+    /** Matches the coal generator's maximum sustained production. */
+    public static final long MAX_INPUT_PER_TICK = 120;
     private final SimplePEStorage energy;
+    private long inputTick = Long.MIN_VALUE;
+    private long inputThisTick;
     private final PESideMode[] sideModes = new PESideMode[Direction.values().length];
     private final PESideMode defaultSideMode;
     private final PESideMode[] allowedSideModes;
@@ -76,6 +80,7 @@ public abstract class PEBlockEntity extends BlockEntity implements PEStorage {
         if (redstoneMode == mode) return;
         redstoneMode = mode;
         markDirty();
+        notifyEnergyNeighbors();
     }
     public boolean hasRedstoneSignal() {
         return world != null && world.isReceivingRedstonePower(pos);
@@ -86,6 +91,11 @@ public abstract class PEBlockEntity extends BlockEntity implements PEStorage {
         if (sideModes[side.getId()] == mode) return;
         sideModes[side.getId()] = mode;
         markDirty();
+        notifyEnergyNeighbors();
+    }
+
+    private void notifyEnergyNeighbors() {
+        if (world != null && !world.isClient) world.updateNeighbors(pos, getCachedState().getBlock());
     }
 
     private boolean allowsSideMode(PESideMode mode) {
@@ -124,11 +134,41 @@ public abstract class PEBlockEntity extends BlockEntity implements PEStorage {
     @Override public long getStored() { return energy.getStored(); }
     @Override public long getCapacity() { return energy.getCapacity(); }
 
+    @Override public Runnable createEnergySnapshot() {
+        Runnable savedEnergy = energy.createEnergySnapshot();
+        long savedTick = inputTick;
+        long savedInput = inputThisTick;
+        return () -> {
+            savedEnergy.run();
+            inputTick = savedTick;
+            inputThisTick = savedInput;
+            markDirty();
+        };
+    }
+
     @Override public long insert(long amount, boolean simulate) {
-        long accepted = energy.insert(amount, simulate);
+        long accepted = energy.insert(limitInputThisTick(amount, simulate), simulate);
+        if (accepted > 0 && !simulate && world != null && !world.isClient) inputThisTick += accepted;
         if (accepted > 0 && !simulate) markDirty();
         return accepted;
     }
+
+    /** Total input budget across all sides, shared by native and API transfers. */
+    protected long getMaxInputPerTick() { return MAX_INPUT_PER_TICK; }
+
+    /** Shared by frequency backed machines so simulated and committed inserts see one limit. */
+    protected long limitInputThisTick(long amount, boolean simulate) {
+        if (amount <= 0 || world == null || world.isClient) return Math.max(0, amount);
+        long tick = world.getTime();
+        if (inputTick != tick) {
+            inputTick = tick;
+            inputThisTick = 0;
+        }
+        return Math.min(amount, Math.max(0, getMaxInputPerTick() - inputThisTick));
+    }
+
+    /** Restore PE carried by a dropped block without applying the live network input limit. */
+    public final long restoreStoredEnergy(long amount) { return energy.insert(amount, false); }
 
     @Override public long extract(long amount, boolean simulate) {
         long extracted = energy.extract(amount, simulate);

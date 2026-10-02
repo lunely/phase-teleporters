@@ -1,7 +1,8 @@
 {
   "ambientocclusion": false,
-  "textures": { "plane": "minecraft:block/water_still" },
+  "textures": { "plane": "phaseteleporters:block/portal_surface" },
   "elements": [{
+    "shade": false,
     "from": [0, 0, 7], "to": [16, 16, 9],
     "faces": {
       "north": { "texture": "#plane", "tintindex": 0 },

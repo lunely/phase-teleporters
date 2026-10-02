@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "phaseteleporters:block/interdimensional_teleportation_frame"
-  }
+  "parent": "phaseteleporters:block/teleportation_frame"
 }

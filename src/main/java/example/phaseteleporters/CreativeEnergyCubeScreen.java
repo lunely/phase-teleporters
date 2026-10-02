@@ -31,7 +31,7 @@ public final class CreativeEnergyCubeScreen extends HandledScreen<CreativeEnergy
         super.render(context, mouseX, mouseY, delta);
         drawMouseoverTooltip(context, mouseX, mouseY);
         if (EnergyCubeGuiRenderer.overBar(x, y, mouseX, mouseY)) {
-            context.drawTooltip(textRenderer, Text.literal("∞ PE"), mouseX, mouseY);
+            context.drawTooltip(textRenderer, Text.literal("∞ J"), mouseX, mouseY);
         }
         sidePanel.tooltip(context, textRenderer, x, y, backgroundWidth, mouseX, mouseY, handler);
     }

@@ -9,9 +9,9 @@ public final class PEEnergyFormat {
     private PEEnergyFormat() {}
 
     public static String format(long amount) {
-        if (amount >= 1_000_000) return compact(amount, 6, "mPE");
-        if (amount >= 100_000) return compact(amount, 3, "kPE");
-        return String.format(Locale.GERMANY, "%,d PE", amount);
+        if (amount >= 1_000_000) return compact(amount, 6, "MJ");
+        if (amount >= 1_000) return compact(amount, 3, "kJ");
+        return String.format(Locale.GERMANY, "%,d J", amount);
     }
 
     private static String compact(long amount, int places, String unit) {

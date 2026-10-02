@@ -16,10 +16,6 @@ public final class EnergyConfigurationScreen extends HandledScreen<EnergyConfigu
     private static final String[] SIDE_KEYS = {
             "top", "bottom", "left", "right", "front", "back"
     };
-    private static final String[] MODE_KEYS = {
-            "input", "output", "input_output", "disabled", "item_input", "item_output",
-            "energy_item_input", "energy_item_output"
-    };
 
     public EnergyConfigurationScreen(EnergyConfigurationScreenHandler handler,
             PlayerInventory inventory, Text title) {
@@ -83,9 +79,8 @@ public final class EnergyConfigurationScreen extends HandledScreen<EnergyConfigu
             int sy = y + POSITIONS[i][1];
             if (mouseX >= sx && mouseX < sx + SIZE && mouseY >= sy && mouseY < sy + SIZE) {
                 Text side = Text.translatable("gui.phaseteleporters.side." + SIDE_KEYS[i]);
-                Text mode = Text.translatable("gui.phaseteleporters.energy_mode."
-                        + MODE_KEYS[handler.getMode(EnergySideConfiguration.sideFor(
-                                handler.getSideFacing(), CELLS[i])).ordinal()]);
+                Text mode = Text.translatable(handler.getMode(EnergySideConfiguration.sideFor(
+                        handler.getSideFacing(), CELLS[i])).translationKey());
                 context.drawTooltip(textRenderer, Text.literal(side.getString() + ": " + mode.getString()),
                         mouseX, mouseY);
                 break;

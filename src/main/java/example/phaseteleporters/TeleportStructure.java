@@ -1,6 +1,7 @@
 package example.phaseteleporters;
 
 import java.util.Optional;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -53,7 +54,7 @@ public final class TeleportStructure {
                     allClear &= state.isAir() || (state.isOf(PhaseTeleportersMod.PORTAL_PLANE)
                             && world.getBlockEntity(inside) instanceof PortalPlaneBlockEntity plane
                             && plane.belongsTo(base));
-                    allFrame &= state.isOf(PhaseTeleportersMod.TELEPORTATION_FRAME);
+                    allFrame &= isFrame(state);
                 }
                 if (y >= 3 && allFrame) {
                     return Optional.of(bounds(base, axis, radius, radius, y + 1));
@@ -71,7 +72,13 @@ public final class TeleportStructure {
     }
 
     private static boolean isFrame(World world, BlockPos pos) {
-        return world.getBlockState(pos).isOf(PhaseTeleportersMod.TELEPORTATION_FRAME);
+        return isFrame(world.getBlockState(pos));
+    }
+
+    static boolean isFrame(BlockState state) {
+        return state.isOf(PhaseTeleportersMod.TELEPORTATION_FRAME)
+                || state.isOf(PhaseTeleportersMod.TELEPORTATION_FRAME_MONITOR)
+                || state.isOf(PhaseTeleportersMod.INTERDIMENSIONAL_TELEPORTATION_FRAME);
     }
 
     public static Bounds bounds(BlockPos base, Direction.Axis axis, int leftSpan, int rightSpan, int height) {

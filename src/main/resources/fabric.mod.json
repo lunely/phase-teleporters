@@ -4,13 +4,16 @@
   "version": "${version}",
   "name": "Phase Teleporters",
   "environment": "*",
-  "mixins": ["phaseteleporters.client.mixins.json"],
+  "mixins": ["phaseteleporters.client.mixins.json", "phaseteleporters.mixins.json"],
   "entrypoints": {
     "main": [
       "example.phaseteleporters.PhaseTeleportersMod"
     ],
     "client": [
       "example.phaseteleporters.PhaseTeleportersClient"
+    ],
+    "jade": [
+      "example.phaseteleporters.jade.PhaseTeleportersJadePlugin"
     ],
     "jei_mod_plugin": [
       "example.phaseteleporters.jei.InfusionJeiPlugin"
@@ -21,5 +24,8 @@
     "minecraft": "1.21.1",
     "java": ">=21",
     "fabric-api": "*"
+  },
+  "suggests": {
+    "team_reborn_energy": ">=4.1.0"
   }
 }

@@ -9,8 +9,19 @@ import net.minecraft.client.render.RenderLayer;
 public final class PhaseTeleportersClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        PortalPlaneModel.register();
+        HandledScreens.register(PhaseTeleportersMod.EMERGENCY_TELEPORT_SCREEN_HANDLER,
+                EmergencyTeleportScreen<EmergencyTeleportScreenHandler>::new);
+        HandledScreens.register(PhaseTeleportersMod.PORTABLE_EMERGENCY_SCREEN_HANDLER,
+                EmergencyTeleportScreen<PortableEmergencyScreenHandler>::new);
         ItemDescriptionTooltip.register();
+        HandledScreens.register(PhaseTeleportersMod.SOLAR_PANEL_SCREEN_HANDLER, SolarPanelScreen::new);
+        TeleportationFrameMonitorRenderer.register();
+        TeleportationFrameMonitorClientNetworking.register();
         EnergyCubeRenderer.register();
+        QuantumTeleportRenderer.register();
+        HandledScreens.register(PhaseTeleportersMod.QUANTUM_TELEPORT_SCREEN_HANDLER, QuantumTeleportScreen::new);
+        QuantumTeleportClientNetworking.register();
         BlockRenderLayerMap.INSTANCE.putBlock(PhaseTeleportersMod.INFUSION_STATION, RenderLayer.getCutout());
         BlockRenderLayerMap.INSTANCE.putBlock(PhaseTeleportersMod.ENRICHMENT_CHAMBER, RenderLayer.getCutout());
         HandledScreens.register(PhaseTeleportersMod.INFUSION_STATION_SCREEN_HANDLER, InfusionStationScreen::new);

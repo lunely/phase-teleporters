@@ -25,7 +25,7 @@ import net.minecraft.world.BlockView;
 public final class InterdimensionalPortalPlaneBlock extends BlockWithEntity {
     private static final long PE_PER_TELEPORT = 500;
     public static final MapCodec<InterdimensionalPortalPlaneBlock> CODEC = createCodec(InterdimensionalPortalPlaneBlock::new);
-    public static final IntProperty COLOR = IntProperty.of("color", 0, 15);
+    public static final IntProperty COLOR = IntProperty.of("color", 0, PortalColors.count() - 1);
 
     public InterdimensionalPortalPlaneBlock(Settings settings) {
         super(settings);
@@ -52,16 +52,27 @@ public final class InterdimensionalPortalPlaneBlock extends BlockWithEntity {
 
     @Override
     protected void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+        if (!(world instanceof ServerWorld)
+                || !PortalReentryGuard.intersectsPortalBlock(entity.getBoundingBox(), pos)) return;
+        BlockPos contact = pos.toImmutable();
+        PortalCollisionTeleport.enqueue(entity, () -> {
+            if (!entity.isRemoved() && entity.getWorld() == world
+                    && world.getBlockState(contact).isOf(this))
+                teleportOnCollision(world.getBlockState(contact), world, contact, entity);
+        });
+    }
+
+    private void teleportOnCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (!(world instanceof ServerWorld serverWorld)) return;
         if (!(entity instanceof ServerPlayerEntity player) || entity.hasVehicle() || entity.hasPassengers()) {
-            if (PortalReentryGuard.intersectsPlane(entity.getBoundingBox(), state, pos)
+            if (PortalReentryGuard.intersectsPortalBlock(entity.getBoundingBox(), pos)
                     && world.getBlockEntity(pos) instanceof InterdimensionalPortalPlaneBlockEntity plane)
                 teleportGroup(serverWorld, plane, entity);
             return;
         }
         boolean blocked = InterdimensionalReentryGuard.isBlocked(player);
         InterdimensionalReentryGuard.collision(player, serverWorld, pos, blocked);
-        if (blocked || !PortalReentryGuard.intersectsPlane(player.getBoundingBox(), state, pos)
+        if (blocked || !PortalReentryGuard.intersectsPortalBlock(player.getBoundingBox(), pos)
                 || !(world.getBlockEntity(pos) instanceof InterdimensionalPortalPlaneBlockEntity plane)) return;
         InterdimensionalTeleportBlockEntity source = plane.sourceTeleport(serverWorld);
         if (source == null || source.getStored() < PE_PER_TELEPORT

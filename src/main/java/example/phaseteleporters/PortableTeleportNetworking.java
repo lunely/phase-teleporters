@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
@@ -19,6 +20,23 @@ public final class PortableTeleportNetworking {
     private record Destination(ServerWorld world, BlockPos controller, Vec3d arrival) {}
 
     public static void registerServer() {
+        PayloadTypeRegistry.playC2S().register(PortableModePayload.ID, PortableModePayload.CODEC);
+        ServerPlayNetworking.registerGlobalReceiver(PortableModePayload.ID,
+                (payload, context) -> context.server().execute(() -> {
+                    ServerPlayerEntity player = context.player();
+                    if (player.currentScreenHandler != player.playerScreenHandler
+                            || player.getInventory().selectedSlot != payload.slot()
+                            || payload.mode() < 0 || payload.mode() >= PortableTeleportItem.Mode.values().length) return;
+                    // Sneak is checked against vanilla client input before sending;
+                    // its movement packet may reach the server after the wheel packet.
+                    ItemStack stack = player.getMainHandStack();
+                    if (!(stack.getItem() instanceof PortableTeleportItem portable)) return;
+                    var mode = PortableTeleportItem.Mode.byId(payload.mode());
+                    portable.setMode(stack, mode);
+                    player.getInventory().markDirty();
+                    player.playerScreenHandler.sendContentUpdates();
+                    player.sendMessage(Text.translatable(mode.messageKey()), true);
+                }));
         PayloadTypeRegistry.playC2S().register(PortableTeleportActionPayload.ID,
                 PortableTeleportActionPayload.CODEC);
         PayloadTypeRegistry.playC2S().register(PortableFrequencyActionPayload.ID,
@@ -77,7 +95,7 @@ public final class PortableTeleportNetworking {
             ItemStack stack, PortableTeleportItem portable, PortableTeleportItem.Selection selection) {
         portable.setSelection(stack, selection);
         player.getInventory().markDirty();
-        handler.sendContentUpdates();
+        if (handler != null) handler.sendContentUpdates();
         player.playerScreenHandler.sendContentUpdates();
     }
 
@@ -190,8 +208,46 @@ public final class PortableTeleportNetworking {
         }
     }
 
+    /** Returns an action-bar error key, or null after a successful teleport. */
+    public static String quickTeleport(ServerPlayerEntity player, ItemStack stack, PortableTeleportItem portable) {
+        ServerWorld world = player.getServerWorld();
+        PortableTeleportItem.Selection selection = portable.getSelection(stack);
+        UUID owner = player.getUuid();
+        boolean exists = !selection.name().isEmpty() && (selection.interdimensional()
+                ? InterdimensionalFrequencyState.get(world).contains(selection.name(), selection.privateFrequency(), owner)
+                : LocalFrequencyState.get(world).contains(selection.name(), selection.privateFrequency(), owner));
+        if (!exists) {
+            portable.setSelection(stack, new PortableTeleportItem.Selection("",
+                    selection.privateFrequency(), selection.interdimensional()));
+            return "message.phaseteleporters.portable.no_frequency";
+        }
+        if (portable.getStoredPE(stack) < TELEPORT_COST)
+            return "message.phaseteleporters.portable.no_energy";
+        Destination destination = selection.interdimensional()
+                ? findInterdimensional(player, world, player.getBlockPos(), selection.name(), selection.privateFrequency(), owner)
+                : findLocal(player, world, player.getBlockPos(), selection.name(), selection.privateFrequency(), owner);
+        if (destination == null) {
+            Destination unpowered = selection.interdimensional()
+                    ? findInterdimensional(player, world, player.getBlockPos(), selection.name(),
+                            selection.privateFrequency(), owner, false)
+                    : findLocal(player, world, player.getBlockPos(), selection.name(),
+                            selection.privateFrequency(), owner, false);
+            return unpowered != null ? "message.phaseteleporters.portable.no_energy"
+                    : "message.phaseteleporters.portable.no_connection";
+        }
+        boolean success = selection.interdimensional()
+                ? teleportInterdimensional(player, world, destination, null, stack, portable, selection)
+                : teleportLocal(player, world, destination, null, stack, portable, selection);
+        return success ? null : "message.phaseteleporters.portable.no_connection";
+    }
+
     private static Destination findLocal(ServerPlayerEntity player, ServerWorld world, BlockPos from,
             String name, boolean privateFrequency, UUID owner) {
+        return findLocal(player, world, from, name, privateFrequency, owner, true);
+    }
+
+    private static Destination findLocal(ServerPlayerEntity player, ServerWorld world, BlockPos from,
+            String name, boolean privateFrequency, UUID owner, boolean requireEnergy) {
         Destination best = null;
         long bestDistance = Long.MAX_VALUE;
         for (long packed : LocalTeleportIndex.get(world).positions()) {
@@ -202,7 +258,7 @@ public final class PortableTeleportNetworking {
                 continue;
             }
             if (!candidate.matchesFrequency(name, privateFrequency, owner)
-                    || candidate.getStored() < REQUIRED_TARGET_ENERGY
+                    || (requireEnergy && candidate.getStored() < REQUIRED_TARGET_ENERGY)
                     || !candidate.canPlayerTeleport(player)) continue;
             Vec3d arrival = findSafeArrival(player, world, pos);
             if (arrival == null) continue;
@@ -217,6 +273,11 @@ public final class PortableTeleportNetworking {
 
     private static Destination findInterdimensional(ServerPlayerEntity player, ServerWorld sourceWorld,
             BlockPos from, String name, boolean privateFrequency, UUID owner) {
+        return findInterdimensional(player, sourceWorld, from, name, privateFrequency, owner, true);
+    }
+
+    private static Destination findInterdimensional(ServerPlayerEntity player, ServerWorld sourceWorld,
+            BlockPos from, String name, boolean privateFrequency, UUID owner, boolean requireEnergy) {
         Destination best = null;
         long bestDistance = Long.MAX_VALUE;
         for (ServerWorld world : sourceWorld.getServer().getWorlds()) {
@@ -228,7 +289,7 @@ public final class PortableTeleportNetworking {
                     continue;
                 }
                 if (!candidate.matchesFrequency(name, privateFrequency, owner)
-                        || candidate.getStored() < REQUIRED_TARGET_ENERGY
+                        || (requireEnergy && candidate.getStored() < REQUIRED_TARGET_ENERGY)
                         || !candidate.canPlayerTeleport(player)) continue;
                 Vec3d arrival = findSafeArrival(player, world, pos);
                 if (arrival == null) continue;
@@ -263,13 +324,13 @@ public final class PortableTeleportNetworking {
         return world.isSpaceEmpty(player, space) ? new Vec3d(x, feet.getY(), z) : null;
     }
 
-    private static void teleportLocal(ServerPlayerEntity player, ServerWorld world, Destination destination,
+    private static boolean teleportLocal(ServerPlayerEntity player, ServerWorld world, Destination destination,
             PortableTeleportScreenHandler handler, ItemStack stack, PortableTeleportItem portable,
             PortableTeleportItem.Selection selection) {
         if (!(world.getBlockEntity(destination.controller()) instanceof TeleportBlockEntity controller)
                 || controller.getStored() < REQUIRED_TARGET_ENERGY
                 || !controller.canPlayerTeleport(player)
-                || portable.getStoredPE(stack) < TELEPORT_COST) return;
+                || portable.getStoredPE(stack) < TELEPORT_COST) return false;
         Vec3d arrival = destination.arrival();
         double sourceX = player.getX();
         double sourceY = player.getY();
@@ -282,15 +343,17 @@ public final class PortableTeleportNetworking {
             portable.spendPE(stack, TELEPORT_COST);
             player.getInventory().markDirty();
             player.playerScreenHandler.sendContentUpdates();
-            player.closeHandledScreen();
-            PortalPlaneBlock.playTeleportEffects(world, world,
+            if (handler != null) player.closeHandledScreen();
+            PortalPlaneBlock.playPortableTeleportEffects(world, world,
                     sourceX, sourceY, sourceZ, arrival.x, arrival.y, arrival.z);
+            return true;
         } else if (bounds != null) {
             PortalReentryGuard.clear(player);
         }
+        return false;
     }
 
-    private static void teleportInterdimensional(ServerPlayerEntity player, ServerWorld sourceWorld,
+    private static boolean teleportInterdimensional(ServerPlayerEntity player, ServerWorld sourceWorld,
             Destination destination, PortableTeleportScreenHandler handler, ItemStack stack,
             PortableTeleportItem portable, PortableTeleportItem.Selection selection) {
         ServerWorld targetWorld = destination.world();
@@ -298,7 +361,7 @@ public final class PortableTeleportNetworking {
                 instanceof InterdimensionalTeleportBlockEntity controller)
                 || controller.getStored() < REQUIRED_TARGET_ENERGY
                 || !controller.canPlayerTeleport(player)
-                || portable.getStoredPE(stack) < TELEPORT_COST) return;
+                || portable.getStoredPE(stack) < TELEPORT_COST) return false;
         Vec3d arrival = destination.arrival();
         double sourceX = player.getX();
         double sourceY = player.getY();
@@ -315,13 +378,15 @@ public final class PortableTeleportNetworking {
             player.getInventory().markDirty();
             player.playerScreenHandler.sendContentUpdates();
             if (bounds != null) InterdimensionalReentryGuard.transferCompleted(player, sourceWorld, targetWorld);
-            player.closeHandledScreen();
-            PortalPlaneBlock.playTeleportEffects(sourceWorld, targetWorld,
+            if (handler != null) player.closeHandledScreen();
+            PortalPlaneBlock.playPortableTeleportEffects(sourceWorld, targetWorld,
                     sourceX, sourceY, sourceZ, arrival.x, arrival.y, arrival.z);
+            return true;
         } else {
             if (sourceWorld != targetWorld)
                 ServerPlayNetworking.send(player, new InterdimensionalTerrainPayload(false));
             if (bounds != null) InterdimensionalReentryGuard.clear(player, "portable-teleport-failed");
         }
+        return false;
     }
 }

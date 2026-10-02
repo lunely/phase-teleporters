@@ -2,6 +2,7 @@ package example.phaseteleporters;
 
 import com.mojang.serialization.MapCodec;
 import example.phaseteleporters.energy.PEStorage;
+import example.phaseteleporters.energy.EnergyApiCompat;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -67,23 +68,25 @@ public final class BasicEnergyCableBlock extends BlockWithEntity {
         BlockPos pos = context.getBlockPos();
         BlockState state = getDefaultState();
         for (Direction direction : Direction.values())
-            state = state.with(property(direction), connects(context.getWorld(), pos.offset(direction)));
+            state = state.with(property(direction), connects(context.getWorld(), pos.offset(direction),
+                    direction.getOpposite()));
         return state;
     }
 
     @Override protected BlockState getStateForNeighborUpdate(BlockState state, Direction direction,
             BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
-        return state.with(property(direction), connects(world, neighborPos));
+        return state.with(property(direction), connects(world, neighborPos, direction.getOpposite()));
     }
 
     static void refreshConnections(World world, BlockPos pos, BlockState state) {
         BlockState updated = state;
         for (Direction direction : Direction.values())
-            updated = updated.with(property(direction), connects(world, pos.offset(direction)));
+            updated = updated.with(property(direction), connects(world, pos.offset(direction),
+                    direction.getOpposite()));
         if (updated != state) world.setBlockState(pos, updated, Block.NOTIFY_ALL);
     }
 
-    private static boolean connects(BlockView world, BlockPos pos) {
+    private static boolean connects(BlockView world, BlockPos pos, Direction side) {
         Block block = world.getBlockState(pos).getBlock();
         return block instanceof BasicEnergyCableBlock
                 || block == PhaseTeleportersMod.CREATIVE_ENERGY_CUBE
@@ -95,7 +98,8 @@ public final class BasicEnergyCableBlock extends BlockWithEntity {
                 || block == PhaseTeleportersMod.ENRICHMENT_CHAMBER
                 || block == PhaseTeleportersMod.TELEPORT
                 || block == PhaseTeleportersMod.INTERDIMENSIONAL_TELEPORT
-                || world.getBlockEntity(pos) instanceof PEStorage;
+                || world.getBlockEntity(pos) instanceof PEStorage
+                || world instanceof World level && EnergyApiCompat.connects(level, pos, side);
     }
 
     private static BooleanProperty property(Direction direction) {

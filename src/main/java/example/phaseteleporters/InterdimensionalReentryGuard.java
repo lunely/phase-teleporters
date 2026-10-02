@@ -36,12 +36,11 @@ final class InterdimensionalReentryGuard {
             ExitPortal exit = entry.getValue();
             RegistryKey<World> currentDimension = player.getWorld().getRegistryKey();
             if (!currentDimension.equals(exit.dimension())) {
-                if (exit.seenAtExit()) {
-                    log("clear uuid={} reason=left-dimension source={} destination={}",
-                            id, currentDimension.getValue(), exit.dimension().getValue());
-                    return true;
-                }
-                return false;
+                // Transfers finish synchronously before the end-of-tick guard runs.
+                // A lock for a different dimension must not survive another teleport.
+                log("clear uuid={} reason=left-dimension source={} destination={}",
+                        id, currentDimension.getValue(), exit.dimension().getValue());
+                return true;
             }
             boolean inside = player.getBoundingBox().intersects(exit.volume());
             if (inside) {
@@ -52,7 +51,7 @@ final class InterdimensionalReentryGuard {
                 }
                 return false;
             }
-            if (!exit.seenAtExit()) return false;
+            // Do not require touching the exit first: arrival may already be outside it.
             log("clear uuid={} reason=fully-left-exit dimension={} box={} exit={}", id,
                     currentDimension.getValue(), player.getBoundingBox(), exit.volume());
             return true;

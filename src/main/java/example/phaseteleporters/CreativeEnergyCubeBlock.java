@@ -8,16 +8,40 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.BlockRotation;
+import net.minecraft.util.BlockMirror;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 public final class CreativeEnergyCubeBlock extends BlockWithEntity {
     public static final MapCodec<CreativeEnergyCubeBlock> CODEC = createCodec(CreativeEnergyCubeBlock::new);
+    public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
-    public CreativeEnergyCubeBlock(Settings settings) { super(settings); }
+    public CreativeEnergyCubeBlock(Settings settings) {
+        super(settings);
+        setDefaultState(getDefaultState().with(FACING, Direction.NORTH));
+    }
+
+    @Override public BlockState getPlacementState(ItemPlacementContext context) {
+        return getDefaultState().with(FACING, context.getHorizontalPlayerFacing().getOpposite());
+    }
+    @Override protected void appendProperties(StateManager.Builder<net.minecraft.block.Block, BlockState> builder) {
+        builder.add(FACING);
+    }
+    @Override protected BlockState rotate(BlockState state, BlockRotation rotation) {
+        return state.with(FACING, rotation.rotate(state.get(FACING)));
+    }
+    @Override protected BlockState mirror(BlockState state, BlockMirror mirror) {
+        return state.rotate(mirror.getRotation(state.get(FACING)));
+    }
 
     @Override protected MapCodec<CreativeEnergyCubeBlock> getCodec() { return CODEC; }
     @Override protected BlockRenderType getRenderType(BlockState state) { return BlockRenderType.MODEL; }

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "phaseteleporters:block/coal_generator",
+    "bottom": "phaseteleporters:block/machine_casing",
+    "top": "phaseteleporters:block/solar_panel_top"
+  }
+}

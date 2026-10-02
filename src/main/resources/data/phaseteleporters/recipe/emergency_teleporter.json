@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["CFC", "OPO"],
+  "key": {
+    "O": { "item": "phaseteleporters:refined_obsidian_ingot" },
+    "C": { "item": "phaseteleporters:phase_control_circuit" },
+    "P": { "item": "phaseteleporters:phase_alloy" },
+    "F": { "item": "phaseteleporters:teleportation_core" }
+  },
+  "result": { "id": "phaseteleporters:emergency_teleporter", "count": 1 }
+}

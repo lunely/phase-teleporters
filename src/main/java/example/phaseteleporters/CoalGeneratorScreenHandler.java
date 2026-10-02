@@ -26,7 +26,7 @@ public final class CoalGeneratorScreenHandler extends ScreenHandler implements E
                 syncId,
                 playerInventory,
                 new SimpleInventory(1),
-                new ArrayPropertyDelegate(6)
+                new ArrayPropertyDelegate(7)
         );
     }
 
@@ -42,7 +42,7 @@ public final class CoalGeneratorScreenHandler extends ScreenHandler implements E
         );
 
         checkSize(inventory, 1);
-        checkDataCount(properties, 6);
+        checkDataCount(properties, 7);
 
         this.inventory = inventory;
         this.properties = properties;
@@ -117,6 +117,8 @@ public final class CoalGeneratorScreenHandler extends ScreenHandler implements E
     public int getBurnTime() {
         return properties.get(0);
     }
+
+    public int getGeneration() { return properties.get(6); }
 
     public int getFuelTime() {
         return properties.get(1);

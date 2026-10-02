@@ -22,6 +22,8 @@ public final class EnergySidePanel {
     private static final Identifier REDSTONE_BUTTON_TEXTURE = Identifier.of(PhaseTeleportersMod.MOD_ID, "textures/gui/slot/redstone_button.png");
     private static final Identifier SECURITY_BACKGROUND = Identifier.of(PhaseTeleportersMod.MOD_ID, "textures/gui/config_security.png");
     private static final Identifier SECURITY_BUTTON_TEXTURE = Identifier.of(PhaseTeleportersMod.MOD_ID, "textures/gui/slot/security_button.png");
+    private static final Identifier CLOSED_LOCK = Identifier.of(PhaseTeleportersMod.MOD_ID, "textures/gui/slot/private_lock.png");
+    private static final Identifier OPEN_LOCK = Identifier.of(PhaseTeleportersMod.MOD_ID, "textures/gui/slot/private_unlocked.png");
     private static final ItemStack REDSTONE_ICON = new ItemStack(Items.REDSTONE);
     private static final ItemStack GUNPOWDER_ICON = new ItemStack(Items.GUNPOWDER);
     private static final ItemStack REDSTONE_TORCH_ICON = new ItemStack(Items.REDSTONE_TORCH);
@@ -35,6 +37,8 @@ public final class EnergySidePanel {
     private static final int HEIGHT = 91;
     private static final int BUTTON_U = 7;
     private static final int BUTTON_V = 5;
+    private static final int SECURITY_BUTTON_U = 6;
+    private static final int SECURITY_BUTTON_V = 3;
     private static final int BUTTON_WIDTH = 25;
     private static final int BUTTON_HEIGHT = 22;
     private static final int REDSTONE_OFFSET_Y = BUTTON_HEIGHT + 3;
@@ -49,10 +53,6 @@ public final class EnergySidePanel {
             {46, 27}, {26, 46}, {46, 46}, {66, 46}, {46, 65}, {26, 65}
     };
     private static final String[] LABELS = {"top", "left", "front", "right", "bottom", "back"};
-    private static final String[] MODES = {
-            "input", "output", "input_output", "disabled", "item_input", "item_output",
-            "energy_item_input", "energy_item_output"
-    };
 
     private boolean open;
     private boolean redstoneOpen;
@@ -69,6 +69,10 @@ public final class EnergySidePanel {
         open = false;
         redstoneOpen = false;
         securityOpen = false;
+    }
+
+    public int rightPanelBottom(int guiY) {
+        return securityOpen && !stackedButtons ? panelY(guiY) + HEIGHT : guiY;
     }
 
     private int panelX(int guiX) { return guiX - WIDTH + 3; }
@@ -122,8 +126,8 @@ public final class EnergySidePanel {
             context.fill(sx + 3, sy + 5, sx + 13, sy + 6, 0x50FFFFFF);
             context.fill(sx + 3, sy + 14, sx + 13, sy + 15, 0x40000000);
             String sign = switch (mode) {
-                case INPUT, ITEM_INPUT, ENERGY_ITEM_INPUT -> "+";
-                case OUTPUT, ITEM_OUTPUT, ENERGY_ITEM_OUTPUT -> "−";
+                case INPUT, ITEM_INPUT, ENERGY_ITEM_INPUT, ALL_INPUT, FLUID_INPUT -> "+";
+                case OUTPUT, ITEM_OUTPUT, ENERGY_ITEM_OUTPUT, ALL_OUTPUT, FLUID_OUTPUT -> "−";
                 case INPUT_OUTPUT -> "±";
                 case DISABLED -> "";
             };
@@ -173,32 +177,10 @@ public final class EnergySidePanel {
     }
 
     private static void drawLockIcon(DrawContext context, int x, int y, boolean closed) {
-        int outline = 0xFF283236;
-        int white = 0xFFF8FBFC;
-        int silver = 0xFFCBD5D9;
-        int shadow = 0xFF87959B;
-        if (closed) {
-            context.fill(x + 4, y + 1, x + 12, y + 3, outline);
-            context.fill(x + 3, y + 3, x + 5, y + 9, outline);
-            context.fill(x + 11, y + 3, x + 13, y + 9, outline);
-            context.fill(x + 5, y + 2, x + 11, y + 3, white);
-            context.fill(x + 4, y + 4, x + 5, y + 8, white);
-            context.fill(x + 11, y + 4, x + 12, y + 8, silver);
-        } else {
-            context.fill(x + 3, y + 1, x + 11, y + 3, outline);
-            context.fill(x + 2, y + 3, x + 4, y + 9, outline);
-            context.fill(x + 9, y + 3, x + 11, y + 6, outline);
-            context.fill(x + 4, y + 2, x + 10, y + 3, white);
-            context.fill(x + 3, y + 4, x + 4, y + 8, white);
-            context.fill(x + 10, y + 4, x + 11, y + 5, silver);
-        }
-        context.fill(x + 2, y + 8, x + 14, y + 15, outline);
-        context.fill(x + 3, y + 9, x + 13, y + 14, white);
-        context.fill(x + 11, y + 9, x + 13, y + 14, silver);
-        context.fill(x + 3, y + 13, x + 13, y + 14, shadow);
-        context.fill(x + 4, y + 9, x + 10, y + 10, 0xFFFFFFFF);
-        context.fill(x + 7, y + 10, x + 9, y + 12, outline);
-        context.fill(x + 8, y + 12, x + 9, y + 13, outline);
+        Identifier texture = closed ? CLOSED_LOCK : OPEN_LOCK;
+        MinecraftClient.getInstance().getTextureManager().getTexture(texture).setFilter(false, false);
+        context.drawTexture(texture, x + 4, y + 3,
+                closed ? 51 : 62, 19, 7, 9, 256, 256);
     }
 
     private static void drawRedstonePanel(DrawContext context, int guiX, int guiY,
@@ -277,9 +259,9 @@ public final class EnergySidePanel {
     private void drawSecurityButton(DrawContext context, int guiX, int guiY, int guiWidth) {
         int bx = securityButtonX(guiX, guiWidth);
         int by = securityButtonY(guiY);
-        context.drawTexture(SECURITY_BUTTON_TEXTURE, bx, by, BUTTON_U, BUTTON_V,
+        context.drawTexture(SECURITY_BUTTON_TEXTURE, bx, by, SECURITY_BUTTON_U, SECURITY_BUTTON_V,
                 BUTTON_WIDTH, BUTTON_HEIGHT, 256, 256);
-        drawLockIcon(context, bx + 4, by + 1, true);
+        drawLockIcon(context, bx + 5, by + 3, true);
     }
 
     public boolean click(double mouseX, double mouseY, int button, int guiX, int guiY,
@@ -424,8 +406,8 @@ public final class EnergySidePanel {
             if (inside(mouseX, mouseY, px + CELLS[i][0], py + CELLS[i][1], CELL, CELL)) {
                 Text side = Text.translatable("gui.phaseteleporters.side." + LABELS[i]);
                 PESideMode sideMode = handler.getSideMode(EnergySideConfiguration.sideFor(handler.getSideFacing(), i));
-                Text mode = Text.translatable("gui.phaseteleporters.energy_mode."
-                        + MODES[sideMode.ordinal()]).styled(style -> style.withColor(sideMode.color() & 0xFFFFFF));
+                Text mode = Text.translatable(sideMode.translationKey())
+                        .styled(style -> style.withColor(sideMode.color() & 0xFFFFFF));
                 context.drawTooltip(font, Text.literal(side.getString() + ": ").append(mode), mouseX, mouseY);
                 return;
             }

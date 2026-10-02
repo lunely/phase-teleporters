@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "phaseteleporters:block/solar_panel"
+    },
+    "facing=east": {
+      "model": "phaseteleporters:block/solar_panel",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "phaseteleporters:block/solar_panel",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "phaseteleporters:block/solar_panel",
+      "y": 270
+    }
+  }
+}

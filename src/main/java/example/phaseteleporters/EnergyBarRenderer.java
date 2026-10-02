@@ -23,6 +23,6 @@ public final class EnergyBarRenderer {
     public static void drawTooltip(DrawContext context, TextRenderer renderer, int x, int y,
             int mouseX, int mouseY, long current, long capacity) {
         if (mouseX >= x && mouseX < x + WIDTH && mouseY >= y && mouseY < y + HEIGHT)
-            context.drawTooltip(renderer, Text.literal(current + " / " + capacity + " PE"), mouseX, mouseY);
+            context.drawTooltip(renderer, Text.literal(PEGuiText.teleporterEnergy(current, capacity)), mouseX, mouseY);
     }
 }

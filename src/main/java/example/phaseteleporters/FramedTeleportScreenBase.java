@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.PositionedSoundInstance;
@@ -19,7 +20,7 @@ import org.lwjgl.glfw.GLFW;
 abstract class FramedTeleportScreenBase<T extends ScreenHandler & EnergySideScreenHandler>
         extends HandledScreen<T> {
     private static final Identifier BACKGROUND = texture("textures/gui/teleporter_gui.png");
-    private static final Identifier COLOR_PANEL = texture("textures/gui/config.png");
+    private static final Identifier COLOR_PANEL = texture("textures/gui/color_config_menu.png");
     private static final Identifier COLOR_BUTTON = texture("textures/gui/slot/config_button.png");
     private static final Identifier COLOR_SLOT = texture("textures/gui/color_slot.png");
     private static final Identifier COLOR_BUTTON_ICON = texture("textures/gui/slot/color_slot.png");
@@ -30,8 +31,11 @@ abstract class FramedTeleportScreenBase<T extends ScreenHandler & EnergySideScre
     private static final Identifier FILLED_ENERGY = texture("textures/gui/electric_furnace_energy_filled.png");
     private static final Identifier ENERGY_SLOT_ICON = texture("textures/gui/slot/energy_slot.png");
     private static final Identifier CHUNKLOADER_SLOT_ICON = texture("textures/gui/slot/chunkloader_slot.png");
-    private static final int PANEL_WIDTH = 101;
-    private static final int PANEL_HEIGHT = 91;
+    private static final int PANEL_WIDTH = 135;
+    private static final int PANEL_HEIGHT = 132;
+    private static final int COLOR_SLOT_SIZE = 18;
+    private static final int COLOR_COLUMNS = 5;
+    private static final int COLOR_STEP = 24;
     private static final int BUTTON_WIDTH = 25;
     private static final int BUTTON_HEIGHT = 22;
     private static final int ACTION_Y = 126;
@@ -102,6 +106,7 @@ abstract class FramedTeleportScreenBase<T extends ScreenHandler & EnergySideScre
     @Override
     protected void init() {
         super.init();
+        updateColorPanelLayout();
         int x = this.x;
         int y = this.y;
         publicButton = addDrawableChild(ButtonWidget.builder(
@@ -211,6 +216,8 @@ abstract class FramedTeleportScreenBase<T extends ScreenHandler & EnergySideScre
     protected abstract void sendFrequencyAction(int action, String name, int color, boolean isPrivate);
     protected abstract Text guiTitle();
     protected abstract int getPortalStatus();
+    protected boolean showsPortalStatus() { return true; }
+    protected boolean showsColorConfiguration() { return true; }
     protected abstract long getEnergy();
     protected abstract long getMaxEnergy();
 
@@ -218,7 +225,7 @@ abstract class FramedTeleportScreenBase<T extends ScreenHandler & EnergySideScre
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
         sidePanel.drawBehind(context, x, y, backgroundWidth, mouseX, mouseY, handler);
         if (colorOpen) drawColorPanel(context, mouseX, mouseY);
-        if (!colorOpen) {
+        if (showsColorConfiguration() && !colorOpen) {
             int bx = colorButtonX();
             int by = colorButtonY();
             context.drawTexture(COLOR_BUTTON, bx, by, 7, 5, BUTTON_WIDTH, BUTTON_HEIGHT, 256, 256);
@@ -226,7 +233,7 @@ abstract class FramedTeleportScreenBase<T extends ScreenHandler & EnergySideScre
                     12, 10, 15, 12, 256, 256);
         }
         context.drawTexture(BACKGROUND, x, y, 5, 2, backgroundWidth, backgroundHeight, 256, 256);
-        context.drawTexture(BACKGROUND, x + STATUS_X, y + STATUS_Y,
+        if (showsPortalStatus()) context.drawTexture(BACKGROUND, x + STATUS_X, y + STATUS_Y,
                 getPortalStatus() == PortalStatus.ACTIVE ? 208 : 192, 2,
                 STATUS_SIZE, STATUS_SIZE, 256, 256);
         drawEnergy(context);
@@ -337,45 +344,82 @@ abstract class FramedTeleportScreenBase<T extends ScreenHandler & EnergySideScre
     }
 
     private int colorButtonX() { return x + backgroundWidth - 3; }
-    private int colorButtonY() { return y + ACTION_Y - 1; }
-    private int colorPanelX() { return x + backgroundWidth - 3; }
-    private int colorPanelY() { return colorButtonY(); }
+    private int colorButtonY() { return Math.max(y + 30, sidePanel.rightPanelBottom(y)); }
+    private int colorPanelX() {
+        int right = x + backgroundWidth - 3;
+        if (right + PANEL_WIDTH <= width - 2) return right;
+        if (x - PANEL_WIDTH + 3 >= 2) return x - PANEL_WIDTH + 3;
+        return right;
+    }
+    private int colorPanelY() { return Math.min(colorButtonY(), height - PANEL_HEIGHT - 2); }
+
+    private void setColorOpen(boolean open) {
+        colorOpen = open && showsColorConfiguration();
+        updateColorPanelLayout();
+    }
+
+    private void updateColorPanelLayout() {
+        int centeredX = (width - backgroundWidth) / 2;
+        int targetX = centeredX;
+        if (colorOpen && centeredX + backgroundWidth + PANEL_WIDTH - 1 > width
+                && centeredX - PANEL_WIDTH + 3 < 2)
+            targetX = Math.max(2, width - backgroundWidth - PANEL_WIDTH + 1);
+        int shift = targetX - x;
+        x = targetX;
+        if (shift != 0)
+            for (var child : children())
+                if (child instanceof ClickableWidget widget) widget.setX(widget.getX() + shift);
+    }
+
+    private int colorSlotX(int position) {
+        int rowStart = position / COLOR_COLUMNS * COLOR_COLUMNS;
+        int rowCount = Math.min(COLOR_COLUMNS, PortalColors.count() - rowStart);
+        return colorPanelX() + 10 + (COLOR_COLUMNS - rowCount) * COLOR_STEP / 2
+                + position % COLOR_COLUMNS * COLOR_STEP;
+    }
+
+    private int colorSlotY(int position) {
+        return colorPanelY() + 30 + position / COLOR_COLUMNS * COLOR_STEP;
+    }
 
     private void drawColorPanel(DrawContext context, int mouseX, int mouseY) {
         int px = colorPanelX();
         int py = colorPanelY();
-        context.drawTexture(COLOR_PANEL, px, py, 12, 9, PANEL_WIDTH, PANEL_HEIGHT, 256, 256);
+        MinecraftClient.getInstance().getTextureManager().getTexture(COLOR_PANEL).setFilter(false, false);
+        MinecraftClient.getInstance().getTextureManager().getTexture(COLOR_SLOT).setFilter(false, false);
+        context.drawTexture(COLOR_PANEL, px, py, 43, 27, PANEL_WIDTH, PANEL_HEIGHT, 256, 256);
         context.drawText(textRenderer, Text.translatable("gui.phaseteleporters.color_button"),
                 px + 12, py + 11, 0x404040, false);
-        context.fill(px + 8, py + 23, px + 96, py + 86, 0xFF777777);
-        context.fill(px + 9, py + 24, px + 95, py + 85, 0xFFA9A9A9);
-        context.fill(px + 9, py + 24, px + 95, py + 25, 0xFF989898);
-        context.fill(px + 9, py + 24, px + 10, py + 85, 0xFF989898);
+        context.fill(px + 6, py + 26, px + 129, py + 125, 0xFF777777);
+        context.fill(px + 7, py + 27, px + 128, py + 124, 0xFFA9A9A9);
+        context.fill(px + 7, py + 27, px + 128, py + 28, 0xFF989898);
+        context.fill(px + 7, py + 27, px + 8, py + 124, 0xFF989898);
         for (int i = 0; i < PortalColors.count(); i++) {
-            int sx = px + 14 + i % 4 * 19;
-            int sy = py + 29 + i / 4 * 14;
-            if (i == color) context.fill(sx - 2, sy - 2, sx + 10, sy + 10, 0xFF303030);
-            drawColorSlot(context, sx, sy, i);
-            if (mouseX >= sx && mouseX < sx + 8 && mouseY >= sy && mouseY < sy + 8)
-                context.fill(sx + 2, sy + 2, sx + 6, sy + 6, 0x66FFFFFF);
+            int sx = colorSlotX(i);
+            int sy = colorSlotY(i);
+            int id = PortalColors.displayColor(i);
+            drawColorSlot(context, sx, sy, id);
+            if (id == color || inside(mouseX, mouseY, sx, sy, COLOR_SLOT_SIZE, COLOR_SLOT_SIZE))
+                context.drawBorder(sx, sy, COLOR_SLOT_SIZE, COLOR_SLOT_SIZE, 0xFFFFFFFF);
         }
     }
 
     private void drawColorSlot(DrawContext context, int sx, int sy, int index) {
-        context.drawTexture(COLOR_SLOT, sx, sy, 52, 14, 8, 8, 256, 256);
-        context.fill(sx + 2, sy + 2, sx + 6, sy + 6, 0xFF000000 | PortalColors.rgb(index));
+        context.drawTexture(COLOR_SLOT, sx, sy, 0, 0, COLOR_SLOT_SIZE, COLOR_SLOT_SIZE, 18, 18);
+        int rgb = PortalColors.rgb(index);
+        context.fill(sx + 1, sy + 1, sx + 17, sy + 17, 0xFF000000 | rgb);
     }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if (button == 0) {
             if (sidePanel.click(mouseX, mouseY, button, x, y, backgroundWidth, handler)) {
-                colorOpen = false;
+                setColorOpen(false);
                 return true;
             }
-            if (!colorOpen && inside(mouseX, mouseY, colorButtonX() + 3, colorButtonY(),
+            if (showsColorConfiguration() && !colorOpen && inside(mouseX, mouseY, colorButtonX() + 3, colorButtonY(),
                     BUTTON_WIDTH - 3, BUTTON_HEIGHT)) {
-                colorOpen = true;
+                setColorOpen(true);
                 sidePanel.closeAll();
                 playClick();
                 return true;
@@ -384,23 +428,23 @@ abstract class FramedTeleportScreenBase<T extends ScreenHandler & EnergySideScre
                 int px = colorPanelX();
                 int py = colorPanelY();
                 if (inside(mouseX, mouseY, px + 3, py, PANEL_WIDTH - 8, 23)) {
-                    colorOpen = false;
+                    setColorOpen(false);
                     playClick();
                     return true;
                 }
                 for (int i = 0; i < PortalColors.count(); i++) {
-                    int sx = px + 14 + i % 4 * 19;
-                    int sy = py + 29 + i / 4 * 14;
-                    if (inside(mouseX, mouseY, sx, sy, 8, 8)) {
-                        color = i;
-                        if (!assigned.isEmpty()) sendColor(assigned, assignedPrivate, i);
-                        colorOpen = false;
+                    int sx = colorSlotX(i);
+                    int sy = colorSlotY(i);
+                    if (inside(mouseX, mouseY, sx, sy, COLOR_SLOT_SIZE, COLOR_SLOT_SIZE)) {
+                        color = PortalColors.displayColor(i);
+                        if (!assigned.isEmpty()) sendColor(assigned, assignedPrivate, color);
+                        setColorOpen(false);
                         playClick();
                         return true;
                     }
                 }
                 if (inside(mouseX, mouseY, px, py, PANEL_WIDTH, PANEL_HEIGHT)) return true;
-                colorOpen = false;
+                setColorOpen(false);
                 playClick();
             }
             int lx = x + LIST_X;
@@ -509,13 +553,26 @@ abstract class FramedTeleportScreenBase<T extends ScreenHandler & EnergySideScre
                 36, 19, 9, 9, 256, 256);
         context.drawTexture(PRIVATE_LOCK, x + TAB_X + 6, y + TAB_Y + TAB_SIZE + TAB_GAP + 5,
                 51, 19, 7, 9, 256, 256);
+        if (colorOpen) {
+            if (inside(mouseX, mouseY, colorPanelX(), colorPanelY(), PANEL_WIDTH, PANEL_HEIGHT)) {
+                for (int i = 0; i < PortalColors.count(); i++) {
+                    if (inside(mouseX, mouseY, colorSlotX(i), colorSlotY(i), COLOR_SLOT_SIZE, COLOR_SLOT_SIZE)) {
+                        int id = PortalColors.displayColor(i);
+                        context.drawTooltip(textRenderer, Text.translatable(PortalColors.nameKey(id))
+                                .styled(style -> style.withColor(PortalColors.rgb(id))), mouseX, mouseY);
+                        break;
+                    }
+                }
+                return;
+            }
+        }
         sidePanel.tooltip(context, textRenderer, x, y, backgroundWidth, mouseX, mouseY, handler);
         if (inside(mouseX, mouseY, x + ENERGY_X - 1, y + ENERGY_Y - 1,
                 ENERGY_WIDTH + 2, ENERGY_HEIGHT + 2))
             context.drawTooltip(textRenderer,
                     Text.literal(PEGuiText.teleporterEnergy(getEnergy(), getMaxEnergy())),
                     mouseX, mouseY);
-        if (inside(mouseX, mouseY, x + STATUS_X, y + STATUS_Y, STATUS_SIZE, STATUS_SIZE))
+        if (showsPortalStatus() && inside(mouseX, mouseY, x + STATUS_X, y + STATUS_Y, STATUS_SIZE, STATUS_SIZE))
             context.drawTooltip(textRenderer,
                     Text.translatable("gui.phaseteleporters.portal_status."
                             + PortalStatus.key(getPortalStatus())), mouseX, mouseY);
@@ -526,7 +583,7 @@ abstract class FramedTeleportScreenBase<T extends ScreenHandler & EnergySideScre
                 TAB_SIZE, TAB_SIZE))
             context.drawTooltip(textRenderer,
                     Text.translatable("gui.phaseteleporters.show_private_frequencies"), mouseX, mouseY);
-        if (!colorOpen && inside(mouseX, mouseY, colorButtonX() + 3, colorButtonY(),
+        if (showsColorConfiguration() && !colorOpen && inside(mouseX, mouseY, colorButtonX() + 3, colorButtonY(),
                 BUTTON_WIDTH - 3, BUTTON_HEIGHT))
             context.drawTooltip(textRenderer,
                     Text.translatable("gui.phaseteleporters.color_button"), mouseX, mouseY);

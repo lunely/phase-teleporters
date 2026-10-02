@@ -10,8 +10,8 @@ public interface PEMachineInventory extends SidedInventory {
     default int[] getAvailableSlots(Direction side) {
         PEBlockEntity machine = (PEBlockEntity) this;
         return switch (machine.getSideMode(side)) {
-            case ITEM_INPUT, ENERGY_ITEM_INPUT -> machine.itemInputSlots();
-            case ITEM_OUTPUT, ENERGY_ITEM_OUTPUT -> machine.itemOutputSlots();
+            case ITEM_INPUT, ENERGY_ITEM_INPUT, ALL_INPUT -> machine.itemInputSlots();
+            case ITEM_OUTPUT, ENERGY_ITEM_OUTPUT, ALL_OUTPUT -> machine.itemOutputSlots();
             default -> new int[0];
         };
     }

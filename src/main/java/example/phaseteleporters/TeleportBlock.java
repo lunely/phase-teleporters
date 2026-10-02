@@ -3,19 +3,17 @@ package example.phaseteleporters;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.ItemScatterer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public final class TeleportBlock extends BlockWithEntity {
+public final class TeleportBlock extends StoredEnergyBlock {
     public static final MapCodec<TeleportBlock> CODEC = createCodec(TeleportBlock::new);
 
     public TeleportBlock(Settings settings) { super(settings); }
@@ -56,7 +54,7 @@ public final class TeleportBlock extends BlockWithEntity {
             TeleportBlockEntity teleport = world.getBlockEntity(pos) instanceof TeleportBlockEntity found ? found : null;
             if (teleport != null) {
                 teleport.releaseAnchor();
-                ItemScatterer.spawn(world, pos, teleport);
+                teleport.scatterEnergyItem();
                 teleport.clearPortal();
             }
             LocalTeleportIndex.get(serverWorld).remove(pos);

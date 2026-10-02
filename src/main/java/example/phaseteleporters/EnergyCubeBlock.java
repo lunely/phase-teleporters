@@ -13,19 +13,43 @@ import net.minecraft.component.type.NbtComponent;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.DirectionProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.BlockRotation;
+import net.minecraft.util.BlockMirror;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 public final class EnergyCubeBlock extends BlockWithEntity {
     public static final MapCodec<EnergyCubeBlock> CODEC = createCodec(EnergyCubeBlock::new);
+    public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 
-    public EnergyCubeBlock(Settings settings) { super(settings); }
+    public EnergyCubeBlock(Settings settings) {
+        super(settings);
+        setDefaultState(getDefaultState().with(FACING, Direction.NORTH));
+    }
+
+    @Override public BlockState getPlacementState(ItemPlacementContext context) {
+        return getDefaultState().with(FACING, context.getHorizontalPlayerFacing().getOpposite());
+    }
+    @Override protected void appendProperties(StateManager.Builder<net.minecraft.block.Block, BlockState> builder) {
+        builder.add(FACING);
+    }
+    @Override protected BlockState rotate(BlockState state, BlockRotation rotation) {
+        return state.with(FACING, rotation.rotate(state.get(FACING)));
+    }
+    @Override protected BlockState mirror(BlockState state, BlockMirror mirror) {
+        return state.rotate(mirror.getRotation(state.get(FACING)));
+    }
 
     @Override protected MapCodec<EnergyCubeBlock> getCodec() { return CODEC; }
     @Override protected BlockRenderType getRenderType(BlockState state) { return BlockRenderType.MODEL; }
@@ -63,7 +87,7 @@ public final class EnergyCubeBlock extends BlockWithEntity {
         PESecurity.onPlaced(world, pos, placer);
         if (world.isClient || !(world.getBlockEntity(pos) instanceof EnergyCubeBlockEntity cube)) return;
         NbtComponent data = stack.get(DataComponentTypes.CUSTOM_DATA);
-        if (data != null) cube.insert(Math.max(0, data.copyNbt().getLong("PE")), false);
+        if (data != null) cube.restoreStoredEnergy(Math.max(0, data.copyNbt().getLong("PE")));
     }
 
     @Override protected void onStateReplaced(BlockState state, World world, BlockPos pos,

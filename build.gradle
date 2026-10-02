@@ -33,13 +33,19 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modCompileOnly "teamreborn:energy:4.1.0"
+    modLocalRuntime "teamreborn:energy:4.1.0"
     modCompileOnly("mezz.jei:jei-1.21.1-fabric:${project.jei_version}") {
         transitive = false
     }
     modLocalRuntime("mezz.jei:jei-1.21.1-fabric:${project.jei_version}") {
         transitive = false
     }
+    modCompileOnly "maven.modrinth:jade:${project.jade_version}"
     modLocalRuntime "maven.modrinth:jade:${project.jade_version}"
+    modLocalRuntime "maven.modrinth:reborncore:${project.tech_reborn_version}"
+    modLocalRuntime "maven.modrinth:techreborn:${project.tech_reborn_version}"
+    modLocalRuntime fileTree(dir: 'dev-mods', include: ['*.jar'])
 }
 
 processResources {

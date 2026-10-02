@@ -7,6 +7,12 @@ public interface PEStorage {
     long insert(long amount, boolean simulate);
     long extract(long amount, boolean simulate);
 
+    /** Restore local energy and transfer quotas when a transaction is aborted. */
+    Runnable createEnergySnapshot();
+
+    /** Shared buffers and cable networks enlist every affected storage once. */
+    default Iterable<? extends PEStorage> transactionParticipants() { return java.util.List.of(this); }
+
     default boolean isInfinite() { return false; }
 
     /** Transfer only what the receiver can accept, refunding any unexpected shortfall. */

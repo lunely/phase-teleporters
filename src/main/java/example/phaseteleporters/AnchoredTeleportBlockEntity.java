@@ -2,6 +2,7 @@ package example.phaseteleporters;
 
 import example.phaseteleporters.energy.PEBlockEntity;
 import example.phaseteleporters.energy.PEChargeableItem;
+import example.phaseteleporters.energy.PESideMode;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -12,6 +13,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 
 public abstract class AnchoredTeleportBlockEntity extends PEBlockEntity implements Inventory {
@@ -21,7 +23,30 @@ public abstract class AnchoredTeleportBlockEntity extends PEBlockEntity implemen
         super(type, pos, state, capacity);
     }
 
+    protected AnchoredTeleportBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, long capacity,
+            PESideMode defaultMode, PESideMode... allowedModes) {
+        super(type, pos, state, capacity, defaultMode, allowedModes);
+    }
+
     public boolean hasAnchorUpgrade() { return slots.get(0).isOf(PhaseTeleportersMod.ANCHOR_UPGRADE); }
+
+    public void writeStoredAnchorUpgrade(NbtCompound data) {
+        if (hasAnchorUpgrade() && world != null)
+            data.put("InstalledChunkLoader", slots.get(0).encode(world.getRegistryManager()));
+    }
+
+    public void readStoredAnchorUpgrade(NbtCompound data) {
+        if (world == null || !data.contains("InstalledChunkLoader")) return;
+        ItemStack upgrade = ItemStack.fromNbt(world.getRegistryManager(),
+                data.getCompound("InstalledChunkLoader")).orElse(ItemStack.EMPTY);
+        if (upgrade.isOf(PhaseTeleportersMod.ANCHOR_UPGRADE)) setStack(0, upgrade.copyWithCount(1));
+    }
+
+    /** The upgrade travels inside the block drop; only the energy item drops separately. */
+    public void scatterEnergyItem() {
+        if (world instanceof ServerWorld serverWorld)
+            ItemScatterer.spawn(serverWorld, pos.getX(), pos.getY(), pos.getZ(), slots.get(1));
+    }
 
     public void dischargeEnergyItem() {
         ItemStack stack = slots.get(1);

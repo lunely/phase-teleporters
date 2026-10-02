@@ -109,7 +109,7 @@ public final class InfusionStationScreenHandler extends ScreenHandler implements
             if (!insertItem(stack, 3, 39, true)) return ItemStack.EMPTY;
         } else if (InfusionResource.fromStack(stack) != InfusionResource.NONE) {
             if (!insertItem(stack, 0, 1, false)) return ItemStack.EMPTY;
-        } else if (stack.isOf(Items.IRON_INGOT) || stack.isOf(PhaseTeleportersMod.STEEL_INGOT)
+        } else if (stack.isOf(Items.IRON_INGOT) || stack.isOf(Items.GOLD_INGOT)
                 || stack.isOf(PhaseTeleportersMod.BASIC_ALLOY)
                 || stack.isOf(PhaseTeleportersMod.ADVANCED_ALLOY)
                 || stack.isOf(PhaseTeleportersMod.OBSIDIAN_DUST)) {

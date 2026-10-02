@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SPS",
+    "WCW",
+    "SKS"
+  ],
+  "key": {
+    "S": {
+      "item": "phaseteleporters:steel_ingot"
+    },
+    "P": {
+      "item": "phaseteleporters:solar_element"
+    },
+    "W": {
+      "item": "phaseteleporters:basic_wire"
+    },
+    "C": {
+      "item": "phaseteleporters:machine_casing"
+    },
+    "K": {
+      "item": "phaseteleporters:basic_control_circuit"
+    }
+  },
+  "result": {
+    "id": "phaseteleporters:solar_panel",
+    "count": 1
+  }
+}

@@ -53,7 +53,7 @@ public final class InterdimensionalTeleportStructure {
                     allClear &= state.isAir() || (state.isOf(PhaseTeleportersMod.INTERDIMENSIONAL_PORTAL_PLANE)
                             && world.getBlockEntity(inside) instanceof InterdimensionalPortalPlaneBlockEntity plane
                             && plane.belongsTo(base));
-                    allFrame &= state.isOf(PhaseTeleportersMod.INTERDIMENSIONAL_TELEPORTATION_FRAME);
+                    allFrame &= TeleportStructure.isFrame(state);
                 }
                 if (y >= 3 && allFrame) {
                     return Optional.of(bounds(base, axis, radius, radius, y + 1));
@@ -71,7 +71,7 @@ public final class InterdimensionalTeleportStructure {
     }
 
     private static boolean isFrame(World world, BlockPos pos) {
-        return world.getBlockState(pos).isOf(PhaseTeleportersMod.INTERDIMENSIONAL_TELEPORTATION_FRAME);
+        return TeleportStructure.isFrame(world.getBlockState(pos));
     }
 
     public static Bounds bounds(BlockPos base, Direction.Axis axis, int leftSpan, int rightSpan, int height) {

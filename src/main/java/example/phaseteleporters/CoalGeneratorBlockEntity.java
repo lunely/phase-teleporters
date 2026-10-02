@@ -28,6 +28,30 @@ public final class CoalGeneratorBlockEntity extends PEBlockEntity
 
     public static final long MAX_PE_PER_TICK = 120;
     public static final long MIN_PE_PER_TICK = 30;
+    public static final long MAX_OUTPUT_PER_TICK = 200;
+    private long outputTick = Long.MIN_VALUE;
+    private long outputThisTick;
+
+    @Override public Runnable createEnergySnapshot() {
+        Runnable savedEnergy = super.createEnergySnapshot();
+        long savedTick = outputTick;
+        long savedOutput = outputThisTick;
+        return () -> {
+            savedEnergy.run();
+            outputTick = savedTick;
+            outputThisTick = savedOutput;
+        };
+    }
+
+    @Override public long extract(long amount, boolean simulate) {
+        if (world != null && outputTick != world.getTime()) {
+            outputTick = world.getTime();
+            outputThisTick = 0;
+        }
+        long sent = super.extract(Math.min(amount, MAX_OUTPUT_PER_TICK - outputThisTick), simulate);
+        if (!simulate) outputThisTick += sent;
+        return sent;
+    }
 
     // 12 секунд разогрева.
     private static final int MAX_HEAT = 240;
@@ -39,6 +63,7 @@ public final class CoalGeneratorBlockEntity extends PEBlockEntity
     private int fuelTime;
 
     private int heat;
+    private int generation;
 
     private final PropertyDelegate properties = new PropertyDelegate() {
         @Override
@@ -47,6 +72,7 @@ public final class CoalGeneratorBlockEntity extends PEBlockEntity
                     : index == 1 ? fuelTime
                     : index >= 2 && index < 6
                     ? PEPropertyCodec.part(CoalGeneratorBlockEntity.this, index - 2)
+                    : index == 6 ? generation
                     : 0;
         }
 
@@ -63,7 +89,7 @@ public final class CoalGeneratorBlockEntity extends PEBlockEntity
 
         @Override
         public int size() {
-            return 6;
+            return 7;
         }
     };
 
@@ -87,6 +113,7 @@ public final class CoalGeneratorBlockEntity extends PEBlockEntity
             BlockState state,
             CoalGeneratorBlockEntity generator
     ) {
+        generator.generation = 0;
         generator.transferConfiguredItems();
         if (!generator.canWork()) return;
         EnergyCableNetwork.distribute(world, pos, generator);
@@ -107,25 +134,6 @@ public final class CoalGeneratorBlockEntity extends PEBlockEntity
                     generator.markDirty();
                 }
 
-                return;
-            }
-
-            /*
-             * Считаем выработку, которая будет после
-             * следующего шага нагрева.
-             */
-            int nextHeat = Math.min(
-                    MAX_HEAT,
-                    generator.heat + 1
-            );
-
-            long nextGeneration = getGenerationForHeat(nextHeat);
-
-            /*
-             * Если энергия не помещается —
-             * новое топливо пока не сжигаем.
-             */
-            if (generator.getCapacity() - generator.getStored() < nextGeneration) {
                 return;
             }
 
@@ -158,18 +166,9 @@ public final class CoalGeneratorBlockEntity extends PEBlockEntity
         long currentGeneration =
                 getGenerationForHeat(generator.heat);
 
-        /*
-         * Если энергия сейчас не помещается,
-         * ставим работу на паузу.
-         *
-         * Топливо не тратится.
-         */
-        if (generator.getCapacity() - generator.getStored() < currentGeneration) {
-            return;
-        }
-
         generator.burnTime--;
-
+        generator.generation = (int) currentGeneration;
+        // Fuel keeps burning; any production that does not fit in the buffer is lost.
         generator.insert(
                 currentGeneration,
                 false

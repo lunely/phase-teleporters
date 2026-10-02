@@ -1,0 +1,7 @@
+{
+  "required": true,
+  "package": "example.phaseteleporters.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": ["EmergencyDamageMixin", "EmergencyFallMovementMixin", "EmergencyFallDamageAccess"],
+  "injectors": { "defaultRequire": 1 }
+}

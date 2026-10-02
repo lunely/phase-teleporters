@@ -3,7 +3,6 @@ package example.phaseteleporters;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
@@ -20,7 +19,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.util.ItemScatterer;
 
-public final class InfusionStationBlock extends BlockWithEntity {
+public final class InfusionStationBlock extends StoredEnergyBlock {
     public static final MapCodec<InfusionStationBlock> CODEC = createCodec(InfusionStationBlock::new);
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
 

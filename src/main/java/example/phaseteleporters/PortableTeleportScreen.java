@@ -72,7 +72,7 @@ public final class PortableTeleportScreen extends HandledScreen<PortableTeleport
     public PortableTeleportScreen(PortableTeleportScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
         backgroundWidth = 175;
-        backgroundHeight = 237;
+        backgroundHeight = 156;
     }
 
     private List<PortableTeleportSnapshotPayload.Entry> entries() {
@@ -219,8 +219,9 @@ public final class PortableTeleportScreen extends HandledScreen<PortableTeleport
 
     @Override
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
-        context.drawTexture(BACKGROUND, x, y, 5, 2, backgroundWidth, backgroundHeight, 256, 256);
-        // Keep the shared inventory art while hiding machine-only controls.
+        // Join the controls area to the original bottom border, leaving out inventory rows.
+        context.drawTexture(BACKGROUND, x, y, 5, 2, backgroundWidth, 152, 256, 256);
+        context.drawTexture(BACKGROUND, x, y + 152, 5, 235, backgroundWidth, 4, 256, 256);
         context.fill(x + 7, y + 4, x + 21, y + 19, 0xFFC6C6C6);
         context.fill(x + 151, y + 78, x + 170, y + 151, 0xFFC6C6C6);
         context.fill(x + 7, y + 130, x + 29, y + 152, 0xFFC6C6C6);

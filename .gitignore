@@ -13,3 +13,4 @@ Thumbs.db
 .gradle-audit/
 .gradle-user/
 javac.*.args
+dev-mods/*.jar

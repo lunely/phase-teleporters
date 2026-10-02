@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "phaseteleporters:block/teleportation_frame_monitor" },
+    "facing=east": { "model": "phaseteleporters:block/teleportation_frame_monitor", "y": 90 },
+    "facing=south": { "model": "phaseteleporters:block/teleportation_frame_monitor", "y": 180 },
+    "facing=west": { "model": "phaseteleporters:block/teleportation_frame_monitor", "y": 270 }
+  }
+}

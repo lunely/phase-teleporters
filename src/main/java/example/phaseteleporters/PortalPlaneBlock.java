@@ -27,7 +27,7 @@ import net.minecraft.world.BlockView;
 public final class PortalPlaneBlock extends BlockWithEntity {
     private static final long PE_PER_TELEPORT = 500;
     public static final MapCodec<PortalPlaneBlock> CODEC = createCodec(PortalPlaneBlock::new);
-    public static final IntProperty COLOR = IntProperty.of("color", 0, 15);
+    public static final IntProperty COLOR = IntProperty.of("color", 0, PortalColors.count() - 1);
 
     public PortalPlaneBlock(Settings settings) {
         super(settings);
@@ -54,8 +54,19 @@ public final class PortalPlaneBlock extends BlockWithEntity {
 
     @Override
     protected void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+        if (!(world instanceof ServerWorld)
+                || !PortalReentryGuard.intersectsPortalBlock(entity.getBoundingBox(), pos)) return;
+        BlockPos contact = pos.toImmutable();
+        PortalCollisionTeleport.enqueue(entity, () -> {
+            if (!entity.isRemoved() && entity.getWorld() == world
+                    && world.getBlockState(contact).isOf(this))
+                teleportOnCollision(world.getBlockState(contact), world, contact, entity);
+        });
+    }
+
+    private void teleportOnCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (!(world instanceof ServerWorld serverWorld)
-                || !PortalReentryGuard.intersectsPlane(entity.getBoundingBox(), state, pos)
+                || !PortalReentryGuard.intersectsPortalBlock(entity.getBoundingBox(), pos)
                 || !(world.getBlockEntity(pos) instanceof PortalPlaneBlockEntity plane)) return;
         if (!(entity instanceof ServerPlayerEntity player) || entity.hasVehicle() || entity.hasPassengers()) {
             teleportGroup(serverWorld, plane, entity);
@@ -132,15 +143,36 @@ public final class PortalPlaneBlock extends BlockWithEntity {
     static void playTeleportEffects(ServerWorld sourceWorld, ServerWorld destinationWorld,
             double sourceX, double sourceY, double sourceZ,
             double destinationX, double destinationY, double destinationZ) {
+        playTeleportEffects(sourceWorld, destinationWorld, sourceX, sourceY, sourceZ,
+                destinationX, destinationY, destinationZ, 27, false);
+    }
+
+    static void playPortableTeleportEffects(ServerWorld sourceWorld, ServerWorld destinationWorld,
+            double sourceX, double sourceY, double sourceZ,
+            double destinationX, double destinationY, double destinationZ) {
+        playTeleportEffects(sourceWorld, destinationWorld, sourceX, sourceY, sourceZ,
+                destinationX, destinationY, destinationZ, 18, true);
+    }
+
+    private static void playTeleportEffects(ServerWorld sourceWorld, ServerWorld destinationWorld,
+            double sourceX, double sourceY, double sourceZ,
+            double destinationX, double destinationY, double destinationZ,
+            int particles, boolean departureSound) {
         sourceWorld.spawnParticles(ParticleTypes.PORTAL, sourceX, sourceY + 0.9, sourceZ,
-                18, 0.3, 0.6, 0.3, 0.08);
+                particles, 0.3, 0.6, 0.3, 0.08);
         destinationWorld.spawnParticles(ParticleTypes.PORTAL,
                 destinationX, destinationY + 0.9, destinationZ,
-                18, 0.3, 0.6, 0.3, 0.08);
+                particles, 0.3, 0.6, 0.3, 0.08);
+        var sound = destinationWorld.random.nextBoolean()
+                ? SoundEvents.ENTITY_ENDERMAN_TELEPORT : SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
+        if (departureSound) {
+            sourceWorld.spawnParticles(ParticleTypes.REVERSE_PORTAL,
+                    sourceX, sourceY + 0.9, sourceZ, 12, 0.3, 0.6, 0.3, 0.08);
+            sourceWorld.playSound(null, sourceX, sourceY, sourceZ,
+                    sound, SoundCategory.PLAYERS, 1.0f, 1.0f);
+        }
         destinationWorld.playSound(null, destinationX, destinationY, destinationZ,
-                destinationWorld.random.nextBoolean()
-                        ? SoundEvents.ENTITY_ENDERMAN_TELEPORT
-                        : SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT,
+                sound,
                 SoundCategory.PLAYERS, 1.0f, 1.0f);
     }
 }

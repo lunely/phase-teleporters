@@ -12,6 +12,25 @@ import net.minecraft.world.World;
 
 public final class BasicEnergyCableBlockEntity extends BlockEntity implements PEStorage {
     public static final long CAPACITY_PER_CABLE = 500;
+    public static final long TRANSFER_PER_TICK = 5_000;
+    private long transferTick = Long.MIN_VALUE;
+    private long insertedThisTick;
+    private long extractedThisTick;
+
+    public long remainingTransfer(long tick, boolean input) {
+        if (transferTick != tick) {
+            transferTick = tick;
+            insertedThisTick = 0;
+            extractedThisTick = 0;
+        }
+        return TRANSFER_PER_TICK - (input ? insertedThisTick : extractedThisTick);
+    }
+
+    public void consumeTransfer(long tick, boolean input, long amount) {
+        remainingTransfer(tick, input);
+        if (input) insertedThisTick += amount;
+        else extractedThisTick += amount;
+    }
     private final SimplePEStorage localEnergy = new SimplePEStorage(CAPACITY_PER_CABLE);
     private long processedTick = Long.MIN_VALUE;
     private boolean connectionsChecked;
@@ -43,6 +62,23 @@ public final class BasicEnergyCableBlockEntity extends BlockEntity implements PE
 
     @Override public long getCapacity() {
         return world == null ? CAPACITY_PER_CABLE : EnergyCableNetwork.capacity(world, pos);
+    }
+
+    @Override public Iterable<? extends PEStorage> transactionParticipants() {
+        return world == null ? java.util.List.of(this) : EnergyCableNetwork.members(world, pos);
+    }
+
+    @Override public Runnable createEnergySnapshot() {
+        long savedEnergy = localStored();
+        long savedTick = transferTick;
+        long savedInput = insertedThisTick;
+        long savedOutput = extractedThisTick;
+        return () -> {
+            setLocalStored(savedEnergy);
+            transferTick = savedTick;
+            insertedThisTick = savedInput;
+            extractedThisTick = savedOutput;
+        };
     }
 
     @Override public long insert(long amount, boolean simulate) {

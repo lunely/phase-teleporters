@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 
 /** PE stored in the ItemStack, with the shared charge bar and tooltip. */
 public class StoredPEItem extends Item implements PEChargeableItem {
@@ -68,6 +69,7 @@ public class StoredPEItem extends Item implements PEChargeableItem {
 
     public static Text energyTooltip(long stored, long capacity) {
         return Text.translatable("tooltip.phaseteleporters.energy",
-                PEEnergyFormat.format(stored), PEEnergyFormat.format(capacity));
+                Text.translatable("tooltip.phaseteleporters.energy_label").formatted(Formatting.GREEN),
+                PEEnergyFormat.format(stored), PEEnergyFormat.format(capacity)).formatted(Formatting.GRAY);
     }
 }

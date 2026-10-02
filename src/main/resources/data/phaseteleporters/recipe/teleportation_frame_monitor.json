@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " R ",
+    "PFP",
+    " B "
+  ],
+  "key": {
+    "R": { "item": "minecraft:redstone" },
+    "P": { "item": "minecraft:glass_pane" },
+    "F": { "item": "phaseteleporters:teleportation_frame" },
+    "B": { "item": "phaseteleporters:battery" }
+  },
+  "result": {
+    "id": "phaseteleporters:teleportation_frame_monitor",
+    "count": 1
+  }
+}

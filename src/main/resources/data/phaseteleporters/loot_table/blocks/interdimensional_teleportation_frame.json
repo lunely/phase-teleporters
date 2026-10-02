@@ -2,7 +2,7 @@
   "type": "minecraft:block",
   "pools": [{
     "rolls": 1,
-    "entries": [{ "type": "minecraft:item", "name": "phaseteleporters:interdimensional_teleportation_frame" }],
+    "entries": [{ "type": "minecraft:item", "name": "phaseteleporters:teleportation_frame" }],
     "conditions": [{ "condition": "minecraft:survives_explosion" }]
   }]
 }
