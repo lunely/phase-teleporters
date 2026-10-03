@@ -63,3 +63,35 @@ java {
     toolchain.languageVersion = JavaLanguageVersion.of(21)
     withSourcesJar()
 }
+
+// Server-only regression tests in a disposable world, separate from the release jar.
+sourceSets {
+    gametest {
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+        runtimeClasspath += sourceSets.main.output + sourceSets.main.runtimeClasspath
+    }
+}
+loom {
+    mods {
+        phaseteleporters { sourceSet sourceSets.main }
+        phaseteleporters_tests { sourceSet sourceSets.gametest }
+    }
+    runs {
+        gameTest {
+            server()
+            name 'Phase Teleporters GameTest'
+            source sourceSets.gametest
+            runDir 'build/gametest/run'
+            vmArg '-Dfabric-api.gametest'
+            vmArg "-Dfabric-api.gametest.report-file=${layout.buildDirectory.file('reports/gametest/results.xml').get().asFile}"
+        }
+    }
+}
+tasks.named('runGameTest') {
+    dependsOn tasks.named('gametestClasses')
+    doFirst {
+        file('build/gametest/run').mkdirs()
+        file('build/reports/gametest').mkdirs()
+        file('build/gametest/run/eula.txt').text = 'eula=true\n'
+    }
+}

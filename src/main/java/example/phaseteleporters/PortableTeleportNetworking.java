@@ -136,7 +136,6 @@ public final class PortableTeleportNetworking {
                 }
             } else return;
             InterdimensionalTeleportNetworking.syncOpenScreens(world);
-            syncOpenScreens(world, true);
         } else {
             LocalFrequencyState state = LocalFrequencyState.get(world);
             if (payload.action() == PortableFrequencyActionPayload.CREATE) {
@@ -152,7 +151,6 @@ public final class PortableTeleportNetworking {
                 }
             } else return;
             TeleportNetworking.syncOpenScreens(world);
-            syncOpenScreens(world, false);
         }
     }
 
@@ -166,7 +164,7 @@ public final class PortableTeleportNetworking {
                     new PortableTeleportItem.Selection("", privateFrequency, interdimensional));
     }
 
-    private static void syncOpenScreens(ServerWorld world, boolean interdimensional) {
+    static void syncOpenScreens(ServerWorld world, boolean interdimensional) {
         if (interdimensional) {
             for (ServerWorld candidateWorld : world.getServer().getWorlds())
                 for (ServerPlayerEntity viewer : candidateWorld.getPlayers())
@@ -258,6 +256,7 @@ public final class PortableTeleportNetworking {
                 continue;
             }
             if (!candidate.matchesFrequency(name, privateFrequency, owner)
+                    || !candidate.canWork()
                     || (requireEnergy && candidate.getStored() < REQUIRED_TARGET_ENERGY)
                     || !candidate.canPlayerTeleport(player)) continue;
             Vec3d arrival = findSafeArrival(player, world, pos);
@@ -289,6 +288,7 @@ public final class PortableTeleportNetworking {
                     continue;
                 }
                 if (!candidate.matchesFrequency(name, privateFrequency, owner)
+                        || !candidate.canWork()
                         || (requireEnergy && candidate.getStored() < REQUIRED_TARGET_ENERGY)
                         || !candidate.canPlayerTeleport(player)) continue;
                 Vec3d arrival = findSafeArrival(player, world, pos);
@@ -328,6 +328,7 @@ public final class PortableTeleportNetworking {
             PortableTeleportScreenHandler handler, ItemStack stack, PortableTeleportItem portable,
             PortableTeleportItem.Selection selection) {
         if (!(world.getBlockEntity(destination.controller()) instanceof TeleportBlockEntity controller)
+                || !controller.canWork()
                 || controller.getStored() < REQUIRED_TARGET_ENERGY
                 || !controller.canPlayerTeleport(player)
                 || portable.getStoredPE(stack) < TELEPORT_COST) return false;
@@ -359,6 +360,7 @@ public final class PortableTeleportNetworking {
         ServerWorld targetWorld = destination.world();
         if (!(targetWorld.getBlockEntity(destination.controller())
                 instanceof InterdimensionalTeleportBlockEntity controller)
+                || !controller.canWork()
                 || controller.getStored() < REQUIRED_TARGET_ENERGY
                 || !controller.canPlayerTeleport(player)
                 || portable.getStoredPE(stack) < TELEPORT_COST) return false;

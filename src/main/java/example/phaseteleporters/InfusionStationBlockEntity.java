@@ -182,7 +182,7 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
         items.clear();
         markDirty();
     }
-    @Override public boolean canPlayerUse(PlayerEntity player) { return Inventory.canPlayerUse(this, player); }
+    @Override public boolean canPlayerUse(PlayerEntity player) { return super.canPlayerUse(player) && Inventory.canPlayerUse(this, player); }
     @Override public boolean isValid(int slot, ItemStack stack) {
         return switch (slot) {
             case 0 -> RECIPES.stream().anyMatch(recipe -> stack.isOf(recipe.input()));
@@ -197,12 +197,14 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
         super.readNbt(nbt, lookup);
         items.clear();
         Inventories.readNbt(nbt, items, lookup);
-        progress = nbt.getInt("Progress");
+        progress = Math.clamp(nbt.getInt("Progress"), 0, PROCESS_TIME - 1);
         infusionResource = InfusionResource.byId(nbt.getInt("InfusionResource"));
         infusionAmount = infusionResource == InfusionResource.NONE ? 0
                 : Math.clamp(nbt.getInt("InfusionAmount"), 0, MAX_INFUSION);
         if (infusionAmount == 0) infusionResource = InfusionResource.NONE;
         currentRecipe = recipeForInputs();
+        if (currentRecipe == null || !nbt.getString("CurrentRecipeOutput").equals(
+                net.minecraft.registry.Registries.ITEM.getId(currentRecipe.output()).toString())) progress = 0;
     }
 
     @Override
@@ -210,6 +212,8 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
         super.writeNbt(nbt, lookup);
         Inventories.writeNbt(nbt, items, lookup);
         nbt.putInt("Progress", progress);
+        if (currentRecipe != null) nbt.putString("CurrentRecipeOutput",
+                net.minecraft.registry.Registries.ITEM.getId(currentRecipe.output()).toString());
         nbt.putInt("InfusionAmount", infusionAmount);
         nbt.putInt("InfusionResource", infusionResource.id());
     }

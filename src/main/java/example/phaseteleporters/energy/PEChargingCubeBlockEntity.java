@@ -76,7 +76,7 @@ public abstract class PEChargingCubeBlockEntity extends PEBlockEntity implements
         markDirty();
     }
     @Override public void clear() { energyItems.clear(); markDirty(); }
-    @Override public boolean canPlayerUse(PlayerEntity player) { return Inventory.canPlayerUse(this, player); }
+    @Override public boolean canPlayerUse(PlayerEntity player) { return super.canPlayerUse(player) && Inventory.canPlayerUse(this, player); }
     @Override public boolean isValid(int slot, ItemStack stack) {
         return slot >= 0 && slot < size() && stack.getItem() instanceof PEChargeableItem;
     }

@@ -8,6 +8,8 @@ import java.util.Set;
 import java.util.UUID;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.TeleportTarget;
 
 /** Moves a vehicle and all of its riders together, including across dimensions. */
 final class PortalEntityTransfer {
@@ -28,17 +30,23 @@ final class PortalEntityTransfer {
     static boolean teleport(List<Entity> group, ServerWorld destination,
             double x, double y, double z) {
         List<Rider> riders = new ArrayList<>();
+        Map<UUID, Origin> origins = new HashMap<>();
+        Map<UUID, Entity> arrivals = new HashMap<>();
         for (Entity member : group) {
+            if (member.isRemoved() || !(member.getWorld() instanceof ServerWorld source)) return false;
+            origins.put(member.getUuid(), new Origin(source, member.getX(), member.getY(), member.getZ(),
+                    member.getYaw(), member.getPitch()));
+            arrivals.put(member.getUuid(), member);
             if (member.hasVehicle()) riders.add(new Rider(member.getUuid(), member.getVehicle().getUuid()));
         }
         for (Entity member : group) member.stopRiding();
 
-        Map<UUID, Entity> arrivals = new HashMap<>();
         for (Entity member : group) {
-            if (!member.teleport(destination, x, y, z, Set.of(), member.getYaw(), member.getPitch()))
+            Entity arrived = move(member, destination, x, y, z, member.getYaw(), member.getPitch());
+            if (arrived == null) {
+                rollback(origins, arrivals, riders);
                 return false;
-            Entity arrived = destination.getEntity(member.getUuid());
-            if (arrived == null) return false;
+            }
             arrivals.put(member.getUuid(), arrived);
         }
         for (Rider rider : riders) {
@@ -49,5 +57,33 @@ final class PortalEntityTransfer {
         return true;
     }
 
+    private static void rollback(Map<UUID, Origin> origins, Map<UUID, Entity> entities, List<Rider> riders) {
+        for (var entry : origins.entrySet()) {
+            Entity current = entities.get(entry.getKey());
+            Origin origin = entry.getValue();
+            if (current.isRemoved()) continue;
+            Entity restored = move(current, origin.world(), origin.x(), origin.y(), origin.z(),
+                    origin.yaw(), origin.pitch());
+            if (restored != null) entities.put(entry.getKey(), restored);
+        }
+        for (Rider rider : riders) {
+            Entity passenger = entities.get(rider.passenger());
+            Entity vehicle = entities.get(rider.vehicle());
+            if (passenger != null && vehicle != null && !passenger.isRemoved() && !vehicle.isRemoved()
+                    && passenger.getWorld() == vehicle.getWorld()) passenger.startRiding(vehicle, true);
+        }
+    }
+
+    private static Entity move(Entity entity, ServerWorld world, double x, double y, double z,
+            float yaw, float pitch) {
+        if (entity.getWorld() == world)
+            return entity.teleport(world, x, y, z, Set.of(), yaw, pitch) ? entity : null;
+        // The UUID lookup may not expose an entity until the arrival chunk becomes active.
+        // Keep the actual replacement instance returned by Minecraft instead.
+        return entity.teleportTo(new TeleportTarget(world, new Vec3d(x, y, z), entity.getVelocity(),
+                yaw, pitch, TeleportTarget.ADD_PORTAL_CHUNK_TICKET));
+    }
+
+    private record Origin(ServerWorld world, double x, double y, double z, float yaw, float pitch) {}
     private record Rider(UUID passenger, UUID vehicle) {}
 }

@@ -95,5 +95,6 @@ public final class TeleportNetworking {
                 sendSnapshot(player, handler.teleport());
             }
         }
+        PortableTeleportNetworking.syncOpenScreens(world, false);
     }
 }

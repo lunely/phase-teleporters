@@ -103,5 +103,6 @@ public final class InterdimensionalTeleportNetworking {
                 }
             }
         }
+        PortableTeleportNetworking.syncOpenScreens(world, true);
     }
 }

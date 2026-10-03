@@ -46,7 +46,7 @@ public final class EnergySidePanel {
     private static final int CELL = 18;
     private static final int REDSTONE_MODE_Y = 27;
     private static final int REDSTONE_MODE_SIZE = 20;
-    private static final int[] REDSTONE_MODE_X = {12, 39, 66};
+    private static final int[] REDSTONE_MODE_X = {15, 42, 69};
     private static final String[] REDSTONE_MODE_KEYS = {"ignored", "without_signal", "with_signal"};
     // Five faces form a plus; the back face sits in its lower-left corner.
     private static final int[][] CELLS = {

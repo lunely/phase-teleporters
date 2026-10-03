@@ -166,16 +166,18 @@ public final class TeamRebornEnergyCompat {
 
         private boolean serverAccess() {
             return !(storage instanceof BlockEntity block)
-                    || block.getWorld() != null && !block.getWorld().isClient;
+                    || !block.isRemoved() && block.getWorld() != null && !block.getWorld().isClient
+                    && block.getWorld().isChunkLoaded(block.getPos().getX() >> 4, block.getPos().getZ() >> 4)
+                    && block.getWorld().getBlockEntity(block.getPos()) == block;
         }
 
         @Override public boolean supportsInsertion() {
-            return !storage.isInfinite() && (!(storage instanceof PEBlockEntity block)
+            return serverAccess() && !storage.isInfinite() && (!(storage instanceof PEBlockEntity block)
                     || side == null || block.getSideMode(side).allowsInput());
         }
         @Override public boolean supportsExtraction() {
-            return !(storage instanceof PEBlockEntity block)
-                    || side == null || block.getSideMode(side).allowsOutput();
+            return serverAccess() && (!(storage instanceof PEBlockEntity block)
+                    || side == null || block.getSideMode(side).allowsOutput());
         }
 
         @Override public long insert(long maxAmount, TransactionContext transaction) {
@@ -197,8 +199,8 @@ public final class TeamRebornEnergyCompat {
             return allowedPE == 0 ? 0 : storage.extract(allowedPE, false) / PE_PER_UNIT;
         }
 
-        @Override public long getAmount() { return storage.getStored() / PE_PER_UNIT; }
-        @Override public long getCapacity() { return storage.getCapacity() / PE_PER_UNIT; }
+        @Override public long getAmount() { return serverAccess() ? storage.getStored() / PE_PER_UNIT : 0; }
+        @Override public long getCapacity() { return serverAccess() ? storage.getCapacity() / PE_PER_UNIT : 0; }
 
         private static long toPE(long amount) {
             return Math.min(amount, Long.MAX_VALUE / PE_PER_UNIT) * PE_PER_UNIT;

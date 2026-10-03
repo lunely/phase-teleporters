@@ -107,9 +107,10 @@ public final class ElectricFurnaceBlockEntity extends PEBlockEntity implements P
     }
     @Override public void setStack(int slot, ItemStack stack) { items.set(slot, stack); markDirty(); }
     @Override public void clear() { items.clear(); markDirty(); }
-    @Override public boolean canPlayerUse(PlayerEntity player) { return Inventory.canPlayerUse(this, player); }
+    @Override public boolean canPlayerUse(PlayerEntity player) { return super.canPlayerUse(player) && Inventory.canPlayerUse(this, player); }
     @Override public boolean isValid(int slot, ItemStack stack) {
-        return slot == 2 && stack.getItem() instanceof example.phaseteleporters.energy.PEChargeableItem || slot == 0;
+        return slot == 2 && stack.getItem() instanceof example.phaseteleporters.energy.PEChargeableItem
+                || slot == 0 && MachineRecipeInputs.furnace(world, stack);
     }
 
     @Override

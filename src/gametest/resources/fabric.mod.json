@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "phaseteleporters_tests",
+  "version": "1.0.0",
+  "name": "Phase Teleporters regression tests",
+  "environment": "server",
+  "entrypoints": {
+    "fabric-gametest": [
+      "example.phaseteleporters.MachineGameTests",
+      "example.phaseteleporters.QuantumGameTests",
+      "example.phaseteleporters.PortalGameTests",
+      "example.phaseteleporters.EmergencyGameTests"
+    ]
+  },
+  "depends": {
+    "phaseteleporters": "*",
+    "fabric-gametest-api-v1": "*",
+    "team_reborn_energy": ">=4.1.0"
+  }
+}

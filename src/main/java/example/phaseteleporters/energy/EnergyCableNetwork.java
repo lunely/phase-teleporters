@@ -235,9 +235,10 @@ public final class EnergyCableNetwork {
 
     /** Stored PE continues flowing to consumers even after a source is removed. */
     public static void distributeStored(World world, BasicEnergyCableBlockEntity cable) {
-        Component component = scan(world, cable.getPos(), null);
         long tick = world.getTime();
-        if (component.cables().isEmpty() || cable.processedTick() == tick) return;
+        if (cable.processedTick() == tick) return;
+        Component component = scan(world, cable.getPos(), null);
+        if (component.cables().isEmpty()) return;
         for (BasicEnergyCableBlockEntity member : component.cables()) member.setProcessedTick(tick);
         Set<BlockPos> receivers = new HashSet<>();
         for (BasicEnergyCableBlockEntity member : component.cables()) {

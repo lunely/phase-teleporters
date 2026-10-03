@@ -26,6 +26,7 @@ public final class PortableTeleportScreenHandler extends ScreenHandler {
 
     @Override
     public boolean canUse(PlayerEntity player) {
+        if (usedHand != null) return !getUsedStack(player).isEmpty();
         return player.getMainHandStack().isOf(PhaseTeleportersMod.PORTABLE_TELEPORT)
                 || player.getOffHandStack().isOf(PhaseTeleportersMod.PORTABLE_TELEPORT);
     }

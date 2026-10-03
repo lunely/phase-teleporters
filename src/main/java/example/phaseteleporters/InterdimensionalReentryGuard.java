@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -25,6 +26,10 @@ final class InterdimensionalReentryGuard {
     private InterdimensionalReentryGuard() {}
 
     static void register() {
+        ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
+            EXITS.clear();
+            LAST_COLLISION_STATE.clear();
+        });
         ServerPlayConnectionEvents.DISCONNECT.register((handler, server) ->
                 clear(handler.player, "disconnected"));
         ServerTickEvents.END_SERVER_TICK.register(server -> EXITS.entrySet().removeIf(entry -> {

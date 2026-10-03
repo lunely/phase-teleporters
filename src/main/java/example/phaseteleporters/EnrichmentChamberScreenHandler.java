@@ -7,7 +7,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -31,7 +30,10 @@ public final class EnrichmentChamberScreenHandler extends ScreenHandler implemen
         this.properties = properties;
         inventory.onOpen(playerInventory.player);
         addSlot(new Slot(inventory, 0, 65, 33) {
-            @Override public boolean canInsert(ItemStack stack) { return inventory.isValid(0, stack); }
+            @Override public boolean canInsert(ItemStack stack) {
+                return inventory.isValid(0, stack)
+                        && MachineRecipeInputs.enrichment(playerInventory.player.getWorld(), stack);
+            }
         });
         addSlot(new Slot(inventory, 1, 122, 33) {
             @Override public boolean canInsert(ItemStack stack) { return false; }
@@ -96,7 +98,8 @@ public final class EnrichmentChamberScreenHandler extends ScreenHandler implemen
             if (!insertItem(stack, machineSlots, slots.size(), true)) return ItemStack.EMPTY;
         } else if (stack.getItem() instanceof example.phaseteleporters.energy.PEChargeableItem) {
             if (!insertItem(stack, 2, machineSlots, false)) return ItemStack.EMPTY;
-        } else if (!insertItem(stack, 0, 2, false)) {
+        } else if (!MachineRecipeInputs.enrichment(player.getWorld(), stack)
+                || !insertItem(stack, 0, 1, false)) {
             return ItemStack.EMPTY;
         }
         if (stack.isEmpty()) slot.setStack(ItemStack.EMPTY);

@@ -271,7 +271,7 @@ public final class CoalGeneratorBlockEntity extends PEBlockEntity
 
     @Override
     public boolean canPlayerUse(PlayerEntity player) {
-        return Inventory.canPlayerUse(this, player);
+        return super.canPlayerUse(player) && Inventory.canPlayerUse(this, player);
     }
 
     @Override

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -16,6 +17,7 @@ final class EntityPortalReentryGuard {
     private EntityPortalReentryGuard() {}
 
     static void register() {
+        ServerLifecycleEvents.SERVER_STOPPED.register(server -> EXITS.clear());
         ServerTickEvents.END_SERVER_TICK.register(server -> EXITS.entrySet().removeIf(entry -> {
             ExitPortal exit = entry.getValue();
             Entity entity = exit.world.getEntity(entry.getKey());

@@ -82,10 +82,12 @@ public final class CreativeEnergyCubeScreenHandler extends ScreenHandler impleme
                 .isOf(PhaseTeleportersMod.CREATIVE_ENERGY_CUBE)
                 && player.squaredDistanceTo(pos.toCenterPos()) <= 64.0
                 && player.getWorld().getBlockEntity(pos) instanceof CreativeEnergyCubeBlockEntity cube
+                && cube == chargingInventory
                 && cube.canPlayerUse(player));
     }
 
     @Override public boolean onButtonClick(PlayerEntity player, int id) {
+        if (!canUse(player)) return false;
         if (id >= EnergySideConfiguration.FIRST_BUTTON && id < EnergySideConfiguration.LAST_BUTTON_EXCLUSIVE)
             return EnergySideConfiguration.click(player, id,
                     pos != null && player.getWorld().getBlockEntity(pos) instanceof CreativeEnergyCubeBlockEntity cube

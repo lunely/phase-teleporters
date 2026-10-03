@@ -100,7 +100,7 @@ public final class CrusherBlockEntity extends PEBlockEntity implements PEMachine
     }
     @Override public void setStack(int slot, ItemStack stack) { items.set(slot, stack); markDirty(); }
     @Override public void clear() { items.clear(); markDirty(); }
-    @Override public boolean canPlayerUse(PlayerEntity player) { return Inventory.canPlayerUse(this, player); }
+    @Override public boolean canPlayerUse(PlayerEntity player) { return super.canPlayerUse(player) && Inventory.canPlayerUse(this, player); }
     @Override public boolean isValid(int slot, ItemStack stack) { return slot == 2 && stack.getItem() instanceof example.phaseteleporters.energy.PEChargeableItem || slot == 0 && recipeFor(stack) != null; }
 
     @Override

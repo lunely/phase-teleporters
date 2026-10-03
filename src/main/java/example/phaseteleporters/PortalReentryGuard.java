@@ -3,6 +3,7 @@ package example.phaseteleporters;
 import java.util.Map;
 import java.util.WeakHashMap;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -15,6 +16,7 @@ final class PortalReentryGuard {
     private PortalReentryGuard() {}
 
     static void register() {
+        ServerLifecycleEvents.SERVER_STOPPED.register(server -> EXIT_PORTALS.clear());
         ServerTickEvents.END_SERVER_TICK.register(server -> EXIT_PORTALS.entrySet().removeIf(entry -> {
             ServerPlayerEntity player = entry.getKey();
             ExitPortal exit = entry.getValue();

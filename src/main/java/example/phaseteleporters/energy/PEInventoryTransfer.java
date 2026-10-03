@@ -1,6 +1,7 @@
 package example.phaseteleporters.energy;
 
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.ChestBlock;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
@@ -25,6 +26,12 @@ public final class PEInventoryTransfer {
             if (!world.isChunkLoaded(neighborPos.getX() >> 4, neighborPos.getZ() >> 4)) continue;
             BlockEntity neighbor = world.getBlockEntity(neighborPos);
             if (!(neighbor instanceof Inventory adjacent)) continue;
+            var neighborState = world.getBlockState(neighborPos);
+            if (neighborState.getBlock() instanceof ChestBlock chest) {
+                // Use both halves, just like vanilla hoppers and Fabric's item storage.
+                adjacent = ChestBlock.getInventory(chest, neighborState, world, neighborPos, true);
+                if (adjacent == null) continue;
+            }
             Direction neighborFace = side.getOpposite();
             if (neighbor instanceof PEBlockEntity other) {
                 PESideMode neighborMode = other.getSideMode(neighborFace);
@@ -49,6 +56,8 @@ public final class PEInventoryTransfer {
                 if (!target.isValid(targetSlot, stack)
                         || !canInsert(target, targetSlot, stack, targetFace)) continue;
                 ItemStack existing = target.getStack(targetSlot);
+                int capacity = Math.min(target.getMaxCountPerStack(), stack.getMaxCount());
+                if (capacity <= 0 || existing.getCount() >= capacity) continue;
                 if (!existing.isEmpty() && (!ItemStack.areItemsAndComponentsEqual(existing, stack)
                         || existing.getCount() >= existing.getMaxCount())) continue;
                 ItemStack moved = source.removeStack(sourceSlot, 1);

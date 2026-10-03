@@ -182,8 +182,10 @@ public final class EmergencyTeleportRescue {
         ServerWorld source = player.getServerWorld();
         Vec3d departure = player.getPos();
         Vec3d arrival = transfer.arrival();
+        var profile = EmergencyTeleportState.get(player.getServer()).boundProfile(player.getUuid());
         boolean valid = player.isAlive() && !player.isDisconnected() && !pad.isRemoved()
                 && source == target
+                && profile != null && profile.enabled && profile.matches(pad) && hasPortable(player)
                 && pad.canPlayerTeleport(player) && pad.canWork() && target.getBlockEntity(pad.getPos()) == pad;
         var space = player.getBoundingBox().offset(arrival.subtract(departure));
         valid = valid && target.isSpaceEmpty(player, space) && !target.containsFluid(space);

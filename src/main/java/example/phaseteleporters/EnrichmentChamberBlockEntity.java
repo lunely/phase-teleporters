@@ -124,8 +124,11 @@ public final class EnrichmentChamberBlockEntity extends PEBlockEntity
     }
     @Override public void setStack(int slot, ItemStack stack) { items.set(slot, stack); markDirty(); }
     @Override public void clear() { items.clear(); markDirty(); }
-    @Override public boolean canPlayerUse(PlayerEntity player) { return Inventory.canPlayerUse(this, player); }
-    @Override public boolean isValid(int slot, ItemStack stack) { return slot == 2 && stack.getItem() instanceof example.phaseteleporters.energy.PEChargeableItem || slot == 0; }
+    @Override public boolean canPlayerUse(PlayerEntity player) { return super.canPlayerUse(player) && Inventory.canPlayerUse(this, player); }
+    @Override public boolean isValid(int slot, ItemStack stack) {
+        return slot == 2 && stack.getItem() instanceof example.phaseteleporters.energy.PEChargeableItem
+                || slot == 0 && MachineRecipeInputs.enrichment(world, stack);
+    }
 
     @Override protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup lookup) {
         super.readNbt(nbt, lookup);
