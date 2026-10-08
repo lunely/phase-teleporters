@@ -1,30 +1,21 @@
-Phase Teleporters License
+MIT License
 
 Copyright (c) 2026 lunely
 
-All rights reserved except as explicitly granted below.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-1. You may:
-   - View and study the source code.
-   - Use Phase Teleporters in personal or public Minecraft modpacks.
-   - Create addons, integrations, compatibility layers, and extensions that depend on or interact with Phase Teleporters.
-   - Modify the source code for private, personal use.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-2. You may not, without prior written permission from the copyright holder:
-   - Reupload or redistribute Phase Teleporters, in whole or in part, as a standalone mod.
-   - Publish modified versions, forks, ports, or derivative standalone versions of Phase Teleporters.
-   - Claim Phase Teleporters or substantial portions of its source code as your own work.
-   - Sell, sublicense, or commercially redistribute the mod or its source code.
-
-3. Addons and integrations:
-   - Addons and integrations are allowed as separate projects, provided they do not include or redistribute substantial portions of Phase Teleporters itself.
-   - Such projects must make clear that they are unofficial and are not affiliated with or endorsed by Phase Teleporters unless permission is granted.
-
-4. Modpacks:
-   - Phase Teleporters may be included in modpacks, including publicly distributed modpacks, provided the mod itself is not sold separately and proper credit is given.
-
-5. No warranty:
-   - Phase Teleporters is provided "as is", without warranty of any kind, express or implied.
-   - The copyright holder is not liable for any damages arising from use of the mod or source code.
-
-For permissions not granted by this license, contact the copyright holder.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
