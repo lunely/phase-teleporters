@@ -26,6 +26,12 @@ public final class PortalColors {
     public static boolean isValid(int color) { return color >= 0 && color < RGB.length; }
     public static int rgb(int color) { return RGB[isValid(color) ? color : DEFAULT]; }
     public static int displayColor(int position) { return DISPLAY_ORDER[position]; }
+    public static int nextDisplayColor(int color) {
+        for (int position = 0; position < DISPLAY_ORDER.length; position++) {
+            if (DISPLAY_ORDER[position] == color) return DISPLAY_ORDER[(position + 1) % DISPLAY_ORDER.length];
+        }
+        return DISPLAY_ORDER[0];
+    }
     public static String nameKey(int color) {
         return "gui.phaseteleporters.color." + NAMES[isValid(color) ? color : DEFAULT];
     }

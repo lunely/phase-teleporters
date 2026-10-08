@@ -92,9 +92,12 @@ public final class InterdimensionalTeleportBlockEntity extends AnchoredTeleportB
 
     public void refreshPortal() {
         if (!(world instanceof ServerWorld serverWorld)) return;
+        if (frequency.isEmpty() || !canWork() || getStored() < ACTIVATION_ENERGY) {
+            clearPortal();
+            return;
+        }
         InterdimensionalTeleportStructure.Bounds found = getStructureBounds().orElse(null);
-        InterdimensionalTeleportBlockEntity destination = found == null || frequency.isEmpty()
-                || !canWork() || getStored() < ACTIVATION_ENERGY ? null : findPartner(serverWorld);
+        InterdimensionalTeleportBlockEntity destination = found == null ? null : findPartner(serverWorld);
         if (destination == null) {
             clearPortal();
             return;
@@ -133,12 +136,16 @@ public final class InterdimensionalTeleportBlockEntity extends AnchoredTeleportB
                     continue;
                 }
                 if (!candidate.matchesFrequency(frequency, privateFrequency, frequencyOwner)
-                        || candidate.getStructureBounds().isEmpty()
                         || !candidate.canWork() || candidate.getStored() < ACTIVATION_ENERGY) continue;
                 long dx = (long) candidatePos.getX() - pos.getX();
                 long dy = (long) candidatePos.getY() - pos.getY();
                 long dz = (long) candidatePos.getZ() - pos.getZ();
                 long distance = dx * dx + dy * dy + dz * dz;
+                boolean otherDimension = candidateWorld != serverWorld;
+                boolean bestOtherDimension = best != null && best.getWorld() != serverWorld;
+                if (best != null && ((!otherDimension && bestOtherDimension)
+                        || (otherDimension == bestOtherDimension && distance >= bestDistance))) continue;
+                if (candidate.getStructureBounds().isEmpty()) continue;
                 if (best == null || (candidateWorld != serverWorld && best.getWorld() == serverWorld)
                         || ((candidateWorld == serverWorld) == (best.getWorld() == serverWorld)
                         && distance < bestDistance)) {

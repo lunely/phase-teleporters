@@ -1,12 +1,176 @@
 {
-  "parent":"minecraft:block/block",
-  "textures":{"particle":"phaseteleporters:block/teleport_side","side":"phaseteleporters:block/teleport_side","top":"phaseteleporters:block/teleport_top"},
-  "elements":[{"from":[0,0,0],"to":[16,1,16],"faces":{
-    "down":{"uv":[0,0,16,16],"texture":"#side","cullface":"down"},
-    "up":{"uv":[0,0,16,16],"texture":"#top"},
-    "north":{"uv":[0,7,16,8],"texture":"#side"},
-    "south":{"uv":[0,7,16,8],"texture":"#side"},
-    "east":{"uv":[0,7,16,8],"texture":"#side"},
-    "west":{"uv":[0,7,16,8],"texture":"#side"}
-  }}]
+  "parent": "minecraft:block/block",
+  "ambientocclusion": true,
+  "textures": {
+    "base": "phaseteleporters:block/models/teleporter_frame_base",
+    "led": "phaseteleporters:block/models/local_teleporter_top_led",
+    "particle": "phaseteleporters:block/models/teleporter_frame_base"
+  },
+  "elements": [
+    {
+      "name": "lower_step",
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        0.5,
+        16
+      ],
+      "faces": {
+        "north": {
+          "texture": "#base",
+          "uv": [
+            0,
+            15,
+            16,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#base",
+          "uv": [
+            0,
+            15,
+            16,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#base",
+          "uv": [
+            0,
+            15,
+            16,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#base",
+          "uv": [
+            0,
+            15,
+            16,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#base",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#base",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "name": "teleporter_deck",
+      "from": [
+        1,
+        0.5,
+        1
+      ],
+      "to": [
+        15,
+        1,
+        15
+      ],
+      "faces": {
+        "north": {
+          "texture": "#base",
+          "uv": [
+            1,
+            15,
+            15,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#base",
+          "uv": [
+            1,
+            15,
+            15,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#base",
+          "uv": [
+            1,
+            15,
+            15,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#base",
+          "uv": [
+            1,
+            15,
+            15,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#base",
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ]
+        },
+        "down": {
+          "texture": "#base",
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ]
+        }
+      }
+    },
+    {
+      "name": "local_top_led",
+      "from": [
+        0,
+        1.016,
+        0
+      ],
+      "to": [
+        16,
+        1.016,
+        16
+      ],
+      "shade": false,
+      "faces": {
+        "up": {
+          "texture": "#led",
+          "uv": [
+            0,
+            6.4,
+            16,
+            7.2
+          ],
+          "tintindex": 2
+        }
+      }
+    }
+  ]
 }

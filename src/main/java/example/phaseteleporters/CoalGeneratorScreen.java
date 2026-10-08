@@ -67,7 +67,9 @@ public final class CoalGeneratorScreen
         );
 
         drawEnergy(context);
-        context.drawTexture(ENERGY_OUTPUT_TEXTURE, x + 7, y + 61, 0, 0, 18, 18, 18, 18);
+        if (!handler.getSlot(1).hasStack()) {
+            context.drawTexture(ENERGY_OUTPUT_TEXTURE, x + 7, y + 61, 0, 0, 18, 18, 18, 18);
+        }
 
         // Огонь.
         drawBurnProgress(context);

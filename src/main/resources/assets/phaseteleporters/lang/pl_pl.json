@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Brak energii",
   "message.phaseteleporters.portable.no_connection": "Brak połączenia",
   "tooltip.phaseteleporters.item_details_hint": "Przytrzymaj %s, aby zobaczyć opis",
-  "tooltip.phaseteleporters.description.battery": "Przechowuje energię i ładuje inne zgodne przedmioty w ekwipunku, gdy włączony jest tryb ładowania ekwipunku.",
+  "tooltip.phaseteleporters.description.battery": "Przechowuje energię i ładuje inne zgodne przedmioty w ekwipunku, gdy włączony jest tryb ładowania ekwipunku.\nKliknij prawym przyciskiem myszy z baterią w ręce, aby zmienić tryb.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Skradanie + kółko myszy z urządzeniem w głównej ręce zmienia tryb.\n- Zwykły — otwiera listę częstotliwości.\n- Szybki teleport — przenosi do wybranej częstotliwości bez otwierania listy.\n- Menu teleportu awaryjnego — otwiera menu teleportu awaryjnego.\nKliknij teleport awaryjny prawym przyciskiem, aby go powiązać.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Utrzymuje chunk teleportu załadowany, dopóki ulepszenie jest zainstalowane.",
   "tooltip.phaseteleporters.description.energy_cube": "Przechowuje duże ilości energii.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Odwiąż",
   "message.phaseteleporters.emergency.no_platform": "Nie powiązano teleportu awaryjnego",
   "message.phaseteleporters.emergency.unavailable": "Platforma niedostępna: sprawdź energię, dostęp i wolne miejsce nad nią",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Ratuje powiązanego gracza przy niebezpiecznie niskim zdrowiu tylko w wymiarze platformy. Powiązanie pozostaje w innych wymiarach, a ratowanie wznawia się po powrocie. Użyj teleportu przenośnego na platformie, aby go powiązać, i trzymaj go w ekwipunku."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Ratuje powiązanego gracza przy niebezpiecznie niskim zdrowiu tylko w wymiarze platformy. Powiązanie pozostaje w innych wymiarach, a ratowanie wznawia się po powrocie. Użyj teleportu przenośnego na platformie, aby go powiązać, i trzymaj go w ekwipunku.",
+  "item.phaseteleporters.color_configurator": "Konfigurator kolorów",
+  "tooltip.phaseteleporters.description.color_configurator": "Kliknij ramę lub teleporter prawym przyciskiem myszy, aby zmienić kolor (przytrzymaj LSHIFT, aby zmienić kolor teleportera).\nLSHIFT + kółko myszy z narzędziem w głównej ręce — zmiana trybu.",
+  "message.phaseteleporters.color_configurator.no_energy": "Zmiana koloru wymaga %s.",
+  "message.phaseteleporters.color_configurator.changed": "Kolor ramy: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Kolor teleportera: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Kolor lampek monitora: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Kolor tekstu: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Tryb: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Kolor ramy",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Kolor lampek monitora",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Kolor tekstu",
+  "tooltip.phaseteleporters.color_configurator.off": "Wył.",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/tick"
 }

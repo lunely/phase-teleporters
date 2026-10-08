@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Energia insufficiente",
   "message.phaseteleporters.portable.no_connection": "Nessuna connessione",
   "tooltip.phaseteleporters.item_details_hint": "Tieni premuto %s per vedere la descrizione",
-  "tooltip.phaseteleporters.description.battery": "Conserva energia e ricarica gli altri oggetti compatibili nell’inventario quando la ricarica inventario è attiva.",
+  "tooltip.phaseteleporters.description.battery": "Conserva energia e ricarica gli altri oggetti compatibili nell’inventario quando la ricarica inventario è attiva.\nFai clic destro tenendo la batteria in mano per cambiare modalità.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Accovacciati e usa la rotellina con il dispositivo nella mano principale per cambiare modalità.\n- Normale — apre l’elenco delle frequenze.\n- Teletrasporto rapido — porta alla frequenza scelta senza aprire l’elenco.\n- Menu del teletrasportatore d’emergenza — apre il menu del teletrasportatore d’emergenza.\nFai clic destro su un teletrasportatore d’emergenza per collegarlo.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Mantiene caricato il chunk del teletrasportatore finché il potenziamento è installato.",
   "tooltip.phaseteleporters.description.energy_cube": "Conserva grandi quantità di energia.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Scollega",
   "message.phaseteleporters.emergency.no_platform": "Nessun teletrasportatore d’emergenza collegato",
   "message.phaseteleporters.emergency.unavailable": "Piattaforma non disponibile: controlla energia, accesso e spazio sopra",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Salva il giocatore collegato quando la salute diventa pericolosamente bassa, solo nella dimensione della piattaforma. Il collegamento rimane nelle altre dimensioni e il soccorso riprende al ritorno. Usa un teletrasportatore portatile sulla piattaforma per collegarlo e tienilo nell’inventario."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Salva il giocatore collegato quando la salute diventa pericolosamente bassa, solo nella dimensione della piattaforma. Il collegamento rimane nelle altre dimensioni e il soccorso riprende al ritorno. Usa un teletrasportatore portatile sulla piattaforma per collegarlo e tienilo nell’inventario.",
+  "item.phaseteleporters.color_configurator": "Configuratore di colori",
+  "tooltip.phaseteleporters.description.color_configurator": "Fai clic destro su un telaio o un teletrasportatore per cambiarne il colore (tieni premuto LSHIFT per cambiare il colore del teletrasportatore).\nLSHIFT + rotellina del mouse con lo strumento nella mano principale — cambia modalità.",
+  "message.phaseteleporters.color_configurator.no_energy": "Per cambiare colore servono %s.",
+  "message.phaseteleporters.color_configurator.changed": "Colore del telaio: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Colore del teletrasportatore: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Colore delle luci del monitor: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Colore del testo: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Modalità: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Colore del telaio",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Colore delle luci del monitor",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Colore del testo",
+  "tooltip.phaseteleporters.color_configurator.off": "Spento",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/tick"
 }

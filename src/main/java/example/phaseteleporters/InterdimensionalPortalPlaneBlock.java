@@ -53,7 +53,8 @@ public final class InterdimensionalPortalPlaneBlock extends BlockWithEntity {
     @Override
     protected void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
         if (!(world instanceof ServerWorld)
-                || !PortalReentryGuard.intersectsPortalBlock(entity.getBoundingBox(), pos)) return;
+                || !PortalReentryGuard.intersectsPortalBlock(entity.getBoundingBox(), pos)
+                || PortalCollisionTeleport.isQueued(entity)) return;
         BlockPos contact = pos.toImmutable();
         PortalCollisionTeleport.enqueue(entity, () -> {
             if (!entity.isRemoved() && entity.getWorld() == world

@@ -12,6 +12,7 @@ public final class TeleportationFrameMonitorBlockEntity extends BlockEntity {
     public static final int MAX_LINE_LENGTH = 90;
     public static final int MAX_TEXT_LENGTH = MAX_LINE_LENGTH * 4 + 3;
     private String text = "";
+    private int textColor = FrameColors.DEFAULT;
     private UUID editor;
     private long editUntil;
 
@@ -19,6 +20,11 @@ public final class TeleportationFrameMonitorBlockEntity extends BlockEntity {
         super(PhaseTeleportersMod.TELEPORTATION_FRAME_MONITOR_BLOCK_ENTITY, pos, state);
     }
     public String text() { return text; }
+    public int textColor() { return textColor; }
+    public void setTextColor(int color) {
+        textColor = PortalColors.isValid(color) ? color : FrameColors.DEFAULT;
+        sync();
+    }
     public boolean beginEditing(UUID player) {
         if (editor != null && world != null) {
             var previous = world.getPlayerByUuid(editor);
@@ -53,10 +59,13 @@ public final class TeleportationFrameMonitorBlockEntity extends BlockEntity {
     @Override protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup lookup) {
         super.writeNbt(nbt, lookup);
         nbt.putString("MonitorText", text);
+        nbt.putInt("MonitorTextColor", textColor);
     }
     @Override protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup lookup) {
         super.readNbt(nbt, lookup);
         text = nbt.getString("MonitorText");
+        int savedColor = nbt.contains("MonitorTextColor") ? nbt.getInt("MonitorTextColor") : FrameColors.DEFAULT;
+        textColor = PortalColors.isValid(savedColor) ? savedColor : FrameColors.DEFAULT;
         if (text.length() > MAX_TEXT_LENGTH) text = text.substring(0, MAX_TEXT_LENGTH);
     }
     @Override public BlockEntityUpdateS2CPacket toUpdatePacket() {

@@ -16,6 +16,7 @@ final class PortalCollisionTeleport {
 
     static void register() {
         ServerTickEvents.END_SERVER_TICK.register(server -> {
+            if (PENDING.isEmpty()) return;
             try {
                 for (Runnable transfer : List.copyOf(PENDING.values())) transfer.run();
             } finally {
@@ -28,5 +29,8 @@ final class PortalCollisionTeleport {
     static void enqueue(Entity entity, Runnable transfer) {
         // A tall entity touches several plane blocks; riders share one transfer with their vehicle.
         PENDING.putIfAbsent(entity.getRootVehicle().getUuid(), transfer);
+    }
+    static boolean isQueued(Entity entity) {
+        return PENDING.containsKey(entity.getRootVehicle().getUuid());
     }
 }

@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Sem energia",
   "message.phaseteleporters.portable.no_connection": "Sem ligação",
   "tooltip.phaseteleporters.item_details_hint": "Mantém %s premido para ver a descrição",
-  "tooltip.phaseteleporters.description.battery": "Armazena energia e carrega outros itens compatíveis no inventário quando a carga do inventário está ativada.",
+  "tooltip.phaseteleporters.description.battery": "Armazena energia e carrega outros itens compatíveis no inventário quando a carga do inventário está ativada.\nClique com o botão direito com a bateria na mão para mudar de modo.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Agachar + rodar a roda do rato com o dispositivo na mão principal muda o modo.\n- Normal — abre a lista de frequências.\n- Teletransporte rápido — teletransporta para a frequência selecionada sem abrir a lista.\n- Menu do teletransportador de emergência — abre o menu do teletransportador de emergência.\nClica com o botão direito num teletransportador de emergência para o associar.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Mantém o chunk do teletransportador carregado enquanto a melhoria está instalada.",
   "tooltip.phaseteleporters.description.energy_cube": "Armazena grandes quantidades de energia.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Desassociar",
   "message.phaseteleporters.emergency.no_platform": "Não há nenhum teletransportador de emergência associado",
   "message.phaseteleporters.emergency.unavailable": "Plataforma indisponível: verifica a energia, o acesso e o espaço por cima",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Resgata o jogador associado quando a sua vida fica perigosamente baixa, apenas na dimensão da plataforma. A associação mantém-se noutras dimensões e o resgate é retomado ao regressar. Usa um teletransportador portátil na plataforma para o associar e mantém-no no inventário."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Resgata o jogador associado quando a sua vida fica perigosamente baixa, apenas na dimensão da plataforma. A associação mantém-se noutras dimensões e o resgate é retomado ao regressar. Usa um teletransportador portátil na plataforma para o associar e mantém-no no inventário.",
+  "item.phaseteleporters.color_configurator": "Configurador de cores",
+  "tooltip.phaseteleporters.description.color_configurator": "Clique com o botão direito numa moldura ou num teletransportador para mudar a cor (mantenha LSHIFT premido para mudar a cor do teletransportador).\nLSHIFT + roda do rato com a ferramenta na mão principal — mudar de modo.",
+  "message.phaseteleporters.color_configurator.no_energy": "Mudar a cor requer %s.",
+  "message.phaseteleporters.color_configurator.changed": "Cor da moldura: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Cor do teletransportador: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Cor das luzes do monitor: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Cor do texto: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Modo: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Cor da moldura",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Cor das luzes do monitor",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Cor do texto",
+  "tooltip.phaseteleporters.color_configurator.off": "Desligado",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/tick"
 }

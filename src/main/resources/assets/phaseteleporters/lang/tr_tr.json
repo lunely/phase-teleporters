@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Enerji yok",
   "message.phaseteleporters.portable.no_connection": "Bağlantı yok",
   "tooltip.phaseteleporters.item_details_hint": "Açıklamayı görmek için %s tuşunu basılı tut",
-  "tooltip.phaseteleporters.description.battery": "Enerji depolar ve Envanter Şarjı etkinken oyuncunun envanterindeki diğer uyumlu eşyaları şarj eder.",
+  "tooltip.phaseteleporters.description.battery": "Enerji depolar ve Envanter Şarjı etkinken oyuncunun envanterindeki diğer uyumlu eşyaları şarj eder.\nModu değiştirmek için pil elindeyken sağ tıkla.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Cihaz ana elindeyken eğil ve fare tekerleğini çevirerek modu değiştir.\n- Normal — frekans listesini açar.\n- Hızlı Işınlanma — listeyi açmadan seçili frekansa ışınlar.\n- Acil Işınlayıcı Menüsü — acil ışınlayıcının menüsünü açar.\nBağlamak için acil ışınlayıcıya sağ tıkla.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Yükseltme takılıyken ışınlayıcının chunk'ını yüklü tutar.",
   "tooltip.phaseteleporters.description.energy_cube": "Büyük miktarda enerji depolar.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Bağlantıyı kaldır",
   "message.phaseteleporters.emergency.no_platform": "Acil ışınlayıcı bağlı değil",
   "message.phaseteleporters.emergency.unavailable": "Platform kullanılamıyor: enerjisini, erişimi ve üstündeki alanı kontrol et",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Bağlı oyuncuyu sağlığı tehlikeli düzeye düştüğünde yalnızca platformun boyutunda kurtarır. Diğer boyutlarda bağlantı korunur; geri dönünce kurtarma yeniden etkinleşir. Bağlamak için platformda taşınabilir ışınlayıcıyı kullan ve onu envanterinde tut."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Bağlı oyuncuyu sağlığı tehlikeli düzeye düştüğünde yalnızca platformun boyutunda kurtarır. Diğer boyutlarda bağlantı korunur; geri dönünce kurtarma yeniden etkinleşir. Bağlamak için platformda taşınabilir ışınlayıcıyı kullan ve onu envanterinde tut.",
+  "item.phaseteleporters.color_configurator": "Renk Yapılandırıcısı",
+  "tooltip.phaseteleporters.description.color_configurator": "Rengi değiştirmek için bir çerçeveye veya ışınlayıcıya sağ tıkla (ışınlayıcının rengini değiştirmek için LSHIFT tuşunu basılı tut).\nAlet ana elindeyken LSHIFT + fare tekerleği — modu değiştir.",
+  "message.phaseteleporters.color_configurator.no_energy": "Rengi değiştirmek için %s gerekir.",
+  "message.phaseteleporters.color_configurator.changed": "Çerçeve rengi: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Işınlayıcı rengi: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Monitör ışıklarının rengi: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Metin rengi: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Mod: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Çerçeve rengi",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Monitör ışıklarının rengi",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Metin rengi",
+  "tooltip.phaseteleporters.color_configurator.off": "Kapalı",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/tik"
 }

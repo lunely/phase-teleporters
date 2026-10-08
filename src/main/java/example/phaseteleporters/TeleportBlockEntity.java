@@ -88,9 +88,12 @@ public final class TeleportBlockEntity extends AnchoredTeleportBlockEntity imple
 
     public void refreshPortal() {
         if (!(world instanceof ServerWorld serverWorld)) return;
+        if (frequency.isEmpty() || !canWork() || getStored() < ACTIVATION_ENERGY) {
+            clearPortal();
+            return;
+        }
         TeleportStructure.Bounds found = getStructureBounds().orElse(null);
-        TeleportBlockEntity destination = found == null || frequency.isEmpty()
-                || !canWork() || getStored() < ACTIVATION_ENERGY ? null : findPartner(serverWorld);
+        TeleportBlockEntity destination = found == null ? null : findPartner(serverWorld);
         if (destination == null) {
             clearPortal();
             return;
@@ -129,12 +132,12 @@ public final class TeleportBlockEntity extends AnchoredTeleportBlockEntity imple
             if (candidate.getWorld() == null
                     || !candidate.getWorld().getRegistryKey().equals(serverWorld.getRegistryKey())
                     || !candidate.matchesFrequency(frequency, privateFrequency, frequencyOwner)
-                    || candidate.getStructureBounds().isEmpty()
                     || !candidate.canWork() || candidate.getStored() < ACTIVATION_ENERGY) continue;
             long dx = (long) candidatePos.getX() - pos.getX();
             long dy = (long) candidatePos.getY() - pos.getY();
             long dz = (long) candidatePos.getZ() - pos.getZ();
             long distance = dx * dx + dy * dy + dz * dz;
+            if (distance >= bestDistance || candidate.getStructureBounds().isEmpty()) continue;
             if (distance < bestDistance) {
                 best = candidate;
                 bestDistance = distance;

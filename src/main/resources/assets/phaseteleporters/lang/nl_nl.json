@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Geen energie",
   "message.phaseteleporters.portable.no_connection": "Geen verbinding",
   "tooltip.phaseteleporters.item_details_hint": "Houd %s ingedrukt om de beschrijving te zien",
-  "tooltip.phaseteleporters.description.battery": "Slaat energie op en laadt andere geschikte voorwerpen in de inventaris op wanneer Inventaris opladen is ingeschakeld.",
+  "tooltip.phaseteleporters.description.battery": "Slaat energie op en laadt andere geschikte voorwerpen in de inventaris op wanneer Inventaris opladen is ingeschakeld.\nRechtsklik met de batterij in je hand om van modus te wisselen.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Sluipen + scrollen met het apparaat in je hoofdhand wisselt de modus.\n- Normaal — opent de frequentielijst.\n- Snel teleporteren — teleporteert naar de gekozen frequentie zonder de lijst te openen.\n- Noodteleportermenu — opent het menu van de noodteleporter.\nKlik met rechts op een noodteleporter om deze te koppelen.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Houdt de chunk van de teleporter geladen zolang de upgrade is geïnstalleerd.",
   "tooltip.phaseteleporters.description.energy_cube": "Slaat grote hoeveelheden energie op.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Ontkoppelen",
   "message.phaseteleporters.emergency.no_platform": "Geen noodteleporter gekoppeld",
   "message.phaseteleporters.emergency.unavailable": "Platform niet beschikbaar: controleer energie, toegang en ruimte erboven",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Redt de gekoppelde speler bij een gevaarlijk lage gezondheid, alleen in de dimensie van het platform. De koppeling blijft in andere dimensies behouden en de redding hervat bij terugkeer. Gebruik een draagbare teleporter op het platform om deze te koppelen en houd hem in je inventaris."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Redt de gekoppelde speler bij een gevaarlijk lage gezondheid, alleen in de dimensie van het platform. De koppeling blijft in andere dimensies behouden en de redding hervat bij terugkeer. Gebruik een draagbare teleporter op het platform om deze te koppelen en houd hem in je inventaris.",
+  "item.phaseteleporters.color_configurator": "Kleurenconfigurator",
+  "tooltip.phaseteleporters.description.color_configurator": "Rechtsklik op een frame of teleporter om de kleur te wijzigen (houd LSHIFT ingedrukt om de kleur van de teleporter te wijzigen).\nLSHIFT + muiswiel met het gereedschap in je hoofdhand — modus wisselen.",
+  "message.phaseteleporters.color_configurator.no_energy": "Een kleur wijzigen kost %s.",
+  "message.phaseteleporters.color_configurator.changed": "Framekleur: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Teleporterkleur: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Kleur van de monitorlampjes: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Tekstkleur: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Modus: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Framekleur",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Kleur van de monitorlampjes",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Tekstkleur",
+  "tooltip.phaseteleporters.color_configurator.off": "Uit",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/tick"
 }

@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Sense energia",
   "message.phaseteleporters.portable.no_connection": "Sense connexió",
   "tooltip.phaseteleporters.item_details_hint": "Mantén premut %s per veure la descripció",
-  "tooltip.phaseteleporters.description.battery": "Emmagatzema energia i pot carregar altres objectes compatibles de l'inventari del jugador quan la càrrega de l'inventari està activada.",
+  "tooltip.phaseteleporters.description.battery": "Emmagatzema energia i pot carregar altres objectes compatibles de l'inventari del jugador quan la càrrega de l'inventari està activada.\nFes clic dret amb la bateria a la mà per canviar de mode.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Ajupir-se + girar la roda del ratolí amb el dispositiu a la mà principal canvia el mode.\n- Menú — obre la llista de freqüències.\n- Teletransport ràpid — et porta a la freqüència seleccionada sense obrir la llista.\n- Menú del teletransportador d'emergència — obre el seu menú.\nFes clic dret en un teletransportador d'emergència per vincular-lo.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Manté carregat el chunk del teletransportador mentre està instal·lada.",
   "tooltip.phaseteleporters.description.energy_cube": "Emmagatzema grans quantitats d'energia.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Desvincula",
   "message.phaseteleporters.emergency.no_platform": "No hi ha cap teletransportador d'emergència vinculat",
   "message.phaseteleporters.emergency.unavailable": "Plataforma no disponible: comprova l'energia, l'accés i l'espai de sobre",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Rescata el jugador vinculat amb salut perillosament baixa només a la dimensió de la plataforma. El vincle es conserva en altres dimensions i el rescat es reprèn en tornar. Utilitza un teletransportador portàtil a la plataforma per vincular-lo i conserva'l a l'inventari."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Rescata el jugador vinculat amb salut perillosament baixa només a la dimensió de la plataforma. El vincle es conserva en altres dimensions i el rescat es reprèn en tornar. Utilitza un teletransportador portàtil a la plataforma per vincular-lo i conserva'l a l'inventari.",
+  "item.phaseteleporters.color_configurator": "Configurador de colors",
+  "tooltip.phaseteleporters.description.color_configurator": "Fes clic dret en un marc o teletransportador per canviar-ne el color (mantén LSHIFT per canviar el color del teletransportador).\nLSHIFT + roda del ratolí amb l’eina a la mà principal — canviar de mode.",
+  "message.phaseteleporters.color_configurator.no_energy": "Canviar el color requereix %s.",
+  "message.phaseteleporters.color_configurator.changed": "Color del marc: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Color del teletransportador: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Color dels llums del monitor: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Color del text: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Mode: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Color del marc",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Color dels llums del monitor",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Color del text",
+  "tooltip.phaseteleporters.color_configurator.off": "Apagat",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/tick"
 }

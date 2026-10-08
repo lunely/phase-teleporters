@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Energia puudub",
   "message.phaseteleporters.portable.no_connection": "Ühendus puudub",
   "tooltip.phaseteleporters.item_details_hint": "Kirjelduse nägemiseks hoia %s all",
-  "tooltip.phaseteleporters.description.battery": "Salvestab energiat ja saab laadida muid ühilduvaid esemeid mängija inventaris, kui inventari laadimine on lubatud.",
+  "tooltip.phaseteleporters.description.battery": "Salvestab energiat ja saab laadida muid ühilduvaid esemeid mängija inventaris, kui inventari laadimine on lubatud.\nRežiimi vahetamiseks paremklõpsa, hoides akut käes.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Hiilimine + kerimine peamises käes hoides vahetab režiimi.\n- Menüü — avab sageduste loendi.\n- Kiirteleport — telepordib valitud sagedusele loendit avamata.\n- Hädateleportija menüü — avab hädateleportija menüü.\nSidumiseks paremklõpsa hädateleportijal.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Hoiab teleportija piirkonna laadituna, kuni täiustus on paigaldatud.",
   "tooltip.phaseteleporters.description.energy_cube": "Salvestab suures koguses energiat.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Eemalda seos",
   "message.phaseteleporters.emergency.no_platform": "Hädateleportija pole seotud",
   "message.phaseteleporters.emergency.unavailable": "Platvorm pole saadaval: kontrolli energiat, juurdepääsu ja ruumi selle kohal",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Päästab seotud mängija ohtlikult madala tervise juures ainult platvormi dimensioonis. Seos säilib teistes dimensioonides ja päästmine jätkub naasmisel. Sidumiseks kasuta platvormil kaasaskantavat teleportijat ning hoia seda inventaris."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Päästab seotud mängija ohtlikult madala tervise juures ainult platvormi dimensioonis. Seos säilib teistes dimensioonides ja päästmine jätkub naasmisel. Sidumiseks kasuta platvormil kaasaskantavat teleportijat ning hoia seda inventaris.",
+  "item.phaseteleporters.color_configurator": "Väriseadistaja",
+  "tooltip.phaseteleporters.description.color_configurator": "Värvi muutmiseks paremklõpsa raamil või teleporteril (teleporteri värvi muutmiseks hoia all LSHIFT).\nLSHIFT + hiireratas, tööriist põhikäes — režiimi vahetamine.",
+  "message.phaseteleporters.color_configurator.no_energy": "Värvi muutmiseks on vaja %s.",
+  "message.phaseteleporters.color_configurator.changed": "Raami värv: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Teleporteri värv: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Monitori tulede värv: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Teksti värv: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Režiim: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Raami värv",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Monitori tulede värv",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Teksti värv",
+  "tooltip.phaseteleporters.color_configurator.off": "Väljas",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/takt"
 }

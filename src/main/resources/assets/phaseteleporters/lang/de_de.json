@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Keine Energie",
   "message.phaseteleporters.portable.no_connection": "Keine Verbindung",
   "tooltip.phaseteleporters.item_details_hint": "%s gedrückt halten, um die Beschreibung anzuzeigen",
-  "tooltip.phaseteleporters.description.battery": "Speichert Energie und lädt andere kompatible Gegenstände im Inventar, wenn „Inventar laden“ aktiviert ist.",
+  "tooltip.phaseteleporters.description.battery": "Speichert Energie und lädt andere kompatible Gegenstände im Inventar, wenn „Inventar laden“ aktiviert ist.\nRechtsklick mit der Batterie in der Hand, um den Modus zu wechseln.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Schleichen + Mausrad mit dem Gerät in der Haupthand wechselt den Modus.\n- Standard — öffnet die Frequenzliste.\n- Schnellteleport — teleportiert zur gewählten Frequenz, ohne die Liste zu öffnen.\n- Notfallteleporter-Menü — öffnet das Menü des Notfallteleporters.\nZum Verknüpfen einen Notfallteleporter rechtsklicken.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Hält den Chunk des Teleporters geladen, solange das Upgrade installiert ist.",
   "tooltip.phaseteleporters.description.energy_cube": "Speichert große Energiemengen.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Trennen",
   "message.phaseteleporters.emergency.no_platform": "Kein Notfallteleporter verknüpft",
   "message.phaseteleporters.emergency.unavailable": "Plattform nicht verfügbar: Energie, Zugriff und Platz darüber prüfen",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Rettet den verknüpften Spieler bei gefährlich niedriger Gesundheit nur in der Dimension der Plattform. Die Verknüpfung bleibt in anderen Dimensionen erhalten; die Rettung wird nach der Rückkehr wieder aktiv. Zum Verknüpfen die Plattform mit einem tragbaren Teleporter benutzen und diesen im Inventar behalten."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Rettet den verknüpften Spieler bei gefährlich niedriger Gesundheit nur in der Dimension der Plattform. Die Verknüpfung bleibt in anderen Dimensionen erhalten; die Rettung wird nach der Rückkehr wieder aktiv. Zum Verknüpfen die Plattform mit einem tragbaren Teleporter benutzen und diesen im Inventar behalten.",
+  "item.phaseteleporters.color_configurator": "Farbkonfigurator",
+  "tooltip.phaseteleporters.description.color_configurator": "Rechtsklick auf einen Rahmen oder Teleporter, um die Farbe zu ändern (zum Ändern der Teleporterfarbe LSHIFT gedrückt halten).\nLSHIFT + Mausrad mit dem Werkzeug in der Haupthand — Modus wechseln.",
+  "message.phaseteleporters.color_configurator.no_energy": "Zum Ändern der Farbe werden %s benötigt.",
+  "message.phaseteleporters.color_configurator.changed": "Rahmenfarbe: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Teleporterfarbe: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Farbe der Monitorbeleuchtung: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Textfarbe: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Modus: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Rahmenfarbe",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Farbe der Monitorbeleuchtung",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Textfarbe",
+  "tooltip.phaseteleporters.color_configurator.off": "Aus",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/Tick"
 }

@@ -1,14 +1,81 @@
 {
   "parent": "minecraft:block/block",
-  "textures": { "all": "phaseteleporters:block/basic_energy_cable", "particle": "phaseteleporters:block/basic_energy_cable" },
+  "textures": {
+    "insulation": "phaseteleporters:block/basic_energy_cable_insulation",
+    "iron": "minecraft:block/iron_block",
+    "particle": "phaseteleporters:block/basic_energy_cable_insulation"
+  },
   "elements": [
     {
-      "from": [6, 0, 6], "to": [10, 5, 10],
+      "name": "insulated_down",
+      "from": [
+        5.75,
+        0,
+        5.75
+      ],
+      "to": [
+        10.25,
+        5.75,
+        10.25
+      ],
       "faces": {
-        "north": { "texture": "#all" }, "south": { "texture": "#all" },
-        "east": { "texture": "#all" }, "west": { "texture": "#all" },
-        "up": { "texture": "#all" }, "down": { "texture": "#all" }
-      }
+        "north": {
+          "texture": "#insulation",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#insulation",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#insulation",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#insulation",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#insulation",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#insulation",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      },
+      "shade": true
     }
-  ]
+  ],
+  "ambientocclusion": true
 }

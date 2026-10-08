@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "אין אנרגיה",
   "message.phaseteleporters.portable.no_connection": "אין חיבור",
   "tooltip.phaseteleporters.item_details_hint": "החזק %s להצגת התיאור",
-  "tooltip.phaseteleporters.description.battery": "אוגרת אנרגיה ויכולה לטעון פריטים תואמים אחרים במלאי של השחקן כאשר טעינה במלאי פעילה.",
+  "tooltip.phaseteleporters.description.battery": "אוגרת אנרגיה ויכולה לטעון פריטים תואמים אחרים במלאי של השחקן כאשר טעינה במלאי פעילה.\nלחיצה ימנית עם הסוללה ביד מחליפה מצב.",
   "tooltip.phaseteleporters.description.portable_teleporter": "התגנבות + גלילה כשהפריט ביד הראשית מחליפות מצב.\n- תפריט — פותח את רשימת התדרים.\n- שיגור מהיר — משגר לתדר הנבחר בלי לפתוח את הרשימה.\n- תפריט משגר החירום — פותח את תפריט משגר החירום.\nלחץ לחיצה ימנית על משגר חירום לקישור.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "משאיר את המקטע של המשגר טעון כל עוד הוא מותקן.",
   "tooltip.phaseteleporters.description.energy_cube": "אוגרת כמויות גדולות של אנרגיה.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "ביטול קישור",
   "message.phaseteleporters.emergency.no_platform": "לא קושר משגר חירום",
   "message.phaseteleporters.emergency.unavailable": "המשטח אינו זמין: בדוק אנרגיה, גישה ומקום מעליו",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "מחלץ את השחקן המקושר ברמת בריאות מסוכנת, רק בממד של המשטח. הקישור נשמר בממדים אחרים והחילוץ מתחדש עם החזרה. השתמש במשגר נייד על המשטח כדי לקשר אותו, ואז שמור אותו במלאי שלך."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "מחלץ את השחקן המקושר ברמת בריאות מסוכנת, רק בממד של המשטח. הקישור נשמר בממדים אחרים והחילוץ מתחדש עם החזרה. השתמש במשגר נייד על המשטח כדי לקשר אותו, ואז שמור אותו במלאי שלך.",
+  "item.phaseteleporters.color_configurator": "מגדיר צבעים",
+  "tooltip.phaseteleporters.description.color_configurator": "לחיצה ימנית על מסגרת או משגר משנה את הצבע (יש להחזיק LSHIFT כדי לשנות את צבע המשגר).\nLSHIFT + גלגלת העכבר עם הכלי ביד הראשית — החלפת מצב.",
+  "message.phaseteleporters.color_configurator.no_energy": "שינוי צבע דורש %s.",
+  "message.phaseteleporters.color_configurator.changed": "צבע המסגרת: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "צבע המשגר: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "צבע אורות הצג: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "צבע הטקסט: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "מצב: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "צבע המסגרת",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "צבע אורות הצג",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "צבע הטקסט",
+  "tooltip.phaseteleporters.color_configurator.off": "כבוי",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/טיק"
 }

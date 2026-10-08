@@ -1,6 +1,7 @@
 package example.phaseteleporters;
 
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
+import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelData;
 import net.minecraft.client.model.ModelPart;
@@ -14,20 +15,26 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 
-/** A black spherical core and matching amber port outlines. */
+/** Renders the spherical core and glass inside the textured block model. */
 public final class QuantumTeleportRenderer implements BlockEntityRenderer<QuantumTeleportBlockEntity> {
     private static final Identifier MATERIAL = Identifier.ofVanilla("textures/block/white_concrete.png");
-    private static final int GLOW_COLOR = 0xFFF0A366;
+    private static final int CORE_COLOR = 0xFFF0A366;
     private static final Identifier GLASS = Identifier.of(PhaseTeleportersMod.MOD_ID,
             "textures/block/energy_cube_glass.png");
     private static final ModelPart GLASS_MODEL = createGlass();
+    private static final Identifier GLASS_PANES_MODEL = Identifier.of(PhaseTeleportersMod.MOD_ID,
+            "block/quantum_teleporter_glass");
+    private static final Random GLASS_RANDOM = Random.create(0);
     private static final int SLICES = 32;
     private static final int BANDS = 20;
 
     public static void register() {
+        QuantumPortModel.register();
+        ModelLoadingPlugin.register(context -> context.addModels(GLASS_PANES_MODEL));
         BlockEntityRendererFactories.register(PhaseTeleportersMod.QUANTUM_TELEPORT_BLOCK_ENTITY,
                 context -> new QuantumTeleportRenderer());
         var state = PhaseTeleportersMod.QUANTUM_TELEPORT.getDefaultState();
@@ -35,19 +42,16 @@ public final class QuantumTeleportRenderer implements BlockEntityRenderer<Quantu
                 (stack, mode, matrices, consumers, light, overlay) -> {
                     MinecraftClient.getInstance().getBlockRenderManager()
                             .renderBlockAsEntity(state, matrices, consumers, light, overlay);
+                    QuantumPortModel.renderLeds(matrices, consumers);
                     renderCore(matrices, consumers, overlay);
-                    renderPortOutlines(matrices, consumers, light, overlay);
-                    renderFrontMarker(matrices, consumers, light, overlay, Direction.NORTH);
                     renderGlass(matrices, consumers, light, overlay);
                 });
     }
 
     @Override public void render(QuantumTeleportBlockEntity entity, float tickDelta, MatrixStack matrices,
             VertexConsumerProvider consumers, int light, int overlay) {
+        QuantumPortModel.renderLeds(matrices, consumers);
         renderCore(matrices, consumers, overlay);
-        renderPortOutlines(matrices, consumers, light, overlay);
-        renderFrontMarker(matrices, consumers, light, overlay,
-                entity.getCachedState().get(QuantumTeleportBlock.FACING));
         renderGlass(matrices, consumers, light, overlay);
     }
 
@@ -55,82 +59,40 @@ public final class QuantumTeleportRenderer implements BlockEntityRenderer<Quantu
         ModelData data = new ModelData();
         data.getRoot().addChild("glass", ModelPartBuilder.create().uv(0, 0)
                 .cuboid(-4, -4, -4, 8, 8, 8), ModelTransform.NONE);
-        return TexturedModelData.of(data, 32, 32).createModel();
+        ModelPart model = TexturedModelData.of(data, 32, 32).createModel();
+        // Keep the glass geometry available, but hide it in both render paths.
+        model.getChild("glass").visible = false;
+        return model;
     }
 
     private static void renderGlass(MatrixStack matrices, VertexConsumerProvider consumers, int light, int overlay) {
+        // Fetch on each render so fitted pane geometry follows resource reloads.
+        var panes = MinecraftClient.getInstance().getBakedModelManager().getModel(GLASS_PANES_MODEL);
+        var vertices = consumers.getBuffer(
+                RenderLayer.getEntityTranslucent(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE));
+        GLASS_RANDOM.setSeed(0);
+        for (var quad : panes.getQuads(null, null, GLASS_RANDOM)) {
+            vertices.quad(matrices.peek(), quad, 8 / 255.0f, 8 / 255.0f, 10 / 255.0f, 1.0f,
+                    light, overlay);
+        }
+    }
+
+    private static void renderLegacyGlass(MatrixStack matrices, VertexConsumerProvider consumers, int light, int overlay) {
         matrices.push();
         matrices.translate(0.5, 0.5, 0.5);
-        // Keep the dark glass just inside the metal frame. At 1.625 its faces
-        // sit on the same planes as the frame and can flicker while moving.
-        matrices.scale(1.60f, 1.60f, 1.60f);
+        // Enclose the central core rather than covering the outer frame.
+        // The recessed structural rails stay outside this inner enclosure.
+        matrices.scale(1.20f, 1.20f, 1.20f);
         GLASS_MODEL.render(matrices, consumers.getBuffer(RenderLayer.getEntityTranslucent(GLASS)),
                 light, overlay, 0xFF121115);
         matrices.pop();
-    }
-
-    private static void renderPortOutlines(MatrixStack matrices, VertexConsumerProvider consumers, int light, int overlay) {
-        VertexConsumer vertices = consumers.getBuffer(RenderLayer.getEntitySolid(MATERIAL));
-        for (int axis = 0; axis < 3; axis++) {
-            for (int side = -1; side <= 1; side += 2) {
-                float plane = (side < 0 ? -0.025f : 16.025f) / 16.0f;
-                // Match the cube's 32 px port artwork: gap 6..7, accent 7..9,
-                // recessed inner rim 9..11, then the black center. Each port is 5 model pixels wide.
-                outline(matrices.peek(), vertices, axis, side, plane, portPixel(6), portPixel(26), portWidth(1),
-                        0xFF15191D, light, overlay);
-                outline(matrices.peek(), vertices, axis, side, plane, portPixel(7), portPixel(25), portWidth(2),
-                        GLOW_COLOR, light, overlay);
-                outline(matrices.peek(), vertices, axis, side, plane, portPixel(9), portPixel(23), portWidth(2),
-                        0xFF20252A, light, overlay);
-            }
-        }
-    }
-
-    private static float portPixel(int pixel) { return 5.5f + portWidth(pixel); }
-    private static void renderFrontMarker(MatrixStack matrices, VertexConsumerProvider consumers,
-            int light, int overlay, Direction front) {
-        VertexConsumer vertices = consumers.getBuffer(RenderLayer.getEntitySolid(MATERIAL));
-        boolean xAxis = front.getAxis() == Direction.Axis.X;
-        int side = front.getDirection() == Direction.AxisDirection.POSITIVE ? 1 : -1;
-        float plane = side < 0 ? -0.025f / 16 : 16.025f / 16;
-        // Small amber dash above the front port identifies the face used by the GUI.
-        portQuad(matrices.peek(), vertices, xAxis ? 0 : 2, side, plane,
-                (xAxis ? 11 : 6.5f) / 16, (xAxis ? 6.5f : 11) / 16,
-                (xAxis ? 12 : 9.5f) / 16, (xAxis ? 9.5f : 12) / 16,
-                GLOW_COLOR, light, overlay);
-    }
-    private static float portWidth(int pixels) { return pixels * 5.0f / 32.0f; }
-
-    private static void outline(MatrixStack.Entry matrix, VertexConsumer vertices, int axis, int side,
-            float plane, float min, float max, float thickness, int color, int light, int overlay) {
-        portQuad(matrix, vertices, axis, side, plane, min, min, max, min + thickness, color, light, overlay);
-        portQuad(matrix, vertices, axis, side, plane, min, max - thickness, max, max, color, light, overlay);
-        portQuad(matrix, vertices, axis, side, plane, min, min + thickness, min + thickness, max - thickness, color, light, overlay);
-        portQuad(matrix, vertices, axis, side, plane, max - thickness, min + thickness, max, max - thickness, color, light, overlay);
-    }
-
-    private static void portQuad(MatrixStack.Entry matrix, VertexConsumer vertices, int axis, int side,
-            float plane, float a0, float b0, float a1, float b1, int color, int light, int overlay) {
-        float[][] corners = {{a0, b0}, {a1, b0}, {a1, b1}, {a0, b1}};
-        // XY and YZ wind toward the positive axis; XZ winds toward negative Y.
-        boolean reverse = side != (axis == 1 ? -1 : 1);
-        for (int i = 0; i < 4; i++) {
-            float[] corner = corners[reverse ? 3 - i : i];
-            float a = corner[0] / 16, b = corner[1] / 16;
-            float x = axis == 0 ? plane : a;
-            float y = axis == 0 ? a : axis == 1 ? plane : b;
-            float z = axis == 2 ? plane : b;
-            vertices.vertex(matrix, x, y, z).color(color).texture(0.5f, 0.5f)
-                    .overlay(overlay).light(light)
-                    .normal(matrix, axis == 0 ? side : 0, axis == 1 ? side : 0, axis == 2 ? side : 0);
-        }
     }
 
     private static void renderCore(MatrixStack matrices, VertexConsumerProvider consumers, int overlay) {
         matrices.push();
         matrices.translate(0.5, 0.5, 0.5);
         VertexConsumer vertices = consumers.getBuffer(RenderLayer.getEntitySolid(MATERIAL));
-        sphere(matrices.peek(), vertices, 0.2625f, GLOW_COLOR, overlay, true);
+        sphere(matrices.peek(), vertices, 0.2625f, CORE_COLOR, overlay, true);
         sphere(matrices.peek(), vertices, 0.25f, 0xFF020103, overlay, false);
         matrices.pop();
     }

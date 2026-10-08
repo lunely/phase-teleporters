@@ -121,7 +121,7 @@
     }
   },
   "textures": {
-    "particle": "phaseteleporters:block/energy_cube_frame"
+    "particle": "phaseteleporters:block/models/port"
   },
   "parent": "builtin/entity"
 }

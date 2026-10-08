@@ -31,7 +31,9 @@ public final class SolarPanelScreen extends HandledScreen<SolarPanelScreenHandle
         context.drawTexture(EMPTY, left, top, 0, 0, ENERGY_WIDTH, ENERGY_HEIGHT, ENERGY_WIDTH, ENERGY_HEIGHT);
         int filled = handler.capacity() <= 0 ? 0 : (int) Math.clamp(handler.energy() * ENERGY_HEIGHT / handler.capacity(), 0, ENERGY_HEIGHT);
         if (filled > 0) context.drawTexture(FILLED, left, bottom - filled, 0, ENERGY_HEIGHT - filled, ENERGY_WIDTH, filled, ENERGY_WIDTH, ENERGY_HEIGHT);
-        context.drawTexture(ENERGY_SLOT, x + 7, y + 61, 0, 0, 18, 18, 18, 18);
+        if (!handler.getSlot(0).hasStack()) {
+            context.drawTexture(ENERGY_SLOT, x + 7, y + 61, 0, 0, 18, 18, 18, 18);
+        }
     }
     @Override public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
@@ -39,7 +41,8 @@ public final class SolarPanelScreen extends HandledScreen<SolarPanelScreenHandle
         if (mouseX >= x + ENERGY_X && mouseX < x + ENERGY_X + ENERGY_WIDTH
                 && mouseY >= y + ENERGY_Y && mouseY < y + ENERGY_Y + ENERGY_HEIGHT) {
             context.drawTooltip(textRenderer, java.util.List.of(
-                    Text.literal(handler.generation() + " J/t").formatted(net.minecraft.util.Formatting.GREEN),
+                    Text.translatable("gui.phaseteleporters.solar_panel.generation_rate", handler.generation())
+                            .formatted(net.minecraft.util.Formatting.GREEN),
                     Text.literal(PEGuiText.energy(handler.energy(), handler.capacity()))), mouseX, mouseY);
         }
         sidePanel.tooltip(context, textRenderer, x, y, backgroundWidth, mouseX, mouseY, handler);

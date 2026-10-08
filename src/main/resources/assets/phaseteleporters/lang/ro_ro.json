@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Fără energie",
   "message.phaseteleporters.portable.no_connection": "Fără conexiune",
   "tooltip.phaseteleporters.item_details_hint": "Ține apăsat %s pentru descriere",
-  "tooltip.phaseteleporters.description.battery": "Stochează energie și poate încărca alte obiecte compatibile din inventarul jucătorului când încărcarea în inventar este activată.",
+  "tooltip.phaseteleporters.description.battery": "Stochează energie și poate încărca alte obiecte compatibile din inventarul jucătorului când încărcarea în inventar este activată.\nFă clic dreapta cu bateria în mână pentru a schimba modul.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Furișare + derulare cu obiectul în mâna principală schimbă modul.\n- Meniu — deschide lista frecvențelor.\n- Teleportare rapidă — teleportează la frecvența selectată fără a deschide lista.\n- Meniul teleportorului de urgență — deschide meniul teleportorului de urgență.\nClic dreapta pe un teleportor de urgență pentru asociere.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Menține chunk-ul teleportorului încărcat cât timp este instalată.",
   "tooltip.phaseteleporters.description.energy_cube": "Stochează cantități mari de energie.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Dezasociază",
   "message.phaseteleporters.emergency.no_platform": "Niciun teleportor de urgență asociat",
   "message.phaseteleporters.emergency.unavailable": "Platformă indisponibilă: verifică energia, accesul și spațiul de deasupra",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Salvează jucătorul asociat la un nivel periculos al sănătății, doar în dimensiunea platformei. Asocierea se păstrează în alte dimensiuni, iar salvarea reîncepe la întoarcere. Folosește un teleportor portabil pe platformă pentru asociere și păstrează-l în inventar."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Salvează jucătorul asociat la un nivel periculos al sănătății, doar în dimensiunea platformei. Asocierea se păstrează în alte dimensiuni, iar salvarea reîncepe la întoarcere. Folosește un teleportor portabil pe platformă pentru asociere și păstrează-l în inventar.",
+  "item.phaseteleporters.color_configurator": "Configurator de culori",
+  "tooltip.phaseteleporters.description.color_configurator": "Fă clic dreapta pe un cadru sau teleportor pentru a schimba culoarea (ține apăsat LSHIFT pentru a schimba culoarea teleportorului).\nLSHIFT + rotița mouse-ului cu unealta în mâna principală — schimbarea modului.",
+  "message.phaseteleporters.color_configurator.no_energy": "Schimbarea culorii necesită %s.",
+  "message.phaseteleporters.color_configurator.changed": "Culoarea cadrului: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Culoarea teleportorului: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Culoarea luminilor monitorului: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Culoarea textului: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Mod: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Culoarea cadrului",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Culoarea luminilor monitorului",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Culoarea textului",
+  "tooltip.phaseteleporters.color_configurator.off": "Oprit",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/tic"
 }

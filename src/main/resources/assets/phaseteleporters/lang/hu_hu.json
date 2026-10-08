@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Nincs energia",
   "message.phaseteleporters.portable.no_connection": "Nincs kapcsolat",
   "tooltip.phaseteleporters.item_details_hint": "Tartsd lenyomva a(z) %s billentyűt a leíráshoz",
-  "tooltip.phaseteleporters.description.battery": "Energiát tárol, és a játékos leltárában lévő kompatibilis tárgyakat is tölti, ha a leltári töltés be van kapcsolva.",
+  "tooltip.phaseteleporters.description.battery": "Energiát tárol, és a játékos leltárában lévő kompatibilis tárgyakat is tölti, ha a leltári töltés be van kapcsolva.\nKattints jobb gombbal az akkumulátorral a kezedben a módváltáshoz.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Lopakodás + görgetés a főkézben tartva módot vált.\n- Menü — megnyitja a frekvencialistát.\n- Gyors teleportálás — a kiválasztott frekvenciára teleportál a lista megnyitása nélkül.\n- Vészteleportáló menüje — megnyitja a vészteleportáló menüjét.\nJobb kattintás egy vészteleportálóra a párosításhoz.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Telepítve betöltve tartja a teleportáló chunkját.",
   "tooltip.phaseteleporters.description.energy_cube": "Nagy mennyiségű energiát tárol.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Párosítás törlése",
   "message.phaseteleporters.emergency.no_platform": "Nincs párosított vészteleportáló",
   "message.phaseteleporters.emergency.unavailable": "A platform nem elérhető: ellenőrizd az energiát, hozzáférést és a felette lévő helyet",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Veszélyesen alacsony életerőnél megmenti a párosított játékost, kizárólag a platform dimenziójában. A kapcsolat más dimenziókban megmarad, és visszatéréskor a mentés újra működik. A párosításhoz használd a hordozható teleportálót a platformon, majd tartsd a leltáradban."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Veszélyesen alacsony életerőnél megmenti a párosított játékost, kizárólag a platform dimenziójában. A kapcsolat más dimenziókban megmarad, és visszatéréskor a mentés újra működik. A párosításhoz használd a hordozható teleportálót a platformon, majd tartsd a leltáradban.",
+  "item.phaseteleporters.color_configurator": "Színbeállító",
+  "tooltip.phaseteleporters.description.color_configurator": "Kattints jobb gombbal egy keretre vagy teleportálóra a szín megváltoztatásához (a teleportáló színének módosításához tartsd lenyomva az LSHIFT billentyűt).\nLSHIFT + egérgörgő az eszközzel a főkézben — módváltás.",
+  "message.phaseteleporters.color_configurator.no_energy": "A színváltáshoz %s szükséges.",
+  "message.phaseteleporters.color_configurator.changed": "Keret színe: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Teleportáló színe: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Monitorlámpák színe: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Szöveg színe: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Mód: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Keret színe",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Monitorlámpák színe",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Szöveg színe",
+  "tooltip.phaseteleporters.color_configurator.off": "Kikapcsolva",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/tick"
 }

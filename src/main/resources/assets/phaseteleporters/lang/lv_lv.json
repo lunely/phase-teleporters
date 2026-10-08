@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Nav enerģijas",
   "message.phaseteleporters.portable.no_connection": "Nav savienojuma",
   "tooltip.phaseteleporters.item_details_hint": "Turi %s, lai redzētu aprakstu",
-  "tooltip.phaseteleporters.description.battery": "Uzglabā enerģiju un var uzlādēt citus saderīgus priekšmetus spēlētāja inventārā, kad ieslēgta inventāra uzlāde.",
+  "tooltip.phaseteleporters.description.battery": "Uzglabā enerģiju un var uzlādēt citus saderīgus priekšmetus spēlētāja inventārā, kad ieslēgta inventāra uzlāde.\nNoklikšķini ar labo peles pogu, turot bateriju rokā, lai mainītu režīmu.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Lavīšanās + ritināšana ar priekšmetu galvenajā rokā pārslēdz režīmus.\n- Izvēlne — atver frekvenču sarakstu.\n- Ātrā teleportācija — teleportē uz izvēlēto frekvenci, neatverot sarakstu.\n- Ārkārtas teleportētāja izvēlne — atver ārkārtas teleportētāja izvēlni.\nLabais klikšķis uz ārkārtas teleportētāja, lai piesaistītu.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Kamēr uzstādīts, uztur teleportētāja apgabalu ielādētu.",
   "tooltip.phaseteleporters.description.energy_cube": "Uzglabā lielu enerģijas daudzumu.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Atvienot",
   "message.phaseteleporters.emergency.no_platform": "Nav piesaistīta ārkārtas teleportētāja",
   "message.phaseteleporters.emergency.unavailable": "Platforma nav pieejama: pārbaudi enerģiju, piekļuvi un vietu virs tās",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Glābj piesaistīto spēlētāju pie bīstami zema veselības līmeņa tikai platformas dimensijā. Saite saglabājas citās dimensijās, un glābšana atsākas pēc atgriešanās. Izmanto pārnēsājamo teleportētāju uz platformas, lai piesaistītu, un turi to inventārā."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Glābj piesaistīto spēlētāju pie bīstami zema veselības līmeņa tikai platformas dimensijā. Saite saglabājas citās dimensijās, un glābšana atsākas pēc atgriešanās. Izmanto pārnēsājamo teleportētāju uz platformas, lai piesaistītu, un turi to inventārā.",
+  "item.phaseteleporters.color_configurator": "Krāsu konfigurators",
+  "tooltip.phaseteleporters.description.color_configurator": "Noklikšķini ar labo peles pogu uz rāmja vai teleportētāja, lai mainītu krāsu (turi LSHIFT, lai mainītu teleportētāja krāsu).\nLSHIFT + peles ritenītis, turot rīku galvenajā rokā — režīma maiņa.",
+  "message.phaseteleporters.color_configurator.no_energy": "Krāsas maiņai nepieciešams %s.",
+  "message.phaseteleporters.color_configurator.changed": "Rāmja krāsa: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Teleportētāja krāsa: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Monitora gaismu krāsa: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Teksta krāsa: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Režīms: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Rāmja krāsa",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Monitora gaismu krāsa",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Teksta krāsa",
+  "tooltip.phaseteleporters.color_configurator.off": "Izslēgts",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/tikšķis"
 }

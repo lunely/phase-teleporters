@@ -24,7 +24,8 @@ public final class EnergyCubeScreen extends HandledScreen<EnergyCubeScreenHandle
 
     @Override protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
         sidePanel.drawBehind(context, x, y, backgroundWidth, mouseX, mouseY, handler);
-        EnergyCubeGuiRenderer.draw(context, x, y, handler.getEnergy(), handler.getMaxEnergy(), false);
+        EnergyCubeGuiRenderer.draw(context, x, y, handler.getEnergy(), handler.getMaxEnergy(), false,
+                handler.getSlot(0).hasStack(), handler.getSlot(1).hasStack());
     }
 
     @Override public void render(DrawContext context, int mouseX, int mouseY, float delta) {

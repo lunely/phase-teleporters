@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "エネルギー不足",
   "message.phaseteleporters.portable.no_connection": "接続なし",
   "tooltip.phaseteleporters.item_details_hint": "%sを押し続けると説明を表示",
-  "tooltip.phaseteleporters.description.battery": "エネルギーを蓄えます。インベントリ充電を有効にすると、インベントリ内の対応アイテムを充電できます。",
+  "tooltip.phaseteleporters.description.battery": "エネルギーを蓄えます。インベントリ充電を有効にすると、インベントリ内の対応アイテムを充電できます。\nバッテリーを手に持って右クリックするとモードを切り替えられます。",
   "tooltip.phaseteleporters.description.portable_teleporter": "装置を利き手に持ち、スニークしながらマウスホイールを回すとモードが切り替わります。\n- 通常モード — 周波数一覧を開きます。\n- クイックテレポート — 一覧を開かずに選択した周波数へテレポートします。\n- 緊急テレポーターメニュー — 緊急テレポーターのメニューを開きます。\n緊急テレポーターを右クリックするとリンクできます。",
   "tooltip.phaseteleporters.description.anchor_upgrade": "取り付けている間、テレポーターのチャンクを読み込み続けます。",
   "tooltip.phaseteleporters.description.energy_cube": "大量のエネルギーを蓄えます。",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "リンク解除",
   "message.phaseteleporters.emergency.no_platform": "緊急テレポーターがリンクされていません",
   "message.phaseteleporters.emergency.unavailable": "プラットフォームが利用できません：エネルギー、アクセス権、上の空間を確認してください",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "リンクしたプレイヤーの体力が危険な水準まで下がると、プラットフォームと同じ次元内で救助します。他の次元でもリンクは維持され、戻ると救助が再開します。携帯テレポーターをプラットフォームに使用してリンクし、インベントリに入れておいてください。"
+  "tooltip.phaseteleporters.description.emergency_teleporter": "リンクしたプレイヤーの体力が危険な水準まで下がると、プラットフォームと同じ次元内で救助します。他の次元でもリンクは維持され、戻ると救助が再開します。携帯テレポーターをプラットフォームに使用してリンクし、インベントリに入れておいてください。",
+  "item.phaseteleporters.color_configurator": "カラーコンフィギュレーター",
+  "tooltip.phaseteleporters.description.color_configurator": "フレームまたはテレポーターを右クリックして色を変更します（テレポーターの色を変えるにはLSHIFTを押しながら操作してください）。\n道具を利き手に持ち、LSHIFT＋マウスホイールでモードを切り替えます。",
+  "message.phaseteleporters.color_configurator.no_energy": "色の変更には%sが必要です。",
+  "message.phaseteleporters.color_configurator.changed": "フレームの色：%s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "テレポーターの色：%s",
+  "message.phaseteleporters.color_configurator.lights_changed": "モニターライトの色：%s",
+  "message.phaseteleporters.color_configurator.text_changed": "文字の色：%s",
+  "tooltip.phaseteleporters.color_configurator.mode": "モード：%s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "フレームの色",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "モニターライトの色",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "文字の色",
+  "tooltip.phaseteleporters.color_configurator.off": "オフ",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/ティック"
 }

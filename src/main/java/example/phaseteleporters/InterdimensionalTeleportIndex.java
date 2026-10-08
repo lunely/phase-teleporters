@@ -13,6 +13,7 @@ public final class InterdimensionalTeleportIndex extends PersistentState {
     private static final Type<InterdimensionalTeleportIndex> TYPE =
             new Type<>(InterdimensionalTeleportIndex::new, InterdimensionalTeleportIndex::fromNbt, null);
     private final Set<Long> positions = new HashSet<>();
+    private Set<Long> snapshot;
 
     public static InterdimensionalTeleportIndex get(ServerWorld world) {
         return world.getPersistentStateManager().getOrCreate(TYPE, "phaseteleporters_interdimensional_teleports");
@@ -30,7 +31,10 @@ public final class InterdimensionalTeleportIndex extends PersistentState {
         return nbt;
     }
 
-    public Set<Long> positions() { return Set.copyOf(positions); }
-    public void add(BlockPos pos) { if (positions.add(pos.asLong())) markDirty(); }
-    public void remove(BlockPos pos) { if (positions.remove(pos.asLong())) markDirty(); }
+    public Set<Long> positions() {
+        if (snapshot == null) snapshot = Set.copyOf(positions);
+        return snapshot;
+    }
+    public void add(BlockPos pos) { if (positions.add(pos.asLong())) { snapshot = null; markDirty(); } }
+    public void remove(BlockPos pos) { if (positions.remove(pos.asLong())) { snapshot = null; markDirty(); } }
 }

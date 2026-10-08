@@ -10,6 +10,8 @@ import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
+import example.phaseteleporters.energy.PESideMode;
 import net.minecraft.world.World;
 
 /** The pad supplies power; rescue preferences belong to each linked player. */
@@ -18,6 +20,7 @@ public final class EmergencyTeleportBlockEntity extends AnchoredTeleportBlockEnt
     public static final long TELEPORT_COST = 100_000;
     public static final double HEIGHT = 1.0 / 16.0;
     private UUID platformId = UUID.randomUUID();
+    private boolean connectionsChecked;
 
     public EmergencyTeleportBlockEntity(BlockPos pos, BlockState state) {
         super(PhaseTeleportersMod.EMERGENCY_TELEPORT_BLOCK_ENTITY, pos, state, CAPACITY);
@@ -25,10 +28,20 @@ public final class EmergencyTeleportBlockEntity extends AnchoredTeleportBlockEnt
 
     public UUID platformId() { return platformId; }
     public static void tick(World world, BlockPos pos, BlockState state, EmergencyTeleportBlockEntity pad) {
+        if (!pad.connectionsChecked) {
+            pad.connectionsChecked = true;
+            EmergencyTeleportBlock.refreshConnections(world, pos, state);
+        }
         pad.dischargeEnergyItem();
         if (world.getTime() % 20 == 0) pad.syncAnchor();
     }
     @Override protected long getMaxInputPerTick() { return 5_000; }
+    @Override public PESideMode getSideMode(Direction side) {
+        return side == Direction.UP ? PESideMode.DISABLED : super.getSideMode(side);
+    }
+    @Override public void setSideMode(Direction side, PESideMode mode) {
+        if (side != Direction.UP) super.setSideMode(side, mode);
+    }
     @Override public Text getDisplayName() { return Text.translatable("block.phaseteleporters.emergency_teleporter"); }
     @Override public ScreenHandler createMenu(int syncId, PlayerInventory inventory, PlayerEntity player) {
         return new EmergencyTeleportScreenHandler(syncId, inventory, this);

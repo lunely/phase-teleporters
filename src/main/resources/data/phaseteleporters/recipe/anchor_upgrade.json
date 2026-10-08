@@ -1,8 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [" G ", "ABA", " G "],
+  "pattern": [" S ", "ABA", " S "],
   "key": {
-    "G": { "tag": "phaseteleporters:glass_blocks" },
+    "S": { "item": "phaseteleporters:steel_ingot" },
     "A": { "item": "phaseteleporters:basic_alloy" },
     "B": { "item": "minecraft:gold_ingot" }
   },

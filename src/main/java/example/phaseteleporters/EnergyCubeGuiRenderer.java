@@ -23,7 +23,8 @@ final class EnergyCubeGuiRenderer {
 
     private EnergyCubeGuiRenderer() {}
 
-    static void draw(DrawContext context, int x, int y, long energy, long capacity, boolean creative) {
+    static void draw(DrawContext context, int x, int y, long energy, long capacity,
+                     boolean creative, boolean inputOccupied, boolean outputOccupied) {
         context.drawTexture(BACKGROUND, x, y, 0, 0, 176, 166, 256, 256);
         int left = x + BAR_X;
         int top = y + BAR_Y;
@@ -38,8 +39,12 @@ final class EnergyCubeGuiRenderer {
             context.drawTexture(FILLED, left, bottom - filled,
                     0, BAR_HEIGHT - filled, BAR_WIDTH, filled, BAR_WIDTH, BAR_HEIGHT);
         }
-        context.drawTexture(INPUT, x + 51, y + 31, 0, 0, 18, 18, 18, 18);
-        context.drawTexture(OUTPUT, x + 107, y + 31, 0, 0, 18, 18, 18, 18);
+        if (!inputOccupied) {
+            context.drawTexture(INPUT, x + 51, y + 31, 0, 0, 18, 18, 18, 18);
+        }
+        if (!outputOccupied) {
+            context.drawTexture(OUTPUT, x + 107, y + 31, 0, 0, 18, 18, 18, 18);
+        }
     }
 
     static boolean overBar(int x, int y, int mouseX, int mouseY) {

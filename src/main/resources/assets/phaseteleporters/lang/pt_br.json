@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Sem energia",
   "message.phaseteleporters.portable.no_connection": "Sem conexão",
   "tooltip.phaseteleporters.item_details_hint": "Segure %s para ver a descrição",
-  "tooltip.phaseteleporters.description.battery": "Armazena energia e carrega outros itens compatíveis no inventário quando a carga do inventário está ativada.",
+  "tooltip.phaseteleporters.description.battery": "Armazena energia e carrega outros itens compatíveis no inventário quando a carga do inventário está ativada.\nClique com o botão direito com a bateria na mão para mudar de modo.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Agachar + rolar a roda do mouse com o dispositivo na mão principal troca o modo.\n- Normal — abre a lista de frequências.\n- Teletransporte rápido — vai para a frequência selecionada sem abrir a lista.\n- Menu do teletransportador de emergência — abre o menu do teletransportador de emergência.\nClique com o botão direito em um teletransportador de emergência para vincular.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Mantém o chunk do teletransportador carregado enquanto a melhoria está instalada.",
   "tooltip.phaseteleporters.description.energy_cube": "Armazena grandes quantidades de energia.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Desvincular",
   "message.phaseteleporters.emergency.no_platform": "Nenhum teletransportador de emergência vinculado",
   "message.phaseteleporters.emergency.unavailable": "Plataforma indisponível: verifique a energia, o acesso e o espaço acima",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Resgata o jogador vinculado quando sua vida fica perigosamente baixa, apenas na dimensão da plataforma. O vínculo permanece em outras dimensões e o resgate volta a funcionar ao retornar. Use um teletransportador portátil na plataforma para vincular e mantenha-o no inventário."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Resgata o jogador vinculado quando sua vida fica perigosamente baixa, apenas na dimensão da plataforma. O vínculo permanece em outras dimensões e o resgate volta a funcionar ao retornar. Use um teletransportador portátil na plataforma para vincular e mantenha-o no inventário.",
+  "item.phaseteleporters.color_configurator": "Configurador de cores",
+  "tooltip.phaseteleporters.description.color_configurator": "Clique com o botão direito em uma moldura ou teletransportador para mudar a cor (segure LSHIFT para mudar a cor do teletransportador).\nLSHIFT + roda do mouse com a ferramenta na mão principal — mudar de modo.",
+  "message.phaseteleporters.color_configurator.no_energy": "Mudar a cor requer %s.",
+  "message.phaseteleporters.color_configurator.changed": "Cor da moldura: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Cor do teletransportador: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Cor das luzes do monitor: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Cor do texto: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Modo: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Cor da moldura",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Cor das luzes do monitor",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Cor do texto",
+  "tooltip.phaseteleporters.color_configurator.off": "Desligado",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/tick"
 }

@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Chýba energia",
   "message.phaseteleporters.portable.no_connection": "Bez spojenia",
   "tooltip.phaseteleporters.item_details_hint": "Podrž %s na zobrazenie popisu",
-  "tooltip.phaseteleporters.description.battery": "Ukladá energiu a môže nabíjať ďalšie kompatibilné predmety v inventári hráča, keď je zapnuté nabíjanie inventára.",
+  "tooltip.phaseteleporters.description.battery": "Ukladá energiu a môže nabíjať ďalšie kompatibilné predmety v inventári hráča, keď je zapnuté nabíjanie inventára.\nKliknutím pravým tlačidlom s batériou v ruke prepneš režim.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Zakrádanie + posúvanie kolieskom s predmetom v hlavnej ruke prepína režimy.\n- Menu — otvorí zoznam frekvencií.\n- Rýchly teleport — teleportuje na zvolenú frekvenciu bez otvorenia zoznamu.\n- Menu núdzového teleportu — otvorí menu núdzového teleportu.\nKlikni pravým tlačidlom na núdzový teleport na prepojenie.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Udržiava chunk teleportu načítaný, kým je nainštalované.",
   "tooltip.phaseteleporters.description.energy_cube": "Ukladá veľké množstvo energie.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Odpojiť",
   "message.phaseteleporters.emergency.no_platform": "Núdzový teleport nie je prepojený",
   "message.phaseteleporters.emergency.unavailable": "Platforma je nedostupná: skontroluj energiu, prístup a priestor nad ňou",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Zachraňuje prepojeného hráča pri nebezpečne nízkom zdraví len v dimenzii platformy. Prepojenie zostáva zachované v iných dimenziách a záchrana sa obnoví po návrate. Použi prenosný teleport na platforme na prepojenie a potom ho nos v inventári."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Zachraňuje prepojeného hráča pri nebezpečne nízkom zdraví len v dimenzii platformy. Prepojenie zostáva zachované v iných dimenziách a záchrana sa obnoví po návrate. Použi prenosný teleport na platforme na prepojenie a potom ho nos v inventári.",
+  "item.phaseteleporters.color_configurator": "Konfigurátor farieb",
+  "tooltip.phaseteleporters.description.color_configurator": "Kliknutím pravým tlačidlom na rám alebo teleportér zmeníš jeho farbu (na zmenu farby teleportéra podrž LSHIFT).\nLSHIFT + koliesko myši s nástrojom v hlavnej ruke — zmena režimu.",
+  "message.phaseteleporters.color_configurator.no_energy": "Zmena farby vyžaduje %s.",
+  "message.phaseteleporters.color_configurator.changed": "Farba rámu: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Farba teleportéra: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Farba svetiel monitora: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Farba textu: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Režim: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Farba rámu",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Farba svetiel monitora",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Farba textu",
+  "tooltip.phaseteleporters.color_configurator.off": "Vypnuté",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/tick"
 }

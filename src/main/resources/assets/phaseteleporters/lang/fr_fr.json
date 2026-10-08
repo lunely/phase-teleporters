@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Pas d’énergie",
   "message.phaseteleporters.portable.no_connection": "Aucune connexion",
   "tooltip.phaseteleporters.item_details_hint": "Maintenez %s pour afficher la description",
-  "tooltip.phaseteleporters.description.battery": "Stocke l’énergie et recharge les autres objets compatibles de l’inventaire lorsque la recharge de l’inventaire est activée.",
+  "tooltip.phaseteleporters.description.battery": "Stocke l’énergie et recharge les autres objets compatibles de l’inventaire lorsque la recharge de l’inventaire est activée.\nFaites un clic droit en tenant la batterie pour changer de mode.",
   "tooltip.phaseteleporters.description.portable_teleporter": "S’accroupir + molette avec l’appareil en main principale change de mode.\n- Normal — ouvre la liste des fréquences.\n- Téléportation rapide — rejoint la fréquence sélectionnée sans ouvrir la liste.\n- Menu du téléporteur d’urgence — ouvre le menu du téléporteur d’urgence.\nFaites un clic droit sur un téléporteur d’urgence pour le lier.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Maintient le chunk du téléporteur chargé tant que l’amélioration est installée.",
   "tooltip.phaseteleporters.description.energy_cube": "Stocke de grandes quantités d’énergie.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Délier",
   "message.phaseteleporters.emergency.no_platform": "Aucun téléporteur d’urgence lié",
   "message.phaseteleporters.emergency.unavailable": "Plateforme indisponible : vérifiez l’énergie, l’accès et l’espace au-dessus",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Sauve le joueur lié lorsque sa santé devient dangereusement basse, uniquement dans la dimension de la plateforme. Le lien persiste dans les autres dimensions et le sauvetage reprend au retour. Utilisez un téléporteur portable sur la plateforme pour le lier, puis gardez-le dans l’inventaire."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Sauve le joueur lié lorsque sa santé devient dangereusement basse, uniquement dans la dimension de la plateforme. Le lien persiste dans les autres dimensions et le sauvetage reprend au retour. Utilisez un téléporteur portable sur la plateforme pour le lier, puis gardez-le dans l’inventaire.",
+  "item.phaseteleporters.color_configurator": "Configurateur de couleurs",
+  "tooltip.phaseteleporters.description.color_configurator": "Clic droit sur un cadre ou un téléporteur pour changer sa couleur (maintenez LSHIFT pour changer la couleur du téléporteur).\nLSHIFT + molette avec l’outil en main principale — changer de mode.",
+  "message.phaseteleporters.color_configurator.no_energy": "Changer de couleur nécessite %s.",
+  "message.phaseteleporters.color_configurator.changed": "Couleur du cadre : %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Couleur du téléporteur : %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Couleur des voyants du moniteur : %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Couleur du texte : %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Mode : %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Couleur du cadre",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Couleur des voyants du moniteur",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Couleur du texte",
+  "tooltip.phaseteleporters.color_configurator.off": "Éteint",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/tick"
 }

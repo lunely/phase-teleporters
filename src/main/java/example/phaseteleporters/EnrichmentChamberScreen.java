@@ -39,7 +39,9 @@ public final class EnrichmentChamberScreen extends HandledScreen<EnrichmentChamb
         sidePanel.drawBehind(context, x, y, backgroundWidth, mouseX, mouseY, handler);
         context.drawTexture(GUI_TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
         drawEnergy(context);
-        context.drawTexture(ENERGY_SLOT_TEXTURE, x + 8, y + 62, 0, 0, 16, 16, 16, 16);
+        if (!handler.getSlot(2).hasStack()) {
+            context.drawTexture(ENERGY_SLOT_TEXTURE, x + 8, y + 62, 0, 0, 16, 16, 16, 16);
+        }
 
         int processTime = handler.getProcessTime();
         if (processTime > 0) {

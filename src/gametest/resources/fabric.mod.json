@@ -7,6 +7,7 @@
   "entrypoints": {
     "fabric-gametest": [
       "example.phaseteleporters.MachineGameTests",
+      "example.phaseteleporters.ColorConfiguratorGameTests",
       "example.phaseteleporters.QuantumGameTests",
       "example.phaseteleporters.PortalGameTests",
       "example.phaseteleporters.EmergencyGameTests"

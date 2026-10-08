@@ -259,9 +259,10 @@ public final class PortableTeleportNetworking {
                     || !candidate.canWork()
                     || (requireEnergy && candidate.getStored() < REQUIRED_TARGET_ENERGY)
                     || !candidate.canPlayerTeleport(player)) continue;
+            long distance = distanceSquared(from, pos);
+            if (distance >= bestDistance) continue;
             Vec3d arrival = findSafeArrival(player, world, pos);
             if (arrival == null) continue;
-            long distance = distanceSquared(from, pos);
             if (distance < bestDistance) {
                 best = new Destination(world, pos, arrival);
                 bestDistance = distance;
@@ -291,11 +292,13 @@ public final class PortableTeleportNetworking {
                         || !candidate.canWork()
                         || (requireEnergy && candidate.getStored() < REQUIRED_TARGET_ENERGY)
                         || !candidate.canPlayerTeleport(player)) continue;
-                Vec3d arrival = findSafeArrival(player, world, pos);
-                if (arrival == null) continue;
                 long distance = distanceSquared(from, pos);
                 boolean otherDimension = world != sourceWorld;
                 boolean bestOtherDimension = best != null && best.world() != sourceWorld;
+                if (best != null && ((!otherDimension && bestOtherDimension)
+                        || (otherDimension == bestOtherDimension && distance >= bestDistance))) continue;
+                Vec3d arrival = findSafeArrival(player, world, pos);
+                if (arrival == null) continue;
                 if (best == null || (otherDimension && !bestOtherDimension)
                         || (otherDimension == bestOtherDimension && distance < bestDistance)) {
                     best = new Destination(world, pos, arrival);

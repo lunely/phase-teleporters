@@ -88,6 +88,7 @@ public final class BasicEnergyCableBlock extends BlockWithEntity {
 
     private static boolean connects(BlockView world, BlockPos pos, Direction side) {
         Block block = world.getBlockState(pos).getBlock();
+        if (block instanceof EmergencyTeleportBlock) return EmergencyTeleportBlock.acceptsCable(side);
         return block instanceof BasicEnergyCableBlock
                 || block == PhaseTeleportersMod.CREATIVE_ENERGY_CUBE
                 || block == PhaseTeleportersMod.ENERGY_CUBE
@@ -115,13 +116,13 @@ public final class BasicEnergyCableBlock extends BlockWithEntity {
 
     @Override protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos,
             ShapeContext context) {
-        VoxelShape shape = Block.createCuboidShape(5, 5, 5, 11, 11, 11);
-        if (state.get(NORTH)) shape = VoxelShapes.union(shape, Block.createCuboidShape(6, 6, 0, 10, 10, 5));
-        if (state.get(SOUTH)) shape = VoxelShapes.union(shape, Block.createCuboidShape(6, 6, 11, 10, 10, 16));
-        if (state.get(EAST)) shape = VoxelShapes.union(shape, Block.createCuboidShape(11, 6, 6, 16, 10, 10));
-        if (state.get(WEST)) shape = VoxelShapes.union(shape, Block.createCuboidShape(0, 6, 6, 5, 10, 10));
-        if (state.get(UP)) shape = VoxelShapes.union(shape, Block.createCuboidShape(6, 11, 6, 10, 16, 10));
-        if (state.get(DOWN)) shape = VoxelShapes.union(shape, Block.createCuboidShape(6, 0, 6, 10, 5, 10));
+        VoxelShape shape = Block.createCuboidShape(5.75, 5.75, 5.75, 10.25, 10.25, 10.25);
+        if (state.get(NORTH)) shape = VoxelShapes.union(shape, Block.createCuboidShape(5.75, 5.75, 0, 10.25, 10.25, 5.75));
+        if (state.get(SOUTH)) shape = VoxelShapes.union(shape, Block.createCuboidShape(5.75, 5.75, 10.25, 10.25, 10.25, 16));
+        if (state.get(EAST)) shape = VoxelShapes.union(shape, Block.createCuboidShape(10.25, 5.75, 5.75, 16, 10.25, 10.25));
+        if (state.get(WEST)) shape = VoxelShapes.union(shape, Block.createCuboidShape(0, 5.75, 5.75, 5.75, 10.25, 10.25));
+        if (state.get(UP)) shape = VoxelShapes.union(shape, Block.createCuboidShape(5.75, 10.25, 5.75, 10.25, 16, 10.25));
+        if (state.get(DOWN)) shape = VoxelShapes.union(shape, Block.createCuboidShape(5.75, 0, 5.75, 10.25, 5.75, 10.25));
         return shape;
     }
 }

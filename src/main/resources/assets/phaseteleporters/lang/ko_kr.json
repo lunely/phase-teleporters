@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "에너지 부족",
   "message.phaseteleporters.portable.no_connection": "연결 없음",
   "tooltip.phaseteleporters.item_details_hint": "%s 키를 누르고 있으면 설명 표시",
-  "tooltip.phaseteleporters.description.battery": "에너지를 저장하며 인벤토리 충전이 켜져 있으면 플레이어 인벤토리의 다른 호환 아이템을 충전합니다.",
+  "tooltip.phaseteleporters.description.battery": "에너지를 저장하며 인벤토리 충전이 켜져 있으면 플레이어 인벤토리의 다른 호환 아이템을 충전합니다.\n배터리를 손에 든 상태에서 우클릭하면 모드를 변경할 수 있습니다.",
   "tooltip.phaseteleporters.description.portable_teleporter": "장치를 주로 사용하는 손에 들고 웅크린 채 마우스 휠을 돌리면 모드가 바뀝니다.\n- 일반 모드 — 주파수 목록을 엽니다.\n- 빠른 텔레포트 — 목록을 열지 않고 선택한 주파수로 이동합니다.\n- 비상 텔레포터 메뉴 — 비상 텔레포터의 메뉴를 엽니다.\n비상 텔레포터를 우클릭하여 연결하세요.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "설치되어 있는 동안 텔레포터의 청크를 계속 로드합니다.",
   "tooltip.phaseteleporters.description.energy_cube": "많은 양의 에너지를 저장합니다.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "연결 해제",
   "message.phaseteleporters.emergency.no_platform": "비상 텔레포터가 연결되지 않았습니다",
   "message.phaseteleporters.emergency.unavailable": "플랫폼 사용 불가: 에너지, 접근 권한 및 위쪽 공간을 확인하세요",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "연결된 플레이어의 체력이 위험한 수준으로 낮아지면 플랫폼과 같은 차원에서만 구조합니다. 다른 차원에서도 연결은 유지되며 돌아오면 구조 기능이 다시 활성화됩니다. 휴대용 텔레포터를 플랫폼에 사용해 연결하고 인벤토리에 보관하세요."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "연결된 플레이어의 체력이 위험한 수준으로 낮아지면 플랫폼과 같은 차원에서만 구조합니다. 다른 차원에서도 연결은 유지되며 돌아오면 구조 기능이 다시 활성화됩니다. 휴대용 텔레포터를 플랫폼에 사용해 연결하고 인벤토리에 보관하세요.",
+  "item.phaseteleporters.color_configurator": "색상 설정기",
+  "tooltip.phaseteleporters.description.color_configurator": "프레임이나 텔레포터를 우클릭하여 색상을 변경하세요(텔레포터 색상을 변경하려면 LSHIFT를 누른 상태로 클릭하세요).\n도구를 주 손에 든 상태에서 LSHIFT + 마우스 휠 — 모드 변경.",
+  "message.phaseteleporters.color_configurator.no_energy": "색상을 변경하려면 %s의 에너지가 필요합니다.",
+  "message.phaseteleporters.color_configurator.changed": "프레임 색상: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "텔레포터 색상: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "모니터 조명 색상: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "텍스트 색상: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "모드: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "프레임 색상",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "모니터 조명 색상",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "텍스트 색상",
+  "tooltip.phaseteleporters.color_configurator.off": "꺼짐",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/틱"
 }

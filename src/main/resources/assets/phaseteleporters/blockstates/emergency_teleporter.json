@@ -1,1 +1,67 @@
-{"variants":{"":{"model":"phaseteleporters:block/emergency_teleporter"}}}
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "phaseteleporters:block/emergency_teleporter"
+      }
+    },
+    {
+      "when": {
+        "north": "true"
+      },
+      "apply": [
+        {
+          "model": "phaseteleporters:block/emergency_teleporter_port"
+        },
+        {
+          "model": "phaseteleporters:block/emergency_teleporter_port_led"
+        }
+      ]
+    },
+    {
+      "when": {
+        "south": "true"
+      },
+      "apply": [
+        {
+          "model": "phaseteleporters:block/emergency_teleporter_port",
+          "y": 180
+        },
+        {
+          "model": "phaseteleporters:block/emergency_teleporter_port_led",
+          "y": 180
+        }
+      ]
+    },
+    {
+      "when": {
+        "east": "true"
+      },
+      "apply": [
+        {
+          "model": "phaseteleporters:block/emergency_teleporter_port",
+          "y": 90
+        },
+        {
+          "model": "phaseteleporters:block/emergency_teleporter_port_led",
+          "y": 90
+        }
+      ]
+    },
+    {
+      "when": {
+        "west": "true"
+      },
+      "apply": [
+        {
+          "model": "phaseteleporters:block/emergency_teleporter_port",
+          "y": 270
+        },
+        {
+          "model": "phaseteleporters:block/emergency_teleporter_port_led",
+          "y": 270
+        }
+      ]
+    }
+  ]
+}

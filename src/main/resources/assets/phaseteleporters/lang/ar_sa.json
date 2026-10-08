@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "لا توجد طاقة",
   "message.phaseteleporters.portable.no_connection": "لا يوجد اتصال",
   "tooltip.phaseteleporters.item_details_hint": "اضغط مطولًا على %s لعرض الوصف",
-  "tooltip.phaseteleporters.description.battery": "تخزن الطاقة ويمكنها شحن العناصر المتوافقة الأخرى في مخزون اللاعب عند تفعيل شحن المخزون.",
+  "tooltip.phaseteleporters.description.battery": "تخزن الطاقة ويمكنها شحن العناصر المتوافقة الأخرى في مخزون اللاعب عند تفعيل شحن المخزون.\nانقر بزر الفأرة الأيمن وأنت تحمل البطارية لتبديل الوضع.",
   "tooltip.phaseteleporters.description.portable_teleporter": "التسلل + التمرير والعنصر في اليد الرئيسية يبدلان الوضع.\n- القائمة — تفتح قائمة الترددات.\n- انتقال آني سريع — ينقلك إلى التردد المحدد دون فتح القائمة.\n- قائمة ناقل الطوارئ — تفتح قائمة ناقل الطوارئ.\nانقر بزر الفأرة الأيمن على ناقل طوارئ لربطه.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "تبقي مقطع الناقل الآني محملًا أثناء تركيبها.",
   "tooltip.phaseteleporters.description.energy_cube": "يخزن كميات كبيرة من الطاقة.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "إلغاء الربط",
   "message.phaseteleporters.emergency.no_platform": "لم يُربط ناقل طوارئ",
   "message.phaseteleporters.emergency.unavailable": "المنصة غير متاحة: تحقق من الطاقة والوصول والمساحة فوقها",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "ينقذ اللاعب المرتبط عند انخفاض صحته إلى مستوى خطير، في بُعد المنصة فقط. يبقى الربط في الأبعاد الأخرى ويستأنف الإنقاذ عند العودة. استخدم ناقلًا آنيًا محمولًا على المنصة لربطه ثم احتفظ به في مخزونك."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "ينقذ اللاعب المرتبط عند انخفاض صحته إلى مستوى خطير، في بُعد المنصة فقط. يبقى الربط في الأبعاد الأخرى ويستأنف الإنقاذ عند العودة. استخدم ناقلًا آنيًا محمولًا على المنصة لربطه ثم احتفظ به في مخزونك.",
+  "item.phaseteleporters.color_configurator": "أداة ضبط الألوان",
+  "tooltip.phaseteleporters.description.color_configurator": "انقر بزر الفأرة الأيمن على إطار أو ناقل آني لتغيير اللون (اضغط باستمرار على LSHIFT لتغيير لون الناقل الآني).\nLSHIFT + عجلة الفأرة مع الأداة في اليد الرئيسية — تبديل الوضع.",
+  "message.phaseteleporters.color_configurator.no_energy": "يتطلب تغيير اللون %s.",
+  "message.phaseteleporters.color_configurator.changed": "لون الإطار: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "لون الناقل الآني: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "لون أضواء الشاشة: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "لون النص: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "الوضع: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "لون الإطار",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "لون أضواء الشاشة",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "لون النص",
+  "tooltip.phaseteleporters.color_configurator.off": "إيقاف",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/تيك"
 }

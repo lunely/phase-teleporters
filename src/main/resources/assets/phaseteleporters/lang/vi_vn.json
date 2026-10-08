@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Không có năng lượng",
   "message.phaseteleporters.portable.no_connection": "Không có kết nối",
   "tooltip.phaseteleporters.item_details_hint": "Giữ %s để xem mô tả",
-  "tooltip.phaseteleporters.description.battery": "Lưu trữ năng lượng và có thể sạc các vật phẩm tương thích khác trong túi đồ người chơi khi bật Sạc trong túi đồ.",
+  "tooltip.phaseteleporters.description.battery": "Lưu trữ năng lượng và có thể sạc các vật phẩm tương thích khác trong túi đồ người chơi khi bật Sạc trong túi đồ.\nNhấp chuột phải khi cầm pin để đổi chế độ.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Cúi + cuộn khi cầm ở tay chính để đổi chế độ.\n- Menu — mở danh sách tần số.\n- Dịch chuyển nhanh — dịch chuyển đến tần số đã chọn mà không mở danh sách.\n- Menu máy dịch chuyển khẩn cấp — mở menu máy dịch chuyển khẩn cấp.\nNhấp chuột phải vào máy dịch chuyển khẩn cấp để liên kết.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Giữ chunk của máy dịch chuyển luôn được tải khi lắp đặt.",
   "tooltip.phaseteleporters.description.energy_cube": "Lưu trữ lượng lớn năng lượng.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Hủy liên kết",
   "message.phaseteleporters.emergency.no_platform": "Chưa liên kết máy dịch chuyển khẩn cấp",
   "message.phaseteleporters.emergency.unavailable": "Bệ không khả dụng: kiểm tra năng lượng, quyền truy cập và khoảng trống phía trên",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Cứu người chơi đã liên kết khi máu ở mức nguy hiểm, chỉ trong chiều của bệ. Liên kết vẫn được giữ ở chiều khác và việc cứu tiếp tục khi quay lại. Dùng máy dịch chuyển cầm tay lên bệ để liên kết, rồi giữ nó trong túi đồ."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Cứu người chơi đã liên kết khi máu ở mức nguy hiểm, chỉ trong chiều của bệ. Liên kết vẫn được giữ ở chiều khác và việc cứu tiếp tục khi quay lại. Dùng máy dịch chuyển cầm tay lên bệ để liên kết, rồi giữ nó trong túi đồ.",
+  "item.phaseteleporters.color_configurator": "Bộ cấu hình màu",
+  "tooltip.phaseteleporters.description.color_configurator": "Nhấp chuột phải vào khung hoặc máy dịch chuyển để đổi màu (giữ LSHIFT để đổi màu máy dịch chuyển).\nLSHIFT + con lăn chuột khi cầm công cụ ở tay chính — đổi chế độ.",
+  "message.phaseteleporters.color_configurator.no_energy": "Đổi màu cần %s.",
+  "message.phaseteleporters.color_configurator.changed": "Màu khung: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Màu máy dịch chuyển: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Màu đèn màn hình: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Màu chữ: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Chế độ: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Màu khung",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Màu đèn màn hình",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Màu chữ",
+  "tooltip.phaseteleporters.color_configurator.off": "Tắt",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/tick"
 }

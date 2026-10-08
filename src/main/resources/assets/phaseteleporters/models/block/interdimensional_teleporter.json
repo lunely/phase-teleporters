@@ -1,8 +1,250 @@
 {
-  "parent": "minecraft:block/cube_bottom_top",
+  "parent": "minecraft:block/block",
+  "ambientocclusion": true,
   "textures": {
-    "side": "phaseteleporters:block/interdimensional_teleport_side",
-    "top": "phaseteleporters:block/interdimensional_teleport_top",
-    "bottom": "phaseteleporters:block/interdimensional_teleport_side"
-  }
+    "base": "phaseteleporters:block/models/teleporter_frame_base",
+    "led": "phaseteleporters:block/models/interdimensional_teleporter_led",
+    "particle": "phaseteleporters:block/models/teleporter_frame_base",
+    "top_led": "phaseteleporters:block/models/interdimensional_teleporter_top_led"
+  },
+  "elements": [
+    {
+      "name": "teleporter_base",
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "shade": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#base",
+          "cullface": "north"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#base",
+          "cullface": "south"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#base",
+          "cullface": "east"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#base",
+          "cullface": "west"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#base",
+          "cullface": "up"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#base",
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "name": "teleporter_led_north",
+      "from": [
+        0,
+        0,
+        -0.016
+      ],
+      "to": [
+        16,
+        16,
+        -0.016
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            4.8,
+            16,
+            5.6
+          ],
+          "texture": "#led",
+          "tintindex": 1,
+          "cullface": "north"
+        }
+      }
+    },
+    {
+      "name": "teleporter_led_south",
+      "from": [
+        0,
+        0,
+        16.016
+      ],
+      "to": [
+        16,
+        16,
+        16.016
+      ],
+      "shade": false,
+      "faces": {
+        "south": {
+          "uv": [
+            0,
+            4.8,
+            16,
+            5.6
+          ],
+          "texture": "#led",
+          "tintindex": 1,
+          "cullface": "south"
+        }
+      }
+    },
+    {
+      "name": "teleporter_led_east",
+      "from": [
+        16.016,
+        0,
+        0
+      ],
+      "to": [
+        16.016,
+        16,
+        16
+      ],
+      "shade": false,
+      "faces": {
+        "east": {
+          "uv": [
+            0,
+            4.8,
+            16,
+            5.6
+          ],
+          "texture": "#led",
+          "tintindex": 1,
+          "cullface": "east"
+        }
+      }
+    },
+    {
+      "name": "teleporter_led_west",
+      "from": [
+        -0.016,
+        0,
+        0
+      ],
+      "to": [
+        -0.016,
+        16,
+        16
+      ],
+      "shade": false,
+      "faces": {
+        "west": {
+          "uv": [
+            0,
+            4.8,
+            16,
+            5.6
+          ],
+          "texture": "#led",
+          "tintindex": 1,
+          "cullface": "west"
+        }
+      }
+    },
+    {
+      "name": "teleporter_led_up",
+      "from": [
+        0,
+        16.016,
+        0
+      ],
+      "to": [
+        16,
+        16.016,
+        16
+      ],
+      "shade": false,
+      "faces": {
+        "up": {
+          "uv": [
+            0,
+            4.8,
+            16,
+            5.6
+          ],
+          "texture": "#top_led",
+          "tintindex": 2,
+          "cullface": "up"
+        }
+      }
+    },
+    {
+      "name": "teleporter_led_down",
+      "from": [
+        0,
+        -0.016,
+        0
+      ],
+      "to": [
+        16,
+        -0.016,
+        16
+      ],
+      "shade": false,
+      "faces": {
+        "down": {
+          "uv": [
+            0,
+            4.8,
+            16,
+            5.6
+          ],
+          "texture": "#led",
+          "tintindex": 1,
+          "cullface": "down"
+        }
+      }
+    }
+  ]
 }

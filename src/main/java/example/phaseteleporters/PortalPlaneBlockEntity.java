@@ -21,6 +21,7 @@ public final class PortalPlaneBlockEntity extends BlockEntity {
     }
 
     public boolean belongsTo(BlockPos pos) { return pos.equals(controller); }
+    BlockPos controllerPos() { return controller; }
 
     public TeleportBlockEntity sourceTeleport(ServerWorld world) {
         return controller != null && world.getBlockEntity(controller) instanceof TeleportBlockEntity teleport

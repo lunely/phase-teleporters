@@ -62,7 +62,9 @@ public final class CrusherScreen extends HandledScreen<CrusherScreenHandler> {
         );
 
         drawEnergy(context);
-        context.drawTexture(ENERGY_SLOT_TEXTURE, x + 8, y + 62, 0, 0, 16, 16, 16, 16);
+        if (!handler.getSlot(2).hasStack()) {
+            context.drawTexture(ENERGY_SLOT_TEXTURE, x + 8, y + 62, 0, 0, 16, 16, 16, 16);
+        }
 
         // Прогресс дробления
         int processTime = handler.getProcessTime();

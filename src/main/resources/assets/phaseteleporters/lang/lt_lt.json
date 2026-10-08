@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Nėra energijos",
   "message.phaseteleporters.portable.no_connection": "Nėra ryšio",
   "tooltip.phaseteleporters.item_details_hint": "Laikyk %s, kad pamatytum aprašymą",
-  "tooltip.phaseteleporters.description.battery": "Kaupia energiją ir gali įkrauti kitus suderinamus daiktus žaidėjo inventoriuje, kai įjungtas inventoriaus įkrovimas.",
+  "tooltip.phaseteleporters.description.battery": "Kaupia energiją ir gali įkrauti kitus suderinamus daiktus žaidėjo inventoriuje, kai įjungtas inventoriaus įkrovimas.\nSpustelėk dešiniuoju pelės mygtuku laikydamas bateriją rankoje, kad pakeistum režimą.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Sėlinimas + slinkimas laikant pagrindinėje rankoje perjungia režimą.\n- Meniu — atidaro dažnių sąrašą.\n- Greitas teleportavimas — teleportuoja pasirinktu dažniu neatidarius sąrašo.\n- Avarinio teleportatoriaus meniu — atidaro avarinio teleportatoriaus meniu.\nDešiniuoju pelės mygtuku spustelk avarinį teleportatorių, kad susietum.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Kol įdiegtas, išlaiko teleportatoriaus sritį įkeltą.",
   "tooltip.phaseteleporters.description.energy_cube": "Kaupia didelį energijos kiekį.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Atsieti",
   "message.phaseteleporters.emergency.no_platform": "Avarinis teleportatorius nesusietas",
   "message.phaseteleporters.emergency.unavailable": "Platforma nepasiekiama: patikrink energiją, prieigą ir vietą virš jos",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Gelbsti susietą žaidėją pavojingai sumažėjus sveikatai tik platformos dimensijoje. Ryšys išlieka kitose dimensijose, o gelbėjimas atsinaujina grįžus. Susiek nešiojamąjį teleportatorių naudodamas jį ant platformos, tada laikyk jį inventoriuje."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Gelbsti susietą žaidėją pavojingai sumažėjus sveikatai tik platformos dimensijoje. Ryšys išlieka kitose dimensijose, o gelbėjimas atsinaujina grįžus. Susiek nešiojamąjį teleportatorių naudodamas jį ant platformos, tada laikyk jį inventoriuje.",
+  "item.phaseteleporters.color_configurator": "Spalvų konfigūratorius",
+  "tooltip.phaseteleporters.description.color_configurator": "Spustelėk rėmą arba teleportavimo įrenginį dešiniuoju pelės mygtuku, kad pakeistum spalvą (įrenginio spalvai pakeisti laikyk LSHIFT).\nLSHIFT + pelės ratukas laikant įrankį pagrindinėje rankoje — režimo keitimas.",
+  "message.phaseteleporters.color_configurator.no_energy": "Spalvai pakeisti reikia %s.",
+  "message.phaseteleporters.color_configurator.changed": "Rėmo spalva: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Teleportavimo įrenginio spalva: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Monitoriaus šviesų spalva: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Teksto spalva: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Režimas: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Rėmo spalva",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Monitoriaus šviesų spalva",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Teksto spalva",
+  "tooltip.phaseteleporters.color_configurator.off": "Išjungta",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/taktas"
 }

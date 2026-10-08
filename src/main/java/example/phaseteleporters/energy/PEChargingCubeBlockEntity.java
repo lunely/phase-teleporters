@@ -1,5 +1,6 @@
 package example.phaseteleporters.energy;
 
+import example.phaseteleporters.BatteryItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -44,7 +45,7 @@ public abstract class PEChargingCubeBlockEntity extends PEBlockEntity implements
 
     protected void dischargeItem() {
         ItemStack stack = energyItems.get(1);
-        if (stack.isEmpty() || !(stack.getItem() instanceof PEChargeableItem chargeable)) return;
+        if (stack.isEmpty() || !(stack.getItem() instanceof BatteryItem chargeable)) return;
         long space = Math.max(0, getCapacity() - getStored());
         if (space == 0) return;
         long available = chargeable.extractPE(stack, space, true);
@@ -78,7 +79,8 @@ public abstract class PEChargingCubeBlockEntity extends PEBlockEntity implements
     @Override public void clear() { energyItems.clear(); markDirty(); }
     @Override public boolean canPlayerUse(PlayerEntity player) { return super.canPlayerUse(player) && Inventory.canPlayerUse(this, player); }
     @Override public boolean isValid(int slot, ItemStack stack) {
-        return slot >= 0 && slot < size() && stack.getItem() instanceof PEChargeableItem;
+        return slot == 0 ? stack.getItem() instanceof PEChargeableItem
+                : slot == 1 && stack.getItem() instanceof BatteryItem;
     }
 
     @Override protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup lookup) {
@@ -86,7 +88,9 @@ public abstract class PEChargingCubeBlockEntity extends PEBlockEntity implements
         energyItems.clear();
         Inventories.readNbt(nbt, energyItems, lookup);
         for (int slot = 0; slot < size(); slot++) {
-            if (!energyItems.get(slot).isEmpty() && !isValid(slot, energyItems.get(slot)))
+            // Retain previously accepted tools for retrieval; dischargeItem never drains them.
+            if (!energyItems.get(slot).isEmpty()
+                    && !(energyItems.get(slot).getItem() instanceof PEChargeableItem))
                 energyItems.set(slot, ItemStack.EMPTY);
         }
     }

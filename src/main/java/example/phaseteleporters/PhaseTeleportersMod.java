@@ -53,6 +53,9 @@ public final class PhaseTeleportersMod implements ModInitializer {
     public static final Item BATTERY = Registry.register(
             Registries.ITEM, Identifier.of(MOD_ID, "battery"),
             new BatteryItem(new Item.Settings().maxCount(1)));
+    public static final Item COLOR_CONFIGURATOR = Registry.register(
+            Registries.ITEM, Identifier.of(MOD_ID, "color_configurator"),
+            new ColorConfiguratorItem(new Item.Settings().maxCount(1)));
     public static final Block INFUSION_STATION = Registry.register(
             Registries.BLOCK, Identifier.of(MOD_ID, "infusion_station"),
             new InfusionStationBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f)));
@@ -111,7 +114,7 @@ public final class PhaseTeleportersMod implements ModInitializer {
             new BlockItem(BASIC_ENERGY_CABLE, new Item.Settings()));
     public static final Block TELEPORTATION_FRAME = Registry.register(
             Registries.BLOCK, Identifier.of(MOD_ID, "teleportation_frame"),
-            new Block(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f)));
+            new TeleportationFrameBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f)));
     public static final Item TELEPORTATION_FRAME_ITEM = Registry.register(
             Registries.ITEM, Identifier.of(MOD_ID, "teleportation_frame"),
             new BlockItem(TELEPORTATION_FRAME, new Item.Settings()));
@@ -164,7 +167,7 @@ public final class PhaseTeleportersMod implements ModInitializer {
                     new ScreenHandlerType<>(PortableEmergencyScreenHandler::new, FeatureFlags.VANILLA_FEATURES));
     public static final Block INTERDIMENSIONAL_TELEPORTATION_FRAME = Registry.register(
             Registries.BLOCK, Identifier.of(MOD_ID, "interdimensional_teleportation_frame"),
-            new Block(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f)));
+            new TeleportationFrameBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f)));
     public static final Item INTERDIMENSIONAL_TELEPORTATION_FRAME_ITEM = Registry.register(
             Registries.ITEM, Identifier.of(MOD_ID, "interdimensional_teleportation_frame"),
             new BlockItem(INTERDIMENSIONAL_TELEPORTATION_FRAME, new Item.Settings()));
@@ -279,6 +282,7 @@ public final class PhaseTeleportersMod implements ModInitializer {
         InterdimensionalTeleportNetworking.registerServer();
         QuantumTeleportNetworking.registerServer();
         PortableTeleportNetworking.registerServer();
+        ColorConfiguratorNetworking.registerServer();
         PortalReentryGuard.register();
         InterdimensionalReentryGuard.register();
         EntityPortalReentryGuard.register();
@@ -310,6 +314,8 @@ public final class PhaseTeleportersMod implements ModInitializer {
                             entries.add(fullyCharged(PORTABLE_TELEPORT));
                             entries.add(BATTERY);
                             entries.add(fullyCharged(BATTERY));
+                            entries.add(COLOR_CONFIGURATOR);
+                            entries.add(fullyCharged(COLOR_CONFIGURATOR));
                             entries.add(MACHINE_CASING_ITEM);
                             entries.add(INFUSION_STATION_ITEM);
                             entries.add(CRUSHER_ITEM);

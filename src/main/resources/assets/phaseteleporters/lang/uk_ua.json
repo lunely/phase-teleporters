@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Немає енергії",
   "message.phaseteleporters.portable.no_connection": "Немає з’єднання",
   "tooltip.phaseteleporters.item_details_hint": "Утримуйте %s, щоб побачити опис",
-  "tooltip.phaseteleporters.description.battery": "Зберігає енергію й може заряджати інші сумісні предмети в інвентарі гравця, коли ввімкнено режим заряджання інвентарю.",
+  "tooltip.phaseteleporters.description.battery": "Зберігає енергію й може заряджати інші сумісні предмети в інвентарі гравця, коли ввімкнено режим заряджання інвентарю.\nПКМ із батареєю в руці для перемикання режиму.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Присідання + колесо миші з пристроєм в основній руці змінює режим.\n- Звичайний режим — відкриває список частот.\n- Швидкий телепорт — переносить до вибраної частоти без відкриття списку.\n- Меню екстреного телепорту — відкриває меню екстреного телепорту.\nНатисніть ПКМ по екстреному телепорту для прив’язування.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Підтримує чанк телепорту завантаженим, доки поліпшення встановлено.",
   "tooltip.phaseteleporters.description.energy_cube": "Зберігає великі обсяги енергії.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Відв’язати",
   "message.phaseteleporters.emergency.no_platform": "Екстрений телепорт не прив’язано",
   "message.phaseteleporters.emergency.unavailable": "Платформа недоступна: перевірте енергію, доступ і вільне місце над нею",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Рятує прив’язаного гравця за небезпечно низького здоров’я лише у вимірі платформи. В інших вимірах прив’язка зберігається, а порятунок відновлюється після повернення. Використайте переносний телепорт на платформі для прив’язування й тримайте його в інвентарі."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Рятує прив’язаного гравця за небезпечно низького здоров’я лише у вимірі платформи. В інших вимірах прив’язка зберігається, а порятунок відновлюється після повернення. Використайте переносний телепорт на платформі для прив’язування й тримайте його в інвентарі.",
+  "item.phaseteleporters.color_configurator": "Конфігуратор кольорів",
+  "tooltip.phaseteleporters.description.color_configurator": "ПКМ по каркасу або телепорту, щоб змінити колір (щоб змінити колір телепорту, затисніть LSHIFT).\nLSHIFT + колесо миші з інструментом в основній руці — зміна режиму.",
+  "message.phaseteleporters.color_configurator.no_energy": "Для зміни кольору потрібно %s.",
+  "message.phaseteleporters.color_configurator.changed": "Колір каркаса: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Колір телепорту: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Колір лампочок монітора: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Колір тексту: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Режим: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Колір каркаса",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Колір лампочок монітора",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Колір тексту",
+  "tooltip.phaseteleporters.color_configurator.off": "Вимк.",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/такт"
 }

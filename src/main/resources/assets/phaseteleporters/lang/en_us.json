@@ -1,9 +1,13 @@
 {
+  "item.phaseteleporters.color_configurator": "Color Configurator",
+  "tooltip.phaseteleporters.description.color_configurator": "Right-click a frame or teleporter (hold LSHIFT to change the teleporter color) to change its color\nLSHIFT + mouse wheel in the main hand to switch modes.",
+  "message.phaseteleporters.color_configurator.no_energy": "Changing color requires %s.",
+  "message.phaseteleporters.color_configurator.changed": "Frame color: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Teleporter color: %s",
   "block.phaseteleporters.quantum_teleporter": "Quantum Teleporter",
   "tooltip.phaseteleporters.description.quantum_teleporter": "Transfers energy, items and fluids between teleporters on the same frequency.",
   "gui.phaseteleporters.quantum_title": "Quantum Teleporter",
   "config.jade.plugin_phaseteleporters.machine_resources": "Machine energy and resources (creative)",
-
   "gui.phaseteleporters.inspection.infinite": "Energy: ∞",
   "gui.phaseteleporters.inspection.empty": "Empty",
   "gui.phaseteleporters.inspection.infusion": "Resource: %s — %s / %s",
@@ -19,7 +23,7 @@
   "itemGroup.phaseteleporters.main": "Phase Teleporters",
   "item.phaseteleporters.obsidian_dust": "Obsidian Dust",
   "item.phaseteleporters.purified_obsidian_dust": "Purified Obsidian Dust",
-  "item.phaseteleporters.enriched_purified_obsidian_dust": "Enriched Purified Obsidian Dust",
+  "item.phaseteleporters.enriched_purified_obsidian_dust": "Enriched Obsidian",
   "item.phaseteleporters.refined_obsidian_ingot": "Refined Obsidian Ingot",
   "item.phaseteleporters.teleportation_core": "Phase Core",
   "block.phaseteleporters.teleportation_frame": "Teleportation Frame",
@@ -154,7 +158,7 @@
   "message.phaseteleporters.portable.no_energy": "No energy",
   "message.phaseteleporters.portable.no_connection": "No connection",
   "tooltip.phaseteleporters.item_details_hint": "Hold %s to see the description",
-  "tooltip.phaseteleporters.description.battery": "Stores energy and can charge other compatible items in the player's inventory when Inventory Charging is enabled.",
+  "tooltip.phaseteleporters.description.battery": "Stores energy and can charge other compatible items in the player's inventory when Inventory Charging is enabled.\nRight-click while holding the battery to switch modes.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Sneak + scroll in your main hand switches modes.\n- GUI Mode — opens the frequency list.\n- Quick Teleport — teleports to the selected frequency without opening the frequency list.\n- Emergency Teleporter Menu — opens the emergency teleporter menu.\nRight-click an emergency teleporter to link.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Keeps the teleporter's chunk loaded while installed.",
   "tooltip.phaseteleporters.description.energy_cube": "Stores large amounts of energy.",
@@ -185,5 +189,13 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Unlink",
   "message.phaseteleporters.emergency.no_platform": "No emergency teleporter is linked",
   "message.phaseteleporters.emergency.unavailable": "Pad unavailable: check its power, access and space above it",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Rescues the linked player at a dangerous health level only in the pad\u0027s dimension. The link is preserved in other dimensions, and rescue resumes upon returning. Use a portable teleporter on the pad to link it, then keep it in your inventory."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Rescues the linked player at a dangerous health level only in the pad's dimension. The link is preserved in other dimensions, and rescue resumes upon returning. Use a portable teleporter on the pad to link it, then keep it in your inventory.",
+  "tooltip.phaseteleporters.color_configurator.mode": "Mode: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Frame color",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Monitor lights color",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Text color",
+  "tooltip.phaseteleporters.color_configurator.off": "Off",
+  "message.phaseteleporters.color_configurator.lights_changed": "Monitor lights: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Text color: %s",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/t"
 }

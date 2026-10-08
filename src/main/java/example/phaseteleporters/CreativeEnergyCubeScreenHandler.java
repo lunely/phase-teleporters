@@ -33,7 +33,7 @@ public final class CreativeEnergyCubeScreenHandler extends ScreenHandler impleme
         chargingInventory.onOpen(playerInventory.player);
         addSlot(new Slot(chargingInventory, 1, 52, 32) {
             @Override public boolean canInsert(ItemStack stack) {
-                return stack.getItem() instanceof PEChargeableItem && chargingInventory.isValid(1, stack);
+                return stack.getItem() instanceof BatteryItem && chargingInventory.isValid(1, stack);
             }
             @Override public int getMaxItemCount() { return 1; }
         });

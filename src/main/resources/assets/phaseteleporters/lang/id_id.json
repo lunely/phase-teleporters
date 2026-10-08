@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Tanpa energi",
   "message.phaseteleporters.portable.no_connection": "Tanpa koneksi",
   "tooltip.phaseteleporters.item_details_hint": "Tahan %s untuk melihat deskripsi",
-  "tooltip.phaseteleporters.description.battery": "Menyimpan energi dan dapat mengisi daya item lain yang kompatibel di inventaris pemain saat Pengisian Inventaris diaktifkan.",
+  "tooltip.phaseteleporters.description.battery": "Menyimpan energi dan dapat mengisi daya item lain yang kompatibel di inventaris pemain saat Pengisian Inventaris diaktifkan.\nKlik kanan sambil memegang baterai untuk mengganti mode.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Mengendap + gulir saat di tangan utama untuk mengganti mode.\n- Menu — membuka daftar frekuensi.\n- Teleportasi Cepat — berteleportasi ke frekuensi pilihan tanpa membuka daftar.\n- Menu Teleporter Darurat — membuka menu teleporter darurat.\nKlik kanan teleporter darurat untuk menautkan.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Menjaga chunk teleporter tetap dimuat selama terpasang.",
   "tooltip.phaseteleporters.description.energy_cube": "Menyimpan energi dalam jumlah besar.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Putuskan tautan",
   "message.phaseteleporters.emergency.no_platform": "Teleporter darurat belum tertaut",
   "message.phaseteleporters.emergency.unavailable": "Platform tidak tersedia: periksa energi, akses, dan ruang di atasnya",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Menyelamatkan pemain tertaut saat kesehatan berbahaya hanya di dimensi platform. Tautan tetap tersimpan di dimensi lain, dan penyelamatan berlanjut saat kembali. Gunakan teleporter portabel pada platform untuk menautkan, lalu simpan di inventarismu."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Menyelamatkan pemain tertaut saat kesehatan berbahaya hanya di dimensi platform. Tautan tetap tersimpan di dimensi lain, dan penyelamatan berlanjut saat kembali. Gunakan teleporter portabel pada platform untuk menautkan, lalu simpan di inventarismu.",
+  "item.phaseteleporters.color_configurator": "Pengatur Warna",
+  "tooltip.phaseteleporters.description.color_configurator": "Klik kanan bingkai atau teleporter untuk mengubah warna (tahan LSHIFT untuk mengubah warna teleporter).\nLSHIFT + roda tetikus dengan alat di tangan utama — ganti mode.",
+  "message.phaseteleporters.color_configurator.no_energy": "Mengubah warna membutuhkan %s.",
+  "message.phaseteleporters.color_configurator.changed": "Warna bingkai: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Warna teleporter: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Warna lampu monitor: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Warna teks: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Mode: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Warna bingkai",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Warna lampu monitor",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Warna teks",
+  "tooltip.phaseteleporters.color_configurator.off": "Mati",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/tick"
 }

@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Няма енергия",
   "message.phaseteleporters.portable.no_connection": "Няма връзка",
   "tooltip.phaseteleporters.item_details_hint": "Задръж %s за описанието",
-  "tooltip.phaseteleporters.description.battery": "Съхранява енергия и може да зарежда други съвместими предмети в инвентара на играча, когато зареждането в инвентара е включено.",
+  "tooltip.phaseteleporters.description.battery": "Съхранява енергия и може да зарежда други съвместими предмети в инвентара на играча, когато зареждането в инвентара е включено.\nЩракни с десния бутон с батерията в ръка, за да смениш режима.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Приклякане + превъртане с предмета в основната ръка сменя режима.\n- Меню — отваря списъка с честоти.\n- Бързо телепортиране — телепортира към избраната честота без отваряне на списъка.\n- Меню на аварийния телепорт — отваря менюто на аварийния телепорт.\nДесен бутон върху авариен телепорт за свързване.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Поддържа чънка на телепорта зареден, докато е монтирано.",
   "tooltip.phaseteleporters.description.energy_cube": "Съхранява големи количества енергия.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Разкачи",
   "message.phaseteleporters.emergency.no_platform": "Няма свързан авариен телепорт",
   "message.phaseteleporters.emergency.unavailable": "Платформата е недостъпна: провери енергията, достъпа и мястото отгоре",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Спасява свързания играч при опасно ниско здраве само в измерението на платформата. Връзката се запазва в други измерения и спасяването се възобновява при връщане. Използвай преносим телепорт върху платформата за свързване, после го дръж в инвентара си."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Спасява свързания играч при опасно ниско здраве само в измерението на платформата. Връзката се запазва в други измерения и спасяването се възобновява при връщане. Използвай преносим телепорт върху платформата за свързване, после го дръж в инвентара си.",
+  "item.phaseteleporters.color_configurator": "Конфигуратор на цветове",
+  "tooltip.phaseteleporters.description.color_configurator": "Щракни с десния бутон върху рамка или телепортатор, за да промениш цвета (задръж LSHIFT, за да промениш цвета на телепортатора).\nLSHIFT + колелце на мишката с инструмента в основната ръка — смяна на режима.",
+  "message.phaseteleporters.color_configurator.no_energy": "Промяната на цвета изисква %s.",
+  "message.phaseteleporters.color_configurator.changed": "Цвят на рамката: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Цвят на телепортатора: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Цвят на светлините на монитора: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Цвят на текста: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Режим: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Цвят на рамката",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Цвят на светлините на монитора",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Цвят на текста",
+  "tooltip.phaseteleporters.color_configurator.off": "Изкл.",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/тик"
 }

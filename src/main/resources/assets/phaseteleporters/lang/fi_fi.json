@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Ei energiaa",
   "message.phaseteleporters.portable.no_connection": "Ei yhteyttä",
   "tooltip.phaseteleporters.item_details_hint": "Pidä %s painettuna nähdäksesi kuvauksen",
-  "tooltip.phaseteleporters.description.battery": "Varastoi energiaa ja lataa muita yhteensopivia esineitä pelaajan tavaraluettelossa, kun tavaraluettelon lataus on käytössä.",
+  "tooltip.phaseteleporters.description.battery": "Varastoi energiaa ja lataa muita yhteensopivia esineitä pelaajan tavaraluettelossa, kun tavaraluettelon lataus on käytössä.\nNapsauta hiiren oikealla painikkeella akku kädessäsi vaihtaaksesi tilaa.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Hiivi ja vieritä esine pääkädessä vaihtaaksesi tilaa.\n- Valikko — avaa taajuusluettelon.\n- Pikateleporttaus — teleporttaa valitulle taajuudelle avaamatta luetteloa.\n- Hätäteleportterin valikko — avaa hätäteleportterin valikon.\nNapsauta hätäteleportteria hiiren oikealla painikkeella liittääksesi sen.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Pitää teleportterin alueen ladattuna, kun päivitys on asennettu.",
   "tooltip.phaseteleporters.description.energy_cube": "Varastoi suuria määriä energiaa.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Poista liitos",
   "message.phaseteleporters.emergency.no_platform": "Hätäteleportteria ei ole liitetty",
   "message.phaseteleporters.emergency.unavailable": "Alusta ei käytettävissä: tarkista energia, käyttöoikeus ja yläpuolen tila",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Pelastaa liitetyn pelaajan vaarallisen alhaisella terveydellä vain alustan ulottuvuudessa. Liitos säilyy muissa ulottuvuuksissa, ja pelastus jatkuu palatessa. Liitä kannettava teleportteri käyttämällä sitä alustaan ja pidä se tavaraluettelossasi."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Pelastaa liitetyn pelaajan vaarallisen alhaisella terveydellä vain alustan ulottuvuudessa. Liitos säilyy muissa ulottuvuuksissa, ja pelastus jatkuu palatessa. Liitä kannettava teleportteri käyttämällä sitä alustaan ja pidä se tavaraluettelossasi.",
+  "item.phaseteleporters.color_configurator": "Värisäädin",
+  "tooltip.phaseteleporters.description.color_configurator": "Napsauta kehystä tai teleportteria hiiren oikealla painikkeella vaihtaaksesi värin (pidä LSHIFT painettuna vaihtaaksesi teleportterin värin).\nLSHIFT + hiiren rulla työkalun ollessa pääkädessä — vaihda tilaa.",
+  "message.phaseteleporters.color_configurator.no_energy": "Värin vaihtaminen vaatii %s.",
+  "message.phaseteleporters.color_configurator.changed": "Kehyksen väri: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Teleportterin väri: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Näytön valojen väri: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Tekstin väri: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Tila: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Kehyksen väri",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Näytön valojen väri",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Tekstin väri",
+  "tooltip.phaseteleporters.color_configurator.off": "Pois",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/pelitikki"
 }

@@ -28,6 +28,10 @@ public final class BatteryItem extends StoredPEItem {
         return data != null && data.copyNbt().getBoolean("InventoryCharging");
     }
 
+    @Override public boolean hasGlint(ItemStack stack) {
+        return isInventoryCharging(stack);
+    }
+
     private void setInventoryCharging(ItemStack stack, boolean enabled) {
         NbtComponent current = stack.get(DataComponentTypes.CUSTOM_DATA);
         NbtCompound data = current == null ? new NbtCompound() : current.copyNbt();

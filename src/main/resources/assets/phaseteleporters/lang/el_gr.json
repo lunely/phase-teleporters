@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Χωρίς ενέργεια",
   "message.phaseteleporters.portable.no_connection": "Χωρίς σύνδεση",
   "tooltip.phaseteleporters.item_details_hint": "Κράτα πατημένο το %s για την περιγραφή",
-  "tooltip.phaseteleporters.description.battery": "Αποθηκεύει ενέργεια και φορτίζει άλλα συμβατά αντικείμενα στο απόθεμα του παίκτη όταν είναι ενεργή η φόρτιση αποθέματος.",
+  "tooltip.phaseteleporters.description.battery": "Αποθηκεύει ενέργεια και φορτίζει άλλα συμβατά αντικείμενα στο απόθεμα του παίκτη όταν είναι ενεργή η φόρτιση αποθέματος.\nΚάνε δεξί κλικ κρατώντας την μπαταρία για να αλλάξεις λειτουργία.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Σκύψιμο + κύλιση με το αντικείμενο στο κύριο χέρι αλλάζει λειτουργία.\n- Μενού — ανοίγει τη λίστα συχνοτήτων.\n- Γρήγορη τηλεμεταφορά — τηλεμεταφέρει στην επιλεγμένη συχνότητα χωρίς άνοιγμα της λίστας.\n- Μενού τηλεμεταφορέα έκτακτης ανάγκης — ανοίγει το μενού του.\nΔεξί κλικ σε τηλεμεταφορέα έκτακτης ανάγκης για σύνδεση.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Διατηρεί φορτωμένο το τμήμα του τηλεμεταφορέα όσο είναι εγκατεστημένη.",
   "tooltip.phaseteleporters.description.energy_cube": "Αποθηκεύει μεγάλες ποσότητες ενέργειας.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Αποσύνδεση",
   "message.phaseteleporters.emergency.no_platform": "Δεν έχει συνδεθεί τηλεμεταφορέας έκτακτης ανάγκης",
   "message.phaseteleporters.emergency.unavailable": "Μη διαθέσιμη πλατφόρμα: έλεγξε ενέργεια, πρόσβαση και χώρο από πάνω",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Διασώζει τον συνδεδεμένο παίκτη όταν η υγεία είναι επικίνδυνα χαμηλή, μόνο στη διάσταση της πλατφόρμας. Η σύνδεση διατηρείται σε άλλες διαστάσεις και η διάσωση συνεχίζεται με την επιστροφή. Χρησιμοποίησε φορητό τηλεμεταφορέα στην πλατφόρμα για σύνδεση και κράτησέ τον στο απόθεμά σου."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Διασώζει τον συνδεδεμένο παίκτη όταν η υγεία είναι επικίνδυνα χαμηλή, μόνο στη διάσταση της πλατφόρμας. Η σύνδεση διατηρείται σε άλλες διαστάσεις και η διάσωση συνεχίζεται με την επιστροφή. Χρησιμοποίησε φορητό τηλεμεταφορέα στην πλατφόρμα για σύνδεση και κράτησέ τον στο απόθεμά σου.",
+  "item.phaseteleporters.color_configurator": "Ρυθμιστής χρωμάτων",
+  "tooltip.phaseteleporters.description.color_configurator": "Κάνε δεξί κλικ σε ένα πλαίσιο ή τηλεμεταφορέα για να αλλάξεις το χρώμα (κράτα πατημένο το LSHIFT για να αλλάξεις το χρώμα του τηλεμεταφορέα).\nLSHIFT + ροδέλα ποντικιού με το εργαλείο στο κύριο χέρι — αλλαγή λειτουργίας.",
+  "message.phaseteleporters.color_configurator.no_energy": "Η αλλαγή χρώματος απαιτεί %s.",
+  "message.phaseteleporters.color_configurator.changed": "Χρώμα πλαισίου: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Χρώμα τηλεμεταφορέα: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Χρώμα φώτων οθόνης: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Χρώμα κειμένου: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Λειτουργία: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Χρώμα πλαισίου",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Χρώμα φώτων οθόνης",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Χρώμα κειμένου",
+  "tooltip.phaseteleporters.color_configurator.off": "Ανενεργό",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/τικ"
 }

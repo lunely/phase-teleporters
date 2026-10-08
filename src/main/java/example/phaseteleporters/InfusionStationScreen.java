@@ -56,7 +56,9 @@ public final class InfusionStationScreen extends HandledScreen<InfusionStationSc
         context.drawTexture(GUI_TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
         drawEnergy(context);
         drawInfusion(context);
-        context.drawTexture(ENERGY_SLOT_TEXTURE, x + 8, y + 62, 0, 0, 16, 16, 16, 16);
+        if (!handler.getSlot(3).hasStack()) {
+            context.drawTexture(ENERGY_SLOT_TEXTURE, x + 8, y + 62, 0, 0, 16, 16, 16, 16);
+        }
         drawClearButton(context, mouseX, mouseY);
 
         int progress = handler.getProcessTime() == 0 ? 0

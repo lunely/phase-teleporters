@@ -1,14 +1,225 @@
 {
   "parent": "minecraft:block/block",
-  "textures": { "all": "phaseteleporters:block/basic_energy_cable", "particle": "phaseteleporters:block/basic_energy_cable" },
+  "textures": {
+    "insulation": "phaseteleporters:block/basic_energy_cable_insulation",
+    "iron": "minecraft:block/iron_block",
+    "particle": "phaseteleporters:block/basic_energy_cable_insulation"
+  },
   "elements": [
     {
-      "from": [5, 5, 5], "to": [11, 11, 11],
+      "name": "insulated_joint",
+      "from": [
+        5.75,
+        5.75,
+        5.75
+      ],
+      "to": [
+        10.25,
+        10.25,
+        10.25
+      ],
       "faces": {
-        "north": { "texture": "#all" }, "south": { "texture": "#all" },
-        "east": { "texture": "#all" }, "west": { "texture": "#all" },
-        "up": { "texture": "#all" }, "down": { "texture": "#all" }
+        "north": {
+          "texture": "#insulation",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#insulation",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "east": {
+          "texture": "#insulation",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "west": {
+          "texture": "#insulation",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#insulation",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "down": {
+          "texture": "#insulation",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      },
+      "shade": true
+    },
+    {
+      "name": "iron_north",
+      "from": [
+        6.875,
+        6.875,
+        5.749
+      ],
+      "to": [
+        9.125,
+        9.125,
+        5.749
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            11,
+            6,
+            14,
+            9
+          ],
+          "texture": "#iron"
+        }
+      }
+    },
+    {
+      "name": "iron_south",
+      "from": [
+        6.875,
+        6.875,
+        10.251
+      ],
+      "to": [
+        9.125,
+        9.125,
+        10.251
+      ],
+      "faces": {
+        "south": {
+          "uv": [
+            11,
+            6,
+            14,
+            9
+          ],
+          "texture": "#iron"
+        }
+      }
+    },
+    {
+      "name": "iron_west",
+      "from": [
+        5.749,
+        6.875,
+        6.875
+      ],
+      "to": [
+        5.749,
+        9.125,
+        9.125
+      ],
+      "faces": {
+        "west": {
+          "uv": [
+            11,
+            6,
+            14,
+            9
+          ],
+          "texture": "#iron"
+        }
+      }
+    },
+    {
+      "name": "iron_east",
+      "from": [
+        10.251,
+        6.875,
+        6.875
+      ],
+      "to": [
+        10.251,
+        9.125,
+        9.125
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            11,
+            6,
+            14,
+            9
+          ],
+          "texture": "#iron"
+        }
+      }
+    },
+    {
+      "name": "iron_up",
+      "from": [
+        6.875,
+        10.251,
+        6.875
+      ],
+      "to": [
+        9.125,
+        10.251,
+        9.125
+      ],
+      "faces": {
+        "up": {
+          "uv": [
+            11,
+            6,
+            14,
+            9
+          ],
+          "texture": "#iron"
+        }
+      }
+    },
+    {
+      "name": "iron_down",
+      "from": [
+        6.875,
+        5.749,
+        6.875
+      ],
+      "to": [
+        9.125,
+        5.749,
+        9.125
+      ],
+      "faces": {
+        "down": {
+          "uv": [
+            11,
+            6,
+            14,
+            9
+          ],
+          "texture": "#iron"
+        }
       }
     }
-  ]
+  ],
+  "ambientocclusion": true
 }

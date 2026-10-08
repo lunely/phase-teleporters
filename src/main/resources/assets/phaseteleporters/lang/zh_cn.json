@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "能量不足",
   "message.phaseteleporters.portable.no_connection": "无连接",
   "tooltip.phaseteleporters.item_details_hint": "按住 %s 查看说明",
-  "tooltip.phaseteleporters.description.battery": "储存能量。启用背包充电时，可为玩家背包内的其他兼容物品充电。",
+  "tooltip.phaseteleporters.description.battery": "储存能量。启用背包充电时，可为玩家背包内的其他兼容物品充电。\n手持电池时右键点击可切换模式。",
   "tooltip.phaseteleporters.description.portable_teleporter": "将设备拿在主手中，潜行并滚动鼠标滚轮以切换模式。\n- 普通模式 — 打开频率列表。\n- 快速传送 — 直接传送到选定频率，不打开列表。\n- 紧急传送器菜单 — 打开紧急传送器菜单。\n右键点击紧急传送器以绑定。",
   "tooltip.phaseteleporters.description.anchor_upgrade": "安装后使传送器所在区块保持加载。",
   "tooltip.phaseteleporters.description.energy_cube": "储存大量能量。",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "解绑",
   "message.phaseteleporters.emergency.no_platform": "尚未绑定紧急传送器",
   "message.phaseteleporters.emergency.unavailable": "平台不可用：请检查能量、访问权限及其上方空间",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "当绑定玩家的生命值降至危险水平时进行救援，仅在平台所在维度生效。在其他维度中仍保留绑定，返回后恢复救援。用便携传送器点击平台以绑定，并将其保留在背包中。"
+  "tooltip.phaseteleporters.description.emergency_teleporter": "当绑定玩家的生命值降至危险水平时进行救援，仅在平台所在维度生效。在其他维度中仍保留绑定，返回后恢复救援。用便携传送器点击平台以绑定，并将其保留在背包中。",
+  "item.phaseteleporters.color_configurator": "颜色配置器",
+  "tooltip.phaseteleporters.description.color_configurator": "右键点击框架或传送器以更改颜色（更改传送器颜色时需按住LSHIFT）。\n主手持有工具时，按住LSHIFT并滚动鼠标滚轮可切换模式。",
+  "message.phaseteleporters.color_configurator.no_energy": "更改颜色需要%s。",
+  "message.phaseteleporters.color_configurator.changed": "框架颜色：%s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "传送器颜色：%s",
+  "message.phaseteleporters.color_configurator.lights_changed": "显示器灯光颜色：%s",
+  "message.phaseteleporters.color_configurator.text_changed": "文字颜色：%s",
+  "tooltip.phaseteleporters.color_configurator.mode": "模式：%s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "框架颜色",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "显示器灯光颜色",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "文字颜色",
+  "tooltip.phaseteleporters.color_configurator.off": "关闭",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/刻"
 }

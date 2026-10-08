@@ -142,7 +142,7 @@ public final class EmergencyTeleportScreen<T extends EmergencyTeleportScreenHand
             if (handler.getSlot(0).getStack().isEmpty()) {
                 Identifier icon = texture("slot/chunkloader_slot.png");
                 client.getTextureManager().getTexture(icon).setFilter(false, false);
-                context.drawTexture(icon, x + 7, y + 130, 16, 16, 0, 0, 32, 32, 32, 32);
+                context.drawTexture(icon, x + 7, y + 130, 16, 16, 0, 0, 16, 16, 16, 16);
             }
             if (handler.getSlot(1).getStack().isEmpty())
                 context.drawTexture(texture("slot/energy_slot.png"), x + 151, y + 77, 0, 0, 16, 16, 16, 16);

@@ -10,6 +10,15 @@ public final class PhaseTeleportersClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         PortalPlaneModel.register();
+        TeleportationFrameModel.register();
+        BlockRenderLayerMap.INSTANCE.putBlock(PhaseTeleportersMod.TELEPORTATION_FRAME_MONITOR, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(PhaseTeleportersMod.TELEPORT, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(PhaseTeleportersMod.INTERDIMENSIONAL_TELEPORT,
+                RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(PhaseTeleportersMod.EMERGENCY_TELEPORT, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(PhaseTeleportersMod.TELEPORTATION_FRAME, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(PhaseTeleportersMod.INTERDIMENSIONAL_TELEPORTATION_FRAME,
+                RenderLayer.getCutout());
         HandledScreens.register(PhaseTeleportersMod.EMERGENCY_TELEPORT_SCREEN_HANDLER,
                 EmergencyTeleportScreen<EmergencyTeleportScreenHandler>::new);
         HandledScreens.register(PhaseTeleportersMod.PORTABLE_EMERGENCY_SCREEN_HANDLER,
@@ -20,6 +29,7 @@ public final class PhaseTeleportersClient implements ClientModInitializer {
         TeleportationFrameMonitorClientNetworking.register();
         EnergyCubeRenderer.register();
         QuantumTeleportRenderer.register();
+        BlockRenderLayerMap.INSTANCE.putBlock(PhaseTeleportersMod.QUANTUM_TELEPORT, RenderLayer.getCutout());
         HandledScreens.register(PhaseTeleportersMod.QUANTUM_TELEPORT_SCREEN_HANDLER, QuantumTeleportScreen::new);
         QuantumTeleportClientNetworking.register();
         BlockRenderLayerMap.INSTANCE.putBlock(PhaseTeleportersMod.INFUSION_STATION, RenderLayer.getCutout());

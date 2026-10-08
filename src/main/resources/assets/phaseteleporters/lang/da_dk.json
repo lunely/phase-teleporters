@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Ingen energi",
   "message.phaseteleporters.portable.no_connection": "Ingen forbindelse",
   "tooltip.phaseteleporters.item_details_hint": "Hold %s nede for at se beskrivelsen",
-  "tooltip.phaseteleporters.description.battery": "Lagrer energi og kan oplade andre kompatible genstande i spillerens inventar, når opladning i inventar er aktiveret.",
+  "tooltip.phaseteleporters.description.battery": "Lagrer energi og kan oplade andre kompatible genstande i spillerens inventar, når opladning i inventar er aktiveret.\nHøjreklik med batteriet i hånden for at skifte tilstand.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Snig + rul med genstanden i hovedhånden for at skifte tilstand.\n- Menu — åbner frekvenslisten.\n- Hurtig teleportering — teleporterer til den valgte frekvens uden at åbne listen.\n- Nødteleporterens menu — åbner nødteleporterens menu.\nHøjreklik på en nødteleporter for at forbinde.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Holder teleporterens chunk indlæst, mens opgraderingen er installeret.",
   "tooltip.phaseteleporters.description.energy_cube": "Lagrer store mængder energi.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Afbryd forbindelse",
   "message.phaseteleporters.emergency.no_platform": "Ingen nødteleporter er forbundet",
   "message.phaseteleporters.emergency.unavailable": "Platform utilgængelig: kontroller energi, adgang og plads ovenover",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Redder den forbundne spiller ved farligt lavt helbred, kun i platformens dimension. Forbindelsen bevares i andre dimensioner, og redning genoptages ved tilbagekomst. Brug en bærbar teleporter på platformen for at forbinde, og behold den i dit inventar."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Redder den forbundne spiller ved farligt lavt helbred, kun i platformens dimension. Forbindelsen bevares i andre dimensioner, og redning genoptages ved tilbagekomst. Brug en bærbar teleporter på platformen for at forbinde, og behold den i dit inventar.",
+  "item.phaseteleporters.color_configurator": "Farvekonfigurator",
+  "tooltip.phaseteleporters.description.color_configurator": "Højreklik på en ramme eller teleporter for at ændre farven (hold LSHIFT nede for at ændre teleporterens farve).\nLSHIFT + musehjul med værktøjet i hovedhånden — skift tilstand.",
+  "message.phaseteleporters.color_configurator.no_energy": "Det kræver %s at ændre farven.",
+  "message.phaseteleporters.color_configurator.changed": "Rammefarve: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Teleporterfarve: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Farve på skærmens lys: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Tekstfarve: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Tilstand: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Rammefarve",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Farve på skærmens lys",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Tekstfarve",
+  "tooltip.phaseteleporters.color_configurator.off": "Fra",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/tick"
 }

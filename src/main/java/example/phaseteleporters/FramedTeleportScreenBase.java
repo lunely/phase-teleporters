@@ -241,7 +241,7 @@ abstract class FramedTeleportScreenBase<T extends ScreenHandler & EnergySideScre
             MinecraftClient.getInstance().getTextureManager().getTexture(CHUNKLOADER_SLOT_ICON)
                     .setFilter(false, false);
             context.drawTexture(CHUNKLOADER_SLOT_ICON, x + CHUNKLOADER_X, y + CHUNKLOADER_Y,
-                    16, 16, 0, 0, 32, 32, 32, 32);
+                    16, 16, 0, 0, 16, 16, 16, 16);
         }
         if (handler.getSlot(1).getStack().isEmpty())
             context.drawTexture(ENERGY_SLOT_ICON, x + ENERGY_ITEM_X, y + ENERGY_ITEM_Y,

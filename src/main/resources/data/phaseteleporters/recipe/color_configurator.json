@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["  R", " A ", "I  "],
+  "key": {
+    "R": { "item": "minecraft:redstone" },
+    "A": { "item": "phaseteleporters:basic_alloy" },
+    "I": { "item": "minecraft:iron_ingot" }
+  },
+  "result": { "id": "phaseteleporters:color_configurator", "count": 1 }
+}

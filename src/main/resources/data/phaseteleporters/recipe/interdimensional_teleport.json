@@ -1,9 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": ["PCP", "OTO", "PCP"],
+  "pattern": [" P ", "CTC", " P "],
   "key": {
     "P": { "item": "phaseteleporters:phase_alloy" },
-    "O": { "item": "phaseteleporters:refined_obsidian_ingot" },
     "C": { "item": "phaseteleporters:basic_control_circuit" },
     "T": { "item": "phaseteleporters:local_teleporter" }
   },

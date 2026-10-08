@@ -1,0 +1,160 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "textures": {
+    "led": "phaseteleporters:block/models/creative_energy_cube_port_led",
+    "particle": "phaseteleporters:block/energy_cube_frame"
+  },
+  "elements": [
+    {
+      "name": "port_led_north",
+      "from": [
+        5.75,
+        5.75,
+        -0.016
+      ],
+      "to": [
+        10.25,
+        10.25,
+        -0.016
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "uv": [
+            3.5,
+            3.5,
+            12.5,
+            12.5
+          ],
+          "texture": "#led"
+        }
+      }
+    },
+    {
+      "name": "port_led_south",
+      "from": [
+        5.75,
+        5.75,
+        16.016
+      ],
+      "to": [
+        10.25,
+        10.25,
+        16.016
+      ],
+      "shade": false,
+      "faces": {
+        "south": {
+          "uv": [
+            3.5,
+            3.5,
+            12.5,
+            12.5
+          ],
+          "texture": "#led"
+        }
+      }
+    },
+    {
+      "name": "port_led_east",
+      "from": [
+        16.016,
+        5.75,
+        5.75
+      ],
+      "to": [
+        16.016,
+        10.25,
+        10.25
+      ],
+      "shade": false,
+      "faces": {
+        "east": {
+          "uv": [
+            3.5,
+            3.5,
+            12.5,
+            12.5
+          ],
+          "texture": "#led"
+        }
+      }
+    },
+    {
+      "name": "port_led_west",
+      "from": [
+        -0.016,
+        5.75,
+        5.75
+      ],
+      "to": [
+        -0.016,
+        10.25,
+        10.25
+      ],
+      "shade": false,
+      "faces": {
+        "west": {
+          "uv": [
+            3.5,
+            3.5,
+            12.5,
+            12.5
+          ],
+          "texture": "#led"
+        }
+      }
+    },
+    {
+      "name": "port_led_up",
+      "from": [
+        5.75,
+        16.016,
+        5.75
+      ],
+      "to": [
+        10.25,
+        16.016,
+        10.25
+      ],
+      "shade": false,
+      "faces": {
+        "up": {
+          "uv": [
+            3.5,
+            3.5,
+            12.5,
+            12.5
+          ],
+          "texture": "#led"
+        }
+      }
+    },
+    {
+      "name": "port_led_down",
+      "from": [
+        5.75,
+        -0.016,
+        5.75
+      ],
+      "to": [
+        10.25,
+        -0.016,
+        10.25
+      ],
+      "shade": false,
+      "faces": {
+        "down": {
+          "uv": [
+            3.5,
+            3.5,
+            12.5,
+            12.5
+          ],
+          "texture": "#led"
+        }
+      }
+    }
+  ]
+}

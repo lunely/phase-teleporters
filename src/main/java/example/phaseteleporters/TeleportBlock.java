@@ -1,22 +1,54 @@
 package example.phaseteleporters;
 
 import com.mojang.serialization.MapCodec;
+import java.util.List;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.IntProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 
 public final class TeleportBlock extends StoredEnergyBlock {
     public static final MapCodec<TeleportBlock> CODEC = createCodec(TeleportBlock::new);
+    public static final IntProperty COLOR = TeleportationFrameBlock.COLOR;
 
-    public TeleportBlock(Settings settings) { super(settings); }
+    public TeleportBlock(Settings settings) {
+        super(settings);
+        setDefaultState(getStateManager().getDefaultState().with(COLOR, FrameColors.DEFAULT));
+    }
+
+    @Override protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder);
+        builder.add(COLOR);
+    }
+
+    @Override protected List<ItemStack> getDroppedStacks(BlockState state,
+            LootContextParameterSet.Builder builder) {
+        var drops = super.getDroppedStacks(state, builder);
+        for (var drop : drops) {
+            if (drop.isOf(asItem())) FrameColors.setItemColor(drop, state.get(COLOR));
+        }
+        return drops;
+    }
+
+    @Override public ItemStack getPickStack(WorldView world,
+            BlockPos pos, BlockState state) {
+        var stack = super.getPickStack(world, pos, state);
+        FrameColors.setItemColor(stack, state.get(COLOR));
+        return stack;
+    }
     @Override protected MapCodec<TeleportBlock> getCodec() { return CODEC; }
     @Override public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new TeleportBlockEntity(pos, state);

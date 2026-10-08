@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "ไม่มีพลังงาน",
   "message.phaseteleporters.portable.no_connection": "ไม่มีการเชื่อมต่อ",
   "tooltip.phaseteleporters.item_details_hint": "กด %s ค้างไว้เพื่อดูคำอธิบาย",
-  "tooltip.phaseteleporters.description.battery": "เก็บพลังงานและชาร์จไอเทมอื่นที่เข้ากันได้ในช่องเก็บของของผู้เล่นเมื่อเปิดโหมดชาร์จในช่องเก็บของ",
+  "tooltip.phaseteleporters.description.battery": "เก็บพลังงานและชาร์จไอเทมอื่นที่เข้ากันได้ในช่องเก็บของของผู้เล่นเมื่อเปิดโหมดชาร์จในช่องเก็บของ\nคลิกขวาขณะถือแบตเตอรี่เพื่อเปลี่ยนโหมด",
   "tooltip.phaseteleporters.description.portable_teleporter": "ย่อง + เลื่อนล้อเมาส์ขณะถือในมือหลักเพื่อเปลี่ยนโหมด\n- เมนู — เปิดรายการความถี่\n- เทเลพอร์ตด่วน — เทเลพอร์ตไปยังความถี่ที่เลือกโดยไม่เปิดรายการ\n- เมนูเครื่องเทเลพอร์ตฉุกเฉิน — เปิดเมนูเครื่องเทเลพอร์ตฉุกเฉิน\nคลิกขวาที่เครื่องเทเลพอร์ตฉุกเฉินเพื่อเชื่อมโยง",
   "tooltip.phaseteleporters.description.anchor_upgrade": "ทำให้ชังก์ของเครื่องเทเลพอร์ตยังคงถูกโหลดขณะติดตั้ง",
   "tooltip.phaseteleporters.description.energy_cube": "เก็บพลังงานปริมาณมาก",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "ยกเลิกการเชื่อมโยง",
   "message.phaseteleporters.emergency.no_platform": "ยังไม่ได้เชื่อมโยงเครื่องเทเลพอร์ตฉุกเฉิน",
   "message.phaseteleporters.emergency.unavailable": "แท่นไม่พร้อมใช้งาน: ตรวจสอบพลังงาน การเข้าถึง และพื้นที่เหนือแท่น",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "ช่วยผู้เล่นที่เชื่อมโยงไว้เมื่อพลังชีวิตต่ำจนเป็นอันตราย เฉพาะในมิติของแท่น การเชื่อมโยงยังคงอยู่ในมิติอื่นและจะกลับมาช่วยเมื่อกลับมา ใช้เครื่องเทเลพอร์ตพกพากับแท่นเพื่อเชื่อมโยงแล้วเก็บไว้ในช่องเก็บของ"
+  "tooltip.phaseteleporters.description.emergency_teleporter": "ช่วยผู้เล่นที่เชื่อมโยงไว้เมื่อพลังชีวิตต่ำจนเป็นอันตราย เฉพาะในมิติของแท่น การเชื่อมโยงยังคงอยู่ในมิติอื่นและจะกลับมาช่วยเมื่อกลับมา ใช้เครื่องเทเลพอร์ตพกพากับแท่นเพื่อเชื่อมโยงแล้วเก็บไว้ในช่องเก็บของ",
+  "item.phaseteleporters.color_configurator": "ตัวปรับแต่งสี",
+  "tooltip.phaseteleporters.description.color_configurator": "คลิกขวาที่กรอบหรือเครื่องเทเลพอร์ตเพื่อเปลี่ยนสี (กด LSHIFT ค้างไว้เพื่อเปลี่ยนสีเครื่องเทเลพอร์ต)\nLSHIFT + ล้อเมาส์ขณะถือเครื่องมือในมือหลัก — เปลี่ยนโหมด",
+  "message.phaseteleporters.color_configurator.no_energy": "การเปลี่ยนสีต้องใช้ %s",
+  "message.phaseteleporters.color_configurator.changed": "สีกรอบ: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "สีเครื่องเทเลพอร์ต: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "สีไฟบนจอภาพ: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "สีข้อความ: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "โหมด: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "สีกรอบ",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "สีไฟบนจอภาพ",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "สีข้อความ",
+  "tooltip.phaseteleporters.color_configurator.off": "ปิด",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/ติ๊ก"
 }

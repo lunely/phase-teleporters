@@ -38,10 +38,10 @@ public final class EnergyCubeScreenHandler extends ScreenHandler implements Ener
         this.chargingInventory = chargingInventory;
         this.properties = properties;
         chargingInventory.onOpen(playerInventory.player);
-        // Red: PE item -> cube (internal discharge slot 1).
+        // Red: battery -> cube (internal discharge slot 1).
         addSlot(new Slot(chargingInventory, 1, 52, 32) {
             @Override public boolean canInsert(ItemStack stack) {
-                return stack.getItem() instanceof PEChargeableItem && chargingInventory.isValid(1, stack);
+                return stack.getItem() instanceof BatteryItem && chargingInventory.isValid(1, stack);
             }
             @Override public int getMaxItemCount() { return 1; }
         });
@@ -115,7 +115,8 @@ public final class EnergyCubeScreenHandler extends ScreenHandler implements Ener
         if (index < 2) {
             if (!insertItem(stack, 2, 38, true)) return ItemStack.EMPTY;
         } else if (stack.getItem() instanceof PEChargeableItem) {
-            if (!insertItem(stack, 0, 1, false)) return ItemStack.EMPTY;
+            int target = stack.getItem() instanceof BatteryItem ? 0 : 1;
+            if (!insertItem(stack, target, target + 1, false)) return ItemStack.EMPTY;
         } else if (index < 29) {
             if (!insertItem(stack, 29, 38, false)) return ItemStack.EMPTY;
         } else if (!insertItem(stack, 2, 29, false)) return ItemStack.EMPTY;

@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Ingen energi",
   "message.phaseteleporters.portable.no_connection": "Ingen anslutning",
   "tooltip.phaseteleporters.item_details_hint": "Håll %s för att se beskrivningen",
-  "tooltip.phaseteleporters.description.battery": "Lagrar energi och kan ladda andra kompatibla föremål i spelarens förråd när laddning i förrådet är aktiverad.",
+  "tooltip.phaseteleporters.description.battery": "Lagrar energi och kan ladda andra kompatibla föremål i spelarens förråd när laddning i förrådet är aktiverad.\nHögerklicka med batteriet i handen för att byta läge.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Smyg + rulla med föremålet i huvudhanden för att byta läge.\n- Meny — öppnar frekvenslistan.\n- Snabbteleportering — teleporterar till den valda frekvensen utan att öppna listan.\n- Nödteleporterarens meny — öppnar nödteleporterarens meny.\nHögerklicka på en nödteleporterare för att länka.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Håller teleporterarens chunk laddad medan uppgraderingen är installerad.",
   "tooltip.phaseteleporters.description.energy_cube": "Lagrar stora mängder energi.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Ta bort länk",
   "message.phaseteleporters.emergency.no_platform": "Ingen nödteleporterare är länkad",
   "message.phaseteleporters.emergency.unavailable": "Plattformen är otillgänglig: kontrollera energi, åtkomst och utrymmet ovanför",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Räddar den länkade spelaren vid farligt låg hälsa, endast i plattformens dimension. Länken bevaras i andra dimensioner och räddningen återupptas vid återkomst. Använd en bärbar teleporterare på plattformen för att länka, och behåll den i förrådet."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Räddar den länkade spelaren vid farligt låg hälsa, endast i plattformens dimension. Länken bevaras i andra dimensioner och räddningen återupptas vid återkomst. Använd en bärbar teleporterare på plattformen för att länka, och behåll den i förrådet.",
+  "item.phaseteleporters.color_configurator": "Färgkonfigurator",
+  "tooltip.phaseteleporters.description.color_configurator": "Högerklicka på en ram eller teleporter för att ändra färgen (håll LSHIFT nedtryckt för att ändra teleporterns färg).\nLSHIFT + mushjul med verktyget i huvudhanden — byt läge.",
+  "message.phaseteleporters.color_configurator.no_energy": "Att ändra färg kräver %s.",
+  "message.phaseteleporters.color_configurator.changed": "Ramfärg: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Teleporterfärg: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Färg på skärmens lampor: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Textfärg: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Läge: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Ramfärg",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Färg på skärmens lampor",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Textfärg",
+  "tooltip.phaseteleporters.color_configurator.off": "Av",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/tick"
 }

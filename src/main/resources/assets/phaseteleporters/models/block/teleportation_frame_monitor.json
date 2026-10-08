@@ -1,13 +1,15 @@
 {
   "parent": "minecraft:block/block",
+  "ambientocclusion": true,
   "textures": {
-    "frame": "phaseteleporters:block/teleportation_frame",
-    "particle": "phaseteleporters:block/teleportation_frame",
-    "rim": "minecraft:block/gray_concrete",
-    "screen": "minecraft:block/black_concrete"
+    "base": "phaseteleporters:block/models/teleporter_frame_base",
+    "led": "phaseteleporters:block/models/teleporter_frame_led",
+    "particle": "phaseteleporters:block/models/teleporter_frame_base",
+    "screen": "phaseteleporters:block/teleportation_frame_monitor_screen"
   },
   "elements": [
     {
+      "name": "frame_base",
       "from": [
         0,
         0,
@@ -18,88 +20,977 @@
         16,
         16
       ],
+      "shade": true,
       "faces": {
-        "down": {
-          "cullface": "down",
-          "texture": "#frame"
-        },
-        "up": {
-          "cullface": "up",
-          "texture": "#frame"
-        },
         "north": {
-          "cullface": "north",
-          "texture": "#frame"
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#base",
+          "cullface": "north"
         },
         "south": {
-          "cullface": "south",
-          "texture": "#frame"
-        },
-        "west": {
-          "cullface": "west",
-          "texture": "#frame"
-        },
-        "east": {
-          "cullface": "east",
-          "texture": "#frame"
-        }
-      }
-    },
-    {
-      "from": [
-        1,
-        2,
-        -0.06
-      ],
-      "to": [
-        15,
-        14,
-        0
-      ],
-      "faces": {
-        "west": {
-          "texture": "#rim"
-        },
-        "down": {
-          "texture": "#rim"
-        },
-        "north": {
           "uv": [
             0,
             0,
             16,
             16
           ],
-          "texture": "#rim"
+          "texture": "#base",
+          "cullface": "south"
         },
         "east": {
-          "texture": "#rim"
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#base",
+          "cullface": "east"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#base",
+          "cullface": "west"
         },
         "up": {
-          "texture": "#rim"
-        }
-      }
-    },
-    {
-      "from": [
-        2,
-        3,
-        -0.08
-      ],
-      "to": [
-        14,
-        13,
-        -0.06
-      ],
-      "faces": {
-        "north": {
           "uv": [
             0,
             0,
             16,
             16
           ],
-          "texture": "#screen"
+          "texture": "#base",
+          "cullface": "up"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#base",
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "name": "frame_led_north",
+      "from": [
+        0,
+        0,
+        -0.016
+      ],
+      "to": [
+        16,
+        16,
+        -0.016
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            6.4,
+            16,
+            7.2
+          ],
+          "texture": "#led",
+          "tintindex": 1,
+          "cullface": "north"
+        }
+      }
+    },
+    {
+      "name": "frame_led_south",
+      "from": [
+        0,
+        0,
+        16.016
+      ],
+      "to": [
+        16,
+        16,
+        16.016
+      ],
+      "shade": false,
+      "faces": {
+        "south": {
+          "uv": [
+            0,
+            6.4,
+            16,
+            7.2
+          ],
+          "texture": "#led",
+          "tintindex": 1,
+          "cullface": "south"
+        }
+      }
+    },
+    {
+      "name": "frame_led_east",
+      "from": [
+        16.016,
+        0,
+        0
+      ],
+      "to": [
+        16.016,
+        16,
+        16
+      ],
+      "shade": false,
+      "faces": {
+        "east": {
+          "uv": [
+            0,
+            6.4,
+            16,
+            7.2
+          ],
+          "texture": "#led",
+          "tintindex": 1,
+          "cullface": "east"
+        }
+      }
+    },
+    {
+      "name": "frame_led_west",
+      "from": [
+        -0.016,
+        0,
+        0
+      ],
+      "to": [
+        -0.016,
+        16,
+        16
+      ],
+      "shade": false,
+      "faces": {
+        "west": {
+          "uv": [
+            0,
+            6.4,
+            16,
+            7.2
+          ],
+          "texture": "#led",
+          "tintindex": 1,
+          "cullface": "west"
+        }
+      }
+    },
+    {
+      "name": "frame_led_up",
+      "from": [
+        0,
+        16.016,
+        0
+      ],
+      "to": [
+        16,
+        16.016,
+        16
+      ],
+      "shade": false,
+      "faces": {
+        "up": {
+          "uv": [
+            0,
+            6.4,
+            16,
+            7.2
+          ],
+          "texture": "#led",
+          "tintindex": 1,
+          "cullface": "up"
+        }
+      }
+    },
+    {
+      "name": "frame_led_down",
+      "from": [
+        0,
+        -0.016,
+        0
+      ],
+      "to": [
+        16,
+        -0.016,
+        16
+      ],
+      "shade": false,
+      "faces": {
+        "down": {
+          "uv": [
+            0,
+            6.4,
+            16,
+            7.2
+          ],
+          "texture": "#led",
+          "tintindex": 1,
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "name": "monitor_backing",
+      "from": [
+        0,
+        2,
+        -0.49
+      ],
+      "to": [
+        16,
+        14,
+        -0.04
+      ],
+      "faces": {
+        "north": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "south": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "east": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "west": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "up": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "down": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        }
+      }
+    },
+    {
+      "name": "monitor_left_rim",
+      "from": [
+        0,
+        2,
+        -0.75
+      ],
+      "to": [
+        0.5,
+        14,
+        -0.49
+      ],
+      "faces": {
+        "north": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "south": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "east": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "west": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "up": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "down": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        }
+      }
+    },
+    {
+      "name": "monitor_right_rim",
+      "from": [
+        15.5,
+        2,
+        -0.75
+      ],
+      "to": [
+        16,
+        14,
+        -0.49
+      ],
+      "faces": {
+        "north": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "south": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "east": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "west": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "up": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "down": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        }
+      }
+    },
+    {
+      "name": "monitor_top_rim",
+      "from": [
+        0.5,
+        13.5,
+        -0.75
+      ],
+      "to": [
+        15.5,
+        14,
+        -0.49
+      ],
+      "faces": {
+        "north": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "south": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "east": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "west": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "up": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "down": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        }
+      }
+    },
+    {
+      "name": "monitor_bottom_rim",
+      "from": [
+        0.5,
+        2,
+        -0.75
+      ],
+      "to": [
+        15.5,
+        2.5,
+        -0.49
+      ],
+      "faces": {
+        "north": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "south": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "east": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "west": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "up": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        },
+        "down": {
+          "texture": "#base",
+          "uv": [
+            0.25,
+            0.25,
+            0.75,
+            0.75
+          ]
+        }
+      }
+    },
+    {
+      "name": "mounted_display",
+      "from": [
+        0.5,
+        2.5,
+        -0.5
+      ],
+      "to": [
+        15.5,
+        13.5,
+        -0.5
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "texture": "#screen",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "name": "monitor_led_corner_horizontal_0",
+      "from": [
+        0.125,
+        2.125,
+        -0.751
+      ],
+      "to": [
+        1.875,
+        2.375,
+        -0.751
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "texture": "#led",
+          "uv": [
+            3,
+            6.55,
+            5,
+            6.6
+          ],
+          "rotation": 0,
+          "tintindex": 4
+        }
+      }
+    },
+    {
+      "name": "monitor_led_corner_vertical_1",
+      "from": [
+        0.125,
+        2.375,
+        -0.751
+      ],
+      "to": [
+        0.375,
+        3.875,
+        -0.751
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "texture": "#led",
+          "uv": [
+            3,
+            6.55,
+            5,
+            6.6
+          ],
+          "rotation": 90,
+          "tintindex": 4
+        }
+      }
+    },
+    {
+      "name": "monitor_led_corner_horizontal_2",
+      "from": [
+        0.125,
+        13.625,
+        -0.751
+      ],
+      "to": [
+        1.875,
+        13.875,
+        -0.751
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "texture": "#led",
+          "uv": [
+            3,
+            6.55,
+            5,
+            6.6
+          ],
+          "rotation": 0,
+          "tintindex": 4
+        }
+      }
+    },
+    {
+      "name": "monitor_led_corner_vertical_3",
+      "from": [
+        0.125,
+        12.125,
+        -0.751
+      ],
+      "to": [
+        0.375,
+        13.625,
+        -0.751
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "texture": "#led",
+          "uv": [
+            3,
+            6.55,
+            5,
+            6.6
+          ],
+          "rotation": 90,
+          "tintindex": 4
+        }
+      }
+    },
+    {
+      "name": "monitor_led_corner_horizontal_4",
+      "from": [
+        14.125,
+        2.125,
+        -0.751
+      ],
+      "to": [
+        15.875,
+        2.375,
+        -0.751
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "texture": "#led",
+          "uv": [
+            3,
+            6.55,
+            5,
+            6.6
+          ],
+          "rotation": 0,
+          "tintindex": 4
+        }
+      }
+    },
+    {
+      "name": "monitor_led_corner_vertical_5",
+      "from": [
+        15.625,
+        2.375,
+        -0.751
+      ],
+      "to": [
+        15.875,
+        3.875,
+        -0.751
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "texture": "#led",
+          "uv": [
+            3,
+            6.55,
+            5,
+            6.6
+          ],
+          "rotation": 90,
+          "tintindex": 4
+        }
+      }
+    },
+    {
+      "name": "monitor_led_corner_horizontal_6",
+      "from": [
+        14.125,
+        13.625,
+        -0.751
+      ],
+      "to": [
+        15.875,
+        13.875,
+        -0.751
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "texture": "#led",
+          "uv": [
+            3,
+            6.55,
+            5,
+            6.6
+          ],
+          "rotation": 0,
+          "tintindex": 4
+        }
+      }
+    },
+    {
+      "name": "monitor_led_corner_vertical_7",
+      "from": [
+        15.625,
+        12.125,
+        -0.751
+      ],
+      "to": [
+        15.875,
+        13.625,
+        -0.751
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "texture": "#led",
+          "uv": [
+            3,
+            6.55,
+            5,
+            6.6
+          ],
+          "rotation": 90,
+          "tintindex": 4
+        }
+      }
+    },
+    {
+      "name": "monitor_led_top_middle_8",
+      "from": [
+        3.958333333333333,
+        13.625,
+        -0.751
+      ],
+      "to": [
+        6.708333333333333,
+        13.875,
+        -0.751
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "texture": "#led",
+          "uv": [
+            3,
+            6.55,
+            5,
+            6.6
+          ],
+          "rotation": 0,
+          "tintindex": 4
+        }
+      }
+    },
+    {
+      "name": "monitor_led_bottom_middle_9",
+      "from": [
+        3.958333333333333,
+        2.125,
+        -0.751
+      ],
+      "to": [
+        6.708333333333333,
+        2.375,
+        -0.751
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "texture": "#led",
+          "uv": [
+            3,
+            6.55,
+            5,
+            6.6
+          ],
+          "rotation": 0,
+          "tintindex": 4
+        }
+      }
+    },
+    {
+      "name": "monitor_led_top_middle_10",
+      "from": [
+        9.291666666666666,
+        13.625,
+        -0.751
+      ],
+      "to": [
+        12.041666666666666,
+        13.875,
+        -0.751
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "texture": "#led",
+          "uv": [
+            3,
+            6.55,
+            5,
+            6.6
+          ],
+          "rotation": 0,
+          "tintindex": 4
+        }
+      }
+    },
+    {
+      "name": "monitor_led_bottom_middle_11",
+      "from": [
+        9.291666666666666,
+        2.125,
+        -0.751
+      ],
+      "to": [
+        12.041666666666666,
+        2.375,
+        -0.751
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "texture": "#led",
+          "uv": [
+            3,
+            6.55,
+            5,
+            6.6
+          ],
+          "rotation": 0,
+          "tintindex": 4
+        }
+      }
+    },
+    {
+      "name": "monitor_led_left_middle_12",
+      "from": [
+        0.125,
+        6.625,
+        -0.751
+      ],
+      "to": [
+        0.375,
+        9.375,
+        -0.751
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "texture": "#led",
+          "uv": [
+            3,
+            6.55,
+            5,
+            6.6
+          ],
+          "rotation": 90,
+          "tintindex": 4
+        }
+      }
+    },
+    {
+      "name": "monitor_led_right_middle_13",
+      "from": [
+        15.625,
+        6.625,
+        -0.751
+      ],
+      "to": [
+        15.875,
+        9.375,
+        -0.751
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "texture": "#led",
+          "uv": [
+            3,
+            6.55,
+            5,
+            6.6
+          ],
+          "rotation": 90,
+          "tintindex": 4
         }
       }
     }

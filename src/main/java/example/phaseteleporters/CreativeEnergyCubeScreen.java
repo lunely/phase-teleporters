@@ -24,7 +24,8 @@ public final class CreativeEnergyCubeScreen extends HandledScreen<CreativeEnergy
 
     @Override protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
         sidePanel.drawBehind(context, x, y, backgroundWidth, mouseX, mouseY, handler);
-        EnergyCubeGuiRenderer.draw(context, x, y, 0, 0, true);
+        EnergyCubeGuiRenderer.draw(context, x, y, 0, 0, true,
+                handler.getSlot(0).hasStack(), handler.getSlot(1).hasStack());
     }
 
     @Override public void render(DrawContext context, int mouseX, int mouseY, float delta) {

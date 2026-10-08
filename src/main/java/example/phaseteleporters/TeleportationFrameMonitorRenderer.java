@@ -28,21 +28,22 @@ public final class TeleportationFrameMonitorRenderer implements BlockEntityRende
         };
         var renderer = MinecraftClient.getInstance().textRenderer;
         var lines = monitor.text().split("\\n", -1);
+        int visible = Math.min(4, lines.length);
+        while (visible > 1 && lines[visible-1].isBlank()) visible--;
         int widest = 1;
-        for (String line : lines) widest = Math.max(widest, renderer.getWidth(line));
-        float scale = Math.min(0.009f, 0.68f / widest);
+        for (int i = 0; i < visible; i++) widest = Math.max(widest, renderer.getWidth(lines[i]));
+        float scale = Math.min(0.0105f, Math.min(0.875f / widest, 0.625f / (visible * 10)));
         matrices.push();
         matrices.translate(0.5, 0.5, 0.5);
         matrices.multiply(net.minecraft.util.math.RotationAxis.POSITIVE_Y.rotationDegrees(yaw));
         // Font quads face local +Z; point that side outward, in front of the display.
-        matrices.translate(0, 0, 0.507);
+        matrices.translate(0, 0, 0.5 + 0.501 / 16.0);
         matrices.scale(scale, -scale, scale);
-        int visible = Math.min(4, lines.length);
         for (int i = 0; i < visible; i++) {
             var line = Text.literal(lines[i]);
             float x = -renderer.getWidth(line) / 2.0f;
             float y = i * 10 - visible * 5;
-            renderer.draw(line, x, y, 0xFFFFFFFF, false,
+            renderer.draw(line, x, y, 0xFF000000 | PortalColors.rgb(monitor.textColor()), false,
                     matrices.peek().getPositionMatrix(), consumers,
                     net.minecraft.client.font.TextRenderer.TextLayerType.POLYGON_OFFSET,
                     0, LightmapTextureManager.MAX_LIGHT_COORDINATE);

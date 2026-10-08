@@ -1,6 +1,249 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/block",
+  "ambientocclusion": true,
   "textures": {
-    "all": "phaseteleporters:block/teleportation_frame"
-  }
+    "base": "phaseteleporters:block/models/teleporter_frame_base",
+    "led": "phaseteleporters:block/models/teleporter_frame_led",
+    "particle": "phaseteleporters:block/models/teleporter_frame_base"
+  },
+  "elements": [
+    {
+      "name": "frame_base",
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "shade": true,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#base",
+          "cullface": "north"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#base",
+          "cullface": "south"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#base",
+          "cullface": "east"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#base",
+          "cullface": "west"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#base",
+          "cullface": "up"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#base",
+          "cullface": "down"
+        }
+      }
+    },
+    {
+      "name": "frame_led_north",
+      "from": [
+        0,
+        0,
+        -0.016
+      ],
+      "to": [
+        16,
+        16,
+        -0.016
+      ],
+      "shade": false,
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            6.4,
+            16,
+            7.2
+          ],
+          "texture": "#led",
+          "tintindex": 1,
+          "cullface": "north"
+        }
+      }
+    },
+    {
+      "name": "frame_led_south",
+      "from": [
+        0,
+        0,
+        16.016
+      ],
+      "to": [
+        16,
+        16,
+        16.016
+      ],
+      "shade": false,
+      "faces": {
+        "south": {
+          "uv": [
+            0,
+            6.4,
+            16,
+            7.2
+          ],
+          "texture": "#led",
+          "tintindex": 1,
+          "cullface": "south"
+        }
+      }
+    },
+    {
+      "name": "frame_led_east",
+      "from": [
+        16.016,
+        0,
+        0
+      ],
+      "to": [
+        16.016,
+        16,
+        16
+      ],
+      "shade": false,
+      "faces": {
+        "east": {
+          "uv": [
+            0,
+            6.4,
+            16,
+            7.2
+          ],
+          "texture": "#led",
+          "tintindex": 1,
+          "cullface": "east"
+        }
+      }
+    },
+    {
+      "name": "frame_led_west",
+      "from": [
+        -0.016,
+        0,
+        0
+      ],
+      "to": [
+        -0.016,
+        16,
+        16
+      ],
+      "shade": false,
+      "faces": {
+        "west": {
+          "uv": [
+            0,
+            6.4,
+            16,
+            7.2
+          ],
+          "texture": "#led",
+          "tintindex": 1,
+          "cullface": "west"
+        }
+      }
+    },
+    {
+      "name": "frame_led_up",
+      "from": [
+        0,
+        16.016,
+        0
+      ],
+      "to": [
+        16,
+        16.016,
+        16
+      ],
+      "shade": false,
+      "faces": {
+        "up": {
+          "uv": [
+            0,
+            6.4,
+            16,
+            7.2
+          ],
+          "texture": "#led",
+          "tintindex": 1,
+          "cullface": "up"
+        }
+      }
+    },
+    {
+      "name": "frame_led_down",
+      "from": [
+        0,
+        -0.016,
+        0
+      ],
+      "to": [
+        16,
+        -0.016,
+        16
+      ],
+      "shade": false,
+      "faces": {
+        "down": {
+          "uv": [
+            0,
+            6.4,
+            16,
+            7.2
+          ],
+          "texture": "#led",
+          "tintindex": 1,
+          "cullface": "down"
+        }
+      }
+    }
+  ]
 }

@@ -153,7 +153,7 @@
   "message.phaseteleporters.portable.no_energy": "Nema energije",
   "message.phaseteleporters.portable.no_connection": "Nema veze",
   "tooltip.phaseteleporters.item_details_hint": "Drži %s za prikaz opisa",
-  "tooltip.phaseteleporters.description.battery": "Pohranjuje energiju i može puniti druge kompatibilne predmete u inventaru igrača kada je uključeno punjenje inventara.",
+  "tooltip.phaseteleporters.description.battery": "Pohranjuje energiju i može puniti druge kompatibilne predmete u inventaru igrača kada je uključeno punjenje inventara.\nDesnim klikom s baterijom u ruci promijeni način rada.",
   "tooltip.phaseteleporters.description.portable_teleporter": "Šuljanje + pomicanje kotačića s predmetom u glavnoj ruci mijenja način rada.\n- Izbornik — otvara popis frekvencija.\n- Brza teleportacija — teleportira na odabranu frekvenciju bez otvaranja popisa.\n- Izbornik hitnog teleportera — otvara izbornik hitnog teleportera.\nDesni klik na hitni teleporter za povezivanje.",
   "tooltip.phaseteleporters.description.anchor_upgrade": "Održava chunk teleportera učitanim dok je ugrađena.",
   "tooltip.phaseteleporters.description.energy_cube": "Pohranjuje velike količine energije.",
@@ -184,5 +184,18 @@
   "gui.phaseteleporters.emergency.unlink_remote": "Odspoji",
   "message.phaseteleporters.emergency.no_platform": "Hitni teleporter nije povezan",
   "message.phaseteleporters.emergency.unavailable": "Platforma nije dostupna: provjeri energiju, pristup i prostor iznad nje",
-  "tooltip.phaseteleporters.description.emergency_teleporter": "Spašava povezanog igrača pri opasno niskom zdravlju samo u dimenziji platforme. Veza ostaje u drugim dimenzijama i spašavanje se nastavlja po povratku. Upotrijebi prijenosni teleporter na platformi za povezivanje, zatim ga drži u inventaru."
+  "tooltip.phaseteleporters.description.emergency_teleporter": "Spašava povezanog igrača pri opasno niskom zdravlju samo u dimenziji platforme. Veza ostaje u drugim dimenzijama i spašavanje se nastavlja po povratku. Upotrijebi prijenosni teleporter na platformi za povezivanje, zatim ga drži u inventaru.",
+  "item.phaseteleporters.color_configurator": "Konfigurator boja",
+  "tooltip.phaseteleporters.description.color_configurator": "Desnim klikom na okvir ili teleporter promijeni boju (drži LSHIFT za promjenu boje teleportera).\nLSHIFT + kotačić miša s alatom u glavnoj ruci — promjena načina rada.",
+  "message.phaseteleporters.color_configurator.no_energy": "Za promjenu boje potrebno je %s.",
+  "message.phaseteleporters.color_configurator.changed": "Boja okvira: %s",
+  "message.phaseteleporters.color_configurator.teleporter_changed": "Boja teleportera: %s",
+  "message.phaseteleporters.color_configurator.lights_changed": "Boja svjetala monitora: %s",
+  "message.phaseteleporters.color_configurator.text_changed": "Boja teksta: %s",
+  "tooltip.phaseteleporters.color_configurator.mode": "Način rada: %s",
+  "tooltip.phaseteleporters.color_configurator.mode.frame": "Boja okvira",
+  "tooltip.phaseteleporters.color_configurator.mode.lights": "Boja svjetala monitora",
+  "tooltip.phaseteleporters.color_configurator.mode.text": "Boja teksta",
+  "tooltip.phaseteleporters.color_configurator.off": "Isključeno",
+  "gui.phaseteleporters.solar_panel.generation_rate": "%s J/tik"
 }
