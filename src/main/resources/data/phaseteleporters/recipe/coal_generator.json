@@ -5,7 +5,7 @@
     "C": { "item": "minecraft:copper_ingot" },
     "I": { "item": "minecraft:iron_ingot" },
     "F": { "item": "minecraft:furnace" },
-    "K": { "item": "phaseteleporters:basic_wire" }
+    "K": { "tag": "phaseteleporters:crafting/basic_wires" }
   },
   "result": { "id": "phaseteleporters:coal_generator", "count": 1 }
 }

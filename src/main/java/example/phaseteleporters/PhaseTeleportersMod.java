@@ -21,14 +21,14 @@ import example.phaseteleporters.energy.PEChargeableItem;
 
 public final class PhaseTeleportersMod implements ModInitializer {
     public static final String MOD_ID = "phaseteleporters";
-    // Vanilla bare-hand breaking takes 1.5 seconds per hardness point.
-    private static final float BLOCK_HARDNESS = 3.5f - 2.0f / 1.5f;
+    // A wooden pickaxe breaks hardness 8/3 in 40 ticks at normal mining speed.
+    private static final float BLOCK_HARDNESS = 8.0f / 3.0f;
 
     public static final Item STEEL_INGOT = register("steel_ingot");
     public static final Item GLOWSTONE_INGOT = register("glowstone_ingot");
     public static final Block MACHINE_CASING = Registry.register(
             Registries.BLOCK, Identifier.of(MOD_ID, "machine_casing"),
-            new Block(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f)));
+            new Block(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).requiresTool()));
     public static final Item MACHINE_CASING_ITEM = Registry.register(
             Registries.ITEM, Identifier.of(MOD_ID, "machine_casing"),
             new BlockItem(MACHINE_CASING, new Item.Settings()));
@@ -58,50 +58,50 @@ public final class PhaseTeleportersMod implements ModInitializer {
             new ColorConfiguratorItem(new Item.Settings().maxCount(1)));
     public static final Block INFUSION_STATION = Registry.register(
             Registries.BLOCK, Identifier.of(MOD_ID, "infusion_station"),
-            new InfusionStationBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f)));
+            new InfusionStationBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).requiresTool()));
     public static final Item INFUSION_STATION_ITEM = Registry.register(
             Registries.ITEM, Identifier.of(MOD_ID, "infusion_station"),
             new BlockItem(INFUSION_STATION, new Item.Settings()));
     public static final Block CRUSHER = Registry.register(
             Registries.BLOCK, Identifier.of(MOD_ID, "crusher"),
-            new CrusherBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f)));
+            new CrusherBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).requiresTool()));
     public static final Item CRUSHER_ITEM = Registry.register(
             Registries.ITEM, Identifier.of(MOD_ID, "crusher"),
             new BlockItem(CRUSHER, new Item.Settings()));
     public static final Block ELECTRIC_FURNACE = Registry.register(
             Registries.BLOCK, Identifier.of(MOD_ID, "electric_furnace"),
-            new ElectricFurnaceBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f)));
+            new ElectricFurnaceBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).requiresTool()));
     public static final Item ELECTRIC_FURNACE_ITEM = Registry.register(
             Registries.ITEM, Identifier.of(MOD_ID, "electric_furnace"),
             new BlockItem(ELECTRIC_FURNACE, new Item.Settings()));
     public static final Block ENRICHMENT_CHAMBER = Registry.register(
             Registries.BLOCK, Identifier.of(MOD_ID, "enrichment_chamber"),
-            new EnrichmentChamberBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).nonOpaque()
+            new EnrichmentChamberBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).requiresTool().nonOpaque()
                     .luminance(state -> state.get(EnrichmentChamberBlock.LIT) ? 5 : 0)));
     public static final Item ENRICHMENT_CHAMBER_ITEM = Registry.register(
             Registries.ITEM, Identifier.of(MOD_ID, "enrichment_chamber"),
             new BlockItem(ENRICHMENT_CHAMBER, new Item.Settings()));
     public static final Block SOLAR_PANEL = Registry.register(
             Registries.BLOCK, Identifier.of(MOD_ID, "solar_panel"),
-            new SolarPanelBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f)));
+            new SolarPanelBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).requiresTool()));
     public static final Item SOLAR_PANEL_ITEM = Registry.register(
             Registries.ITEM, Identifier.of(MOD_ID, "solar_panel"),
             new BlockItem(SOLAR_PANEL, new Item.Settings()));
     public static final Block COAL_GENERATOR = Registry.register(
             Registries.BLOCK, Identifier.of(MOD_ID, "coal_generator"),
-            new CoalGeneratorBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f)));
+            new CoalGeneratorBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).requiresTool()));
     public static final Item COAL_GENERATOR_ITEM = Registry.register(
             Registries.ITEM, Identifier.of(MOD_ID, "coal_generator"),
             new BlockItem(COAL_GENERATOR, new Item.Settings()));
     public static final Block CREATIVE_ENERGY_CUBE = Registry.register(
             Registries.BLOCK, Identifier.of(MOD_ID, "creative_energy_cube"),
-            new CreativeEnergyCubeBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).nonOpaque()));
+            new CreativeEnergyCubeBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).requiresTool().nonOpaque()));
     public static final Item CREATIVE_ENERGY_CUBE_ITEM = Registry.register(
             Registries.ITEM, Identifier.of(MOD_ID, "creative_energy_cube"),
             new CreativeEnergyCubeItem(CREATIVE_ENERGY_CUBE, new Item.Settings()));
     public static final Block ENERGY_CUBE = Registry.register(
             Registries.BLOCK, Identifier.of(MOD_ID, "energy_cube"),
-            new EnergyCubeBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).nonOpaque()));
+            new EnergyCubeBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).requiresTool().nonOpaque()));
     public static final Item ENERGY_CUBE_ITEM = Registry.register(
             Registries.ITEM, Identifier.of(MOD_ID, "energy_cube"),
             new EnergyCubeItem(ENERGY_CUBE, new Item.Settings()));
@@ -114,13 +114,13 @@ public final class PhaseTeleportersMod implements ModInitializer {
             new BlockItem(BASIC_ENERGY_CABLE, new Item.Settings()));
     public static final Block TELEPORTATION_FRAME = Registry.register(
             Registries.BLOCK, Identifier.of(MOD_ID, "teleportation_frame"),
-            new TeleportationFrameBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f)));
+            new TeleportationFrameBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).requiresTool()));
     public static final Item TELEPORTATION_FRAME_ITEM = Registry.register(
             Registries.ITEM, Identifier.of(MOD_ID, "teleportation_frame"),
             new BlockItem(TELEPORTATION_FRAME, new Item.Settings()));
     public static final Block TELEPORTATION_FRAME_MONITOR = Registry.register(
             Registries.BLOCK, Identifier.of(MOD_ID, "teleportation_frame_monitor"),
-            new TeleportationFrameMonitorBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f)));
+            new TeleportationFrameMonitorBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).requiresTool()));
     public static final Item TELEPORTATION_FRAME_MONITOR_ITEM = Registry.register(
             Registries.ITEM, Identifier.of(MOD_ID, "teleportation_frame_monitor"),
             new BlockItem(TELEPORTATION_FRAME_MONITOR, new Item.Settings()));
@@ -130,7 +130,7 @@ public final class PhaseTeleportersMod implements ModInitializer {
                             TELEPORTATION_FRAME_MONITOR).build(null));
     public static final Block TELEPORT = Registry.register(
             Registries.BLOCK, Identifier.of(MOD_ID, "local_teleporter"),
-            new TeleportBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f)));
+            new TeleportBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).requiresTool()));
     public static final Item TELEPORT_ITEM = Registry.register(
             Registries.ITEM, Identifier.of(MOD_ID, "local_teleporter"),
             new BlockItem(TELEPORT, new Item.Settings()));
@@ -139,7 +139,7 @@ public final class PhaseTeleportersMod implements ModInitializer {
             new PortalPlaneBlock(AbstractBlock.Settings.create().noCollision().nonOpaque().dropsNothing().strength(-1.0f)));
     public static final Block QUANTUM_TELEPORT = Registry.register(
             Registries.BLOCK, Identifier.of(MOD_ID, "quantum_teleporter"),
-            new QuantumTeleportBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f)
+            new QuantumTeleportBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).requiresTool()
                     .nonOpaque()));
     public static final Item QUANTUM_TELEPORT_ITEM = Registry.register(
             Registries.ITEM, Identifier.of(MOD_ID, "quantum_teleporter"),
@@ -152,7 +152,7 @@ public final class PhaseTeleportersMod implements ModInitializer {
                     new ScreenHandlerType<>(QuantumTeleportScreenHandler::new, FeatureFlags.VANILLA_FEATURES));
     public static final Block EMERGENCY_TELEPORT = Registry.register(
             Registries.BLOCK, Identifier.of(MOD_ID, "emergency_teleporter"),
-            new EmergencyTeleportBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).nonOpaque()));
+            new EmergencyTeleportBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).requiresTool().nonOpaque()));
     public static final Item EMERGENCY_TELEPORT_ITEM = Registry.register(
             Registries.ITEM, Identifier.of(MOD_ID, "emergency_teleporter"),
             new BlockItem(EMERGENCY_TELEPORT, new Item.Settings()));
@@ -167,13 +167,13 @@ public final class PhaseTeleportersMod implements ModInitializer {
                     new ScreenHandlerType<>(PortableEmergencyScreenHandler::new, FeatureFlags.VANILLA_FEATURES));
     public static final Block INTERDIMENSIONAL_TELEPORTATION_FRAME = Registry.register(
             Registries.BLOCK, Identifier.of(MOD_ID, "interdimensional_teleportation_frame"),
-            new TeleportationFrameBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f)));
+            new TeleportationFrameBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).requiresTool()));
     public static final Item INTERDIMENSIONAL_TELEPORTATION_FRAME_ITEM = Registry.register(
             Registries.ITEM, Identifier.of(MOD_ID, "interdimensional_teleportation_frame"),
             new BlockItem(INTERDIMENSIONAL_TELEPORTATION_FRAME, new Item.Settings()));
     public static final Block INTERDIMENSIONAL_TELEPORT = Registry.register(
             Registries.BLOCK, Identifier.of(MOD_ID, "interdimensional_teleporter"),
-            new InterdimensionalTeleportBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f)));
+            new InterdimensionalTeleportBlock(AbstractBlock.Settings.create().strength(BLOCK_HARDNESS, 3.5f).requiresTool()));
     public static final Item INTERDIMENSIONAL_TELEPORT_ITEM = Registry.register(
             Registries.ITEM, Identifier.of(MOD_ID, "interdimensional_teleporter"),
             new BlockItem(INTERDIMENSIONAL_TELEPORT, new Item.Settings()));

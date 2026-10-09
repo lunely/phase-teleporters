@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "phaseteleporters:basic_wire",
+    { "id": "galacticraft:aluminum_wire", "required": false }
+  ]
+}

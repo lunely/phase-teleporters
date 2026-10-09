@@ -21,6 +21,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public final class InfusionJeiCategory implements IRecipeCategory<InfusionStationBlockEntity.InfusionRecipe> {
@@ -58,7 +59,7 @@ public final class InfusionJeiCategory implements IRecipeCategory<InfusionStatio
     public void setRecipe(IRecipeLayoutBuilder builder, InfusionStationBlockEntity.InfusionRecipe recipe,
             IFocusGroup focuses) {
         builder.addInputSlot(33, 62).addItemStacks(infusionInputs(recipe));
-        builder.addInputSlot(77, 31).addItemStack(new ItemStack(recipe.input()));
+        builder.addInputSlot(77, 31).addItemStacks(Arrays.asList(recipe.inputIngredient().getMatchingStacks()));
         builder.addOutputSlot(129, 31).addItemStack(new ItemStack(recipe.output()));
     }
 

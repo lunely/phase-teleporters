@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "phaseteleporters:coal_generator",
+    "phaseteleporters:creative_energy_cube",
+    "phaseteleporters:crusher",
+    "phaseteleporters:electric_furnace",
+    "phaseteleporters:emergency_teleporter",
+    "phaseteleporters:energy_cube",
+    "phaseteleporters:enrichment_chamber",
+    "phaseteleporters:infusion_station",
+    "phaseteleporters:interdimensional_teleportation_frame",
+    "phaseteleporters:interdimensional_teleporter",
+    "phaseteleporters:local_teleporter",
+    "phaseteleporters:machine_casing",
+    "phaseteleporters:quantum_teleporter",
+    "phaseteleporters:solar_panel",
+    "phaseteleporters:teleportation_frame",
+    "phaseteleporters:teleportation_frame_monitor"
+  ]
+}

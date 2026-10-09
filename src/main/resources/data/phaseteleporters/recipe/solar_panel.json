@@ -7,7 +7,7 @@
   ],
   "key": {
     "S": {
-      "item": "phaseteleporters:steel_ingot"
+      "tag": "c:ingots/steel"
     },
     "P": {
       "item": "phaseteleporters:solar_element"

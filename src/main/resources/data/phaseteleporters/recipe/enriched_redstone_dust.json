@@ -1,5 +1,5 @@
 {
   "type": "phaseteleporters:enrichment",
-  "ingredient": { "item": "minecraft:redstone" },
+  "ingredient": { "tag": "phaseteleporters:enrichment/redstone" },
   "result": { "id": "phaseteleporters:enriched_redstone_dust", "count": 1 }
 }

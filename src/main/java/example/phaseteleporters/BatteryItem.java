@@ -12,6 +12,7 @@ import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -68,10 +69,10 @@ public final class BatteryItem extends StoredPEItem {
 
     @Override public void appendTooltip(ItemStack stack, TooltipContext context,
             List<Text> tooltip, TooltipType type) {
-        super.appendTooltip(stack, context, tooltip, type);
         tooltip.add(Text.translatable("tooltip.phaseteleporters.battery_mode",
                 Text.translatable(isInventoryCharging(stack)
                         ? "tooltip.phaseteleporters.battery_mode_charging"
-                        : "tooltip.phaseteleporters.battery_mode_idle")));
+                        : "tooltip.phaseteleporters.battery_mode_idle")).formatted(Formatting.GRAY));
+        super.appendTooltip(stack, context, tooltip, type);
     }
 }

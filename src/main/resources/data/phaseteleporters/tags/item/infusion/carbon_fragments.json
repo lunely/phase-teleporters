@@ -1,0 +1,6 @@
+{
+  "replace": false,
+  "values": [
+    { "id": "galacticraft:carbon_fragments", "required": false }
+  ]
+}

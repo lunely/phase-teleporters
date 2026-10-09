@@ -37,6 +37,11 @@ public enum InfusionResource {
         if (stack.isOf(Items.REDSTONE_BLOCK)) return REDSTONE;
         if (stack.isOf(Items.DIAMOND_BLOCK)) return DIAMOND;
         if (stack.isOf(Items.COAL_BLOCK) || stack.isOf(Items.CHARCOAL)) return COAL;
+        if (stack.isIn(MaterialTags.DIAMOND_DUST)) return DIAMOND;
+        if (stack.isIn(MaterialTags.REDSTONE_DUST)) return REDSTONE;
+        if (stack.isIn(MaterialTags.GLOWSTONE_DUST)) return GLOWSTONE_DUST;
+        if (stack.isIn(MaterialTags.COAL_DUST) || stack.isIn(MaterialTags.CHARCOAL_DUST)
+                || stack.isIn(MaterialTags.CARBON_FRAGMENTS)) return COAL;
         for (InfusionResource resource : values()) {
             if (resource.item != null && stack.isOf(resource.item)) return resource;
         }
@@ -51,7 +56,8 @@ public enum InfusionResource {
         if (stack.isOf(Items.REDSTONE_BLOCK)) return REDSTONE.unitsPerItem * 9;
         if (stack.isOf(Items.DIAMOND_BLOCK)) return DIAMOND.unitsPerItem * 9;
         if (stack.isOf(Items.COAL_BLOCK)) return 90;
-        if (stack.isOf(Items.CHARCOAL)) return 20;
+        if (stack.isIn(MaterialTags.CARBON_FRAGMENTS)) return 5;
+        if (stack.isOf(Items.CHARCOAL) || stack.isIn(MaterialTags.CHARCOAL_DUST)) return 20;
         return fromStack(stack).unitsPerItem;
     }
 

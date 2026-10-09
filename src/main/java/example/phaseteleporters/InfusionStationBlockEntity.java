@@ -9,6 +9,8 @@ import net.minecraft.inventory.Inventories;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.PropertyDelegate;
@@ -28,7 +30,20 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
     public static final int PROCESS_TIME = 100;
     public static final long PE_PER_TICK = 80;
     public static final int MAX_INFUSION = 1000;
-    public record InfusionRecipe(Item input, InfusionResource resource, int units, Item output) {}
+    public record InfusionRecipe(Item input, TagKey<Item> inputTag,
+                                 InfusionResource resource, int units, Item output) {
+        public InfusionRecipe(Item input, InfusionResource resource, int units, Item output) {
+            this(input, null, resource, units, output);
+        }
+
+        public boolean matchesInput(ItemStack stack) {
+            return stack.isOf(input) || (inputTag != null && stack.isIn(inputTag));
+        }
+
+        public Ingredient inputIngredient() {
+            return inputTag == null ? Ingredient.ofItems(input) : Ingredient.fromTag(inputTag);
+        }
+    }
     public static final List<InfusionRecipe> RECIPES = List.of(
             new InfusionRecipe(Items.IRON_INGOT, InfusionResource.COAL, 10, PhaseTeleportersMod.STEEL_INGOT),
             new InfusionRecipe(Items.IRON_INGOT, InfusionResource.REDSTONE, 10, PhaseTeleportersMod.BASIC_ALLOY),
@@ -38,7 +53,8 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
                     InfusionResource.PURIFIED_OBSIDIAN_DUST, 20, PhaseTeleportersMod.PHASE_CONTROL_CIRCUIT),
             new InfusionRecipe(PhaseTeleportersMod.BASIC_ALLOY, InfusionResource.DIAMOND, 20,
                     PhaseTeleportersMod.ADVANCED_ALLOY),
-            new InfusionRecipe(PhaseTeleportersMod.OBSIDIAN_DUST, InfusionResource.DIAMOND, 10,
+            new InfusionRecipe(PhaseTeleportersMod.OBSIDIAN_DUST, MaterialTags.OBSIDIAN_DUST,
+                    InfusionResource.DIAMOND, 10,
                     PhaseTeleportersMod.PURIFIED_OBSIDIAN_DUST),
             new InfusionRecipe(Items.LAPIS_LAZULI, InfusionResource.DIAMOND, 100,
                     PhaseTeleportersMod.SOLAR_ELEMENT),
@@ -127,7 +143,7 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
     private InfusionRecipe recipeForInputs() {
         for (InfusionRecipe recipe : RECIPES)
             if (infusionResource == recipe.resource() && infusionAmount >= recipe.units()
-                    && items.get(0).isOf(recipe.input())) return recipe;
+                    && recipe.matchesInput(items.get(0))) return recipe;
         return null;
     }
 
@@ -185,7 +201,7 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
     @Override public boolean canPlayerUse(PlayerEntity player) { return super.canPlayerUse(player) && Inventory.canPlayerUse(this, player); }
     @Override public boolean isValid(int slot, ItemStack stack) {
         return switch (slot) {
-            case 0 -> RECIPES.stream().anyMatch(recipe -> stack.isOf(recipe.input()));
+            case 0 -> RECIPES.stream().anyMatch(recipe -> recipe.matchesInput(stack));
             case 1 -> InfusionResource.fromStack(stack) != InfusionResource.NONE;
             case 3 -> stack.getItem() instanceof example.phaseteleporters.energy.PEChargeableItem;
             default -> false;

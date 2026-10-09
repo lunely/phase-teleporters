@@ -1,5 +1,5 @@
 {
   "type": "phaseteleporters:enrichment",
-  "ingredient": { "item": "minecraft:diamond" },
+  "ingredient": { "tag": "phaseteleporters:enrichment/diamond" },
   "result": { "id": "phaseteleporters:enriched_diamond", "count": 1 }
 }

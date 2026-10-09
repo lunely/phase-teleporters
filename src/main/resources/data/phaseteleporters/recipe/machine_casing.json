@@ -6,9 +6,9 @@
     "IGI"
   ],
   "key": {
-    "I": { "item": "phaseteleporters:steel_ingot" },
+    "I": { "tag": "c:ingots/steel" },
     "G": { "item": "minecraft:glass" },
-    "X": { "item": "phaseteleporters:steel_ingot" }
+    "X": { "tag": "c:ingots/steel" }
   },
   "result": {
     "id": "phaseteleporters:machine_casing",
