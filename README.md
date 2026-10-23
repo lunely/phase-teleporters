@@ -2,6 +2,8 @@
 
 <a href="https://boosty.to/lunelydev"><img src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/boosty/default.svg" alt="Boosty" width="32"></a>
 
+[![Available on CurseForge](https://img.shields.io/badge/Available%20on-CurseForge-F16436?logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/mc-mods/phase-teleporters)
+
 **Phase Teleporters** — a lightweight tech mod for Minecraft designed for teleportation
 
 Phase Teleporters lets you travel conveniently both within the same dimension and between different dimensions
