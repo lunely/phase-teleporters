@@ -1,6 +1,6 @@
 # Phase Teleporters
 
-<a href="https://boosty.to/lunelydev"><img src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/boosty/default.svg" alt="Boosty" width="32"></a>
+[![Support on Boosty](https://img.shields.io/badge/Support%20on-Boosty-F15F2C)](https://boosty.to/lunelydev)
 
 [![Available on CurseForge](https://img.shields.io/badge/Available%20on-CurseForge-F16436?logo=curseforge&logoColor=white)](https://www.curseforge.com/minecraft/mc-mods/phase-teleporters)
 
