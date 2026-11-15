@@ -3,6 +3,7 @@
   "id": "phaseteleporters",
   "version": "${version}",
   "name": "Phase Teleporters",
+  "icon": "assets/phaseteleporters/icon.png",
   "environment": "*",
   "mixins": ["phaseteleporters.client.mixins.json", "phaseteleporters.mixins.json"],
   "entrypoints": {
