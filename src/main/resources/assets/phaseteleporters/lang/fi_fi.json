@@ -8,7 +8,7 @@
   "gui.phaseteleporters.inspection.infusion": "Resurssi: %s — %s / %s",
   "item.phaseteleporters.steel_ingot": "Teräsharkko",
   "item.phaseteleporters.glowstone_ingot": "Hehkukiviharkko",
-  "block.phaseteleporters.machine_casing": "Teräskotelo",
+  "block.phaseteleporters.machine_casing": "Konekotelo",
   "block.phaseteleporters.infusion_station": "Infuusioasema",
   "item.phaseteleporters.basic_alloy": "Perusseos",
   "item.phaseteleporters.advanced_alloy": "Edistynyt seos",

@@ -1,5 +1,6 @@
 package example.phaseteleporters;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -53,18 +54,24 @@ public final class ElectricFurnaceBlockEntity extends PEBlockEntity implements P
         example.phaseteleporters.energy.PEEnergyItemTransfer.discharge(furnace, furnace.items.get(2));
         furnace.transferConfiguredItems();
         furnace.sendConfiguredOutput();
-        if (!furnace.canWork()) return;
-        ItemStack input = furnace.items.get(0);
-        ItemStack output = furnace.items.get(1);
+        boolean working = furnace.canWork() && furnace.processRecipe(world);
+        if (state.get(ElectricFurnaceBlock.LIT) != working) {
+            world.setBlockState(pos, state.with(ElectricFurnaceBlock.LIT, working), Block.NOTIFY_LISTENERS);
+        }
+    }
+
+    private boolean processRecipe(World world) {
+        ItemStack input = items.get(0);
+        ItemStack output = items.get(1);
         RecipeEntry<SmeltingRecipe> smelting = input.isEmpty() ? null : world.getRecipeManager()
                 .getFirstMatch(RecipeType.SMELTING, new SingleStackRecipeInput(input), world).orElse(null);
         RecipeEntry<BlastingRecipe> blasting = input.isEmpty() || smelting != null ? null : world.getRecipeManager()
                 .getFirstMatch(RecipeType.BLASTING, new SingleStackRecipeInput(input), world).orElse(null);
         Identifier recipeId = smelting != null ? smelting.id() : blasting != null ? blasting.id() : null;
-        if (!java.util.Objects.equals(recipeId, furnace.currentRecipeId)) {
-            furnace.currentRecipeId = recipeId;
-            furnace.progress = 0;
-            furnace.markDirty();
+        if (!java.util.Objects.equals(recipeId, currentRecipeId)) {
+            currentRecipeId = recipeId;
+            progress = 0;
+            markDirty();
         }
         ItemStack result = smelting != null ? smelting.value().getResult(world.getRegistryManager())
                 : blasting != null ? blasting.value().getResult(world.getRegistryManager()) : ItemStack.EMPTY;
@@ -72,22 +79,23 @@ public final class ElectricFurnaceBlockEntity extends PEBlockEntity implements P
                 || (ItemStack.areItemsAndComponentsEqual(output, result)
                 && output.getCount() + result.getCount() <= output.getMaxCount()));
         if (!canProcess) {
-            if (furnace.progress != 0) {
-                furnace.progress = 0;
-                furnace.markDirty();
+            if (progress != 0) {
+                progress = 0;
+                markDirty();
             }
-            return;
+            return false;
         }
-        if (furnace.getStored() < PE_PER_TICK) return;
-        furnace.extract(PE_PER_TICK, false);
-        furnace.progress++;
-        if (furnace.progress >= PROCESS_TIME) {
+        if (getStored() < PE_PER_TICK) return false;
+        extract(PE_PER_TICK, false);
+        progress++;
+        if (progress >= PROCESS_TIME) {
             input.decrement(1);
-            if (output.isEmpty()) furnace.items.set(1, result.copy());
+            if (output.isEmpty()) items.set(1, result.copy());
             else output.increment(result.getCount());
-            furnace.progress = 0;
+            progress = 0;
         }
-        furnace.markDirty();
+        markDirty();
+        return true;
     }
 
     @Override public int size() { return items.size(); }

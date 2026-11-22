@@ -8,7 +8,7 @@
   "gui.phaseteleporters.inspection.infusion": "Ressource : %s — %s / %s",
   "item.phaseteleporters.steel_ingot": "Lingot d’acier",
   "item.phaseteleporters.glowstone_ingot": "Lingot de pierre lumineuse",
-  "block.phaseteleporters.machine_casing": "Châssis en acier",
+  "block.phaseteleporters.machine_casing": "Châssis de machine",
   "block.phaseteleporters.infusion_station": "Station d’infusion",
   "item.phaseteleporters.basic_alloy": "Alliage de base",
   "item.phaseteleporters.advanced_alloy": "Alliage avancé",

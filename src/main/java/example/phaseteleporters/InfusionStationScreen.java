@@ -13,10 +13,6 @@ public final class InfusionStationScreen extends HandledScreen<InfusionStationSc
             Identifier.of("phaseteleporters", "textures/gui/infusion_station.png");
     private static final Identifier ENERGY_SLOT_TEXTURE =
             Identifier.of("phaseteleporters", "textures/gui/slot/energy_slot.png");
-    private static final Identifier EMPTY_BAR_TEXTURE =
-            Identifier.of("phaseteleporters", "textures/gui/electric_furnace_energy_empty.png");
-    private static final Identifier FILLED_ENERGY_TEXTURE =
-            Identifier.of("phaseteleporters", "textures/gui/electric_furnace_energy_filled.png");
     private static final Identifier WATER_TEXTURE =
             Identifier.of("minecraft", "textures/block/water_still.png");
     private static final int BAR_Y = 8;
@@ -70,18 +66,7 @@ public final class InfusionStationScreen extends HandledScreen<InfusionStationSc
     }
 
     private void drawEnergy(DrawContext context) {
-        int left = x + ENERGY_X;
-        int top = y + BAR_Y;
-        int bottom = top + BAR_HEIGHT;
-        drawBarFrame(context, left, top, bottom);
-        long capacity = handler.getMaxEnergy();
-        if (capacity <= 0) return;
-        int filled = (int) Math.min(BAR_HEIGHT,
-                Math.max(0, handler.getEnergy()) * BAR_HEIGHT / capacity);
-        if (filled > 0) {
-            context.drawTexture(FILLED_ENERGY_TEXTURE, left, bottom - filled, 0,
-                    BAR_HEIGHT - filled, BAR_WIDTH, filled, BAR_WIDTH, BAR_HEIGHT);
-        }
+        EnergyBarRenderer.draw(context, x + ENERGY_X, y + BAR_Y, handler.getEnergy(), handler.getMaxEnergy());
     }
 
     private void drawInfusion(DrawContext context) {
@@ -124,12 +109,6 @@ public final class InfusionStationScreen extends HandledScreen<InfusionStationSc
             int tickWidth = (tick & 1) == 0 ? 6 : 8;
             context.fill(left, tickY, left + tickWidth, tickY + 1, 0xFFB31212);
         }
-    }
-
-    private void drawBarFrame(DrawContext context, int left, int top, int bottom) {
-        context.fill(left - 1, top - 1, left + BAR_WIDTH + 1, bottom + 1, 0xFF373737);
-        context.drawTexture(EMPTY_BAR_TEXTURE, left, top, 0, 0,
-                BAR_WIDTH, BAR_HEIGHT, BAR_WIDTH, BAR_HEIGHT);
     }
 
     private boolean canClear() {
@@ -182,8 +161,7 @@ public final class InfusionStationScreen extends HandledScreen<InfusionStationSc
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
         drawMouseoverTooltip(context, mouseX, mouseY);
-        if (mouseX >= x + ENERGY_X && mouseX < x + ENERGY_X + BAR_WIDTH
-                && mouseY >= y + BAR_Y && mouseY < y + BAR_Y + BAR_HEIGHT) {
+        if (EnergyBarRenderer.contains(x + ENERGY_X, y + BAR_Y, mouseX, mouseY)) {
             context.drawTooltip(textRenderer,
                     Text.literal(PEGuiText.energy(handler.getEnergy(), handler.getMaxEnergy())),
                     mouseX, mouseY);

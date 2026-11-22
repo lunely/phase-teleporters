@@ -2,8 +2,8 @@
   "parent": "minecraft:block/orientable_with_bottom",
   "textures": {
     "front": "phaseteleporters:block/electric_furnace_front",
-    "side": "phaseteleporters:block/electric_furnace_side",
-    "top": "phaseteleporters:block/electric_furnace_top",
-    "bottom": "phaseteleporters:block/electric_furnace_side"
+    "side": "phaseteleporters:block/machine_casing_graphite",
+    "top": "phaseteleporters:block/machine_casing_graphite",
+    "bottom": "phaseteleporters:block/machine_casing_graphite"
   }
 }

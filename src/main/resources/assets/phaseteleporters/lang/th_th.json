@@ -8,7 +8,7 @@
   "gui.phaseteleporters.inspection.infusion": "ทรัพยากร: %s — %s / %s",
   "item.phaseteleporters.steel_ingot": "แท่งเหล็กกล้า",
   "item.phaseteleporters.glowstone_ingot": "แท่งหินเรืองแสง",
-  "block.phaseteleporters.machine_casing": "โครงเหล็กกล้า",
+  "block.phaseteleporters.machine_casing": "โครงเครื่องจักร",
   "block.phaseteleporters.infusion_station": "สถานีอัดสาร",
   "item.phaseteleporters.basic_alloy": "โลหะผสมพื้นฐาน",
   "item.phaseteleporters.advanced_alloy": "โลหะผสมขั้นสูง",

@@ -64,6 +64,14 @@ java {
     withSourcesJar()
 }
 
+tasks.named('jar') {
+    from('LICENSE')
+}
+
+tasks.named('sourcesJar') {
+    from('LICENSE')
+}
+
 // Server-only regression tests in a disposable world, separate from the release jar.
 sourceSets {
     gametest {

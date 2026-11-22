@@ -290,7 +290,7 @@ public final class PhaseTeleportersMod implements ModInitializer {
         AnchorChunkState.register();
         Registry.register(Registries.ITEM_GROUP, Identifier.of(MOD_ID, "main"),
                 FabricItemGroup.builder()
-                        .icon(() -> new ItemStack(TELEPORTATION_CORE))
+                        .icon(() -> new ItemStack(TELEPORT_ITEM))
                         .displayName(Text.translatable("itemGroup.phaseteleporters.main"))
                         .entries((context, entries) -> {
                             entries.add(STEEL_INGOT);

@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
@@ -22,10 +23,11 @@ import net.minecraft.world.World;
 public final class ElectricFurnaceBlock extends StoredEnergyBlock {
     public static final MapCodec<ElectricFurnaceBlock> CODEC = createCodec(ElectricFurnaceBlock::new);
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
+    public static final BooleanProperty LIT = Properties.LIT;
 
     public ElectricFurnaceBlock(Settings settings) {
         super(settings);
-        setDefaultState(getDefaultState().with(FACING, Direction.NORTH));
+        setDefaultState(getDefaultState().with(FACING, Direction.NORTH).with(LIT, false));
     }
 
     @Override public BlockState getPlacementState(ItemPlacementContext context) {
@@ -33,7 +35,7 @@ public final class ElectricFurnaceBlock extends StoredEnergyBlock {
     }
 
     @Override protected void appendProperties(StateManager.Builder<net.minecraft.block.Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(FACING, LIT);
     }
 
     @Override protected MapCodec<ElectricFurnaceBlock> getCodec() { return CODEC; }

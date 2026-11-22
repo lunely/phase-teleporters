@@ -8,7 +8,7 @@
   "gui.phaseteleporters.inspection.infusion": "Ресурс: %s — %s / %s",
   "item.phaseteleporters.steel_ingot": "Сталевий зливок",
   "item.phaseteleporters.glowstone_ingot": "Зливок світлокаменю",
-  "block.phaseteleporters.machine_casing": "Сталевий корпус",
+  "block.phaseteleporters.machine_casing": "Корпус механізму",
   "block.phaseteleporters.infusion_station": "Станція наповнення",
   "item.phaseteleporters.basic_alloy": "Базовий сплав",
   "item.phaseteleporters.advanced_alloy": "Удосконалений сплав",

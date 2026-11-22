@@ -12,7 +12,9 @@ import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.NamedScreenHandlerFactory;
@@ -30,6 +32,7 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
     public static final int PROCESS_TIME = 100;
     public static final long PE_PER_TICK = 80;
     public static final int MAX_INFUSION = 1000;
+    static final int DISPLAY_ROWS = 16;
     public record InfusionRecipe(Item input, TagKey<Item> inputTag,
                                  InfusionResource resource, int units, Item output) {
         public InfusionRecipe(Item input, InfusionResource resource, int units, Item output) {
@@ -113,6 +116,8 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
         station.extract(PE_PER_TICK, false);
         station.progress++;
         if (station.progress >= PROCESS_TIME) {
+            int previousLevel = station.displayLevel();
+            InfusionResource previousResource = station.infusionResource;
             station.items.get(0).decrement(1);
             station.infusionAmount -= recipe.units();
             if (station.infusionAmount == 0) station.infusionResource = InfusionResource.NONE;
@@ -120,6 +125,7 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
             if (output.isEmpty()) station.items.set(2, new ItemStack(recipe.output()));
             else output.increment(1);
             station.progress = 0;
+            station.syncDisplay(previousLevel, previousResource);
         }
         station.markDirty();
     }
@@ -130,6 +136,8 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
         if (resource == InfusionResource.NONE) return;
         if (infusionAmount > 0 && infusionResource != resource) return;
         int unitsPerStackItem = InfusionResource.unitsForStack(stack);
+        int previousLevel = displayLevel();
+        InfusionResource previousResource = infusionResource;
         boolean loaded = false;
         while (!stack.isEmpty() && unitsPerStackItem <= MAX_INFUSION - infusionAmount) {
             stack.decrement(1);
@@ -137,7 +145,10 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
             infusionResource = resource;
             loaded = true;
         }
-        if (loaded) markDirty();
+        if (loaded) {
+            markDirty();
+            syncDisplay(previousLevel, previousResource);
+        }
     }
 
     private InfusionRecipe recipeForInputs() {
@@ -149,10 +160,13 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
 
     public boolean clearInfusion() {
         if (progress != 0 || infusionAmount == 0) return false;
+        int previousLevel = displayLevel();
+        InfusionResource previousResource = infusionResource;
         infusionAmount = 0;
         infusionResource = InfusionResource.NONE;
         currentRecipe = null;
         markDirty();
+        syncDisplay(previousLevel, previousResource);
         return true;
     }
 
@@ -163,11 +177,44 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
     }
 
     public void readStoredInfusion(NbtCompound data) {
+        int previousLevel = displayLevel();
+        InfusionResource previousResource = infusionResource;
+        loadStoredInfusion(data);
+        markDirty();
+        syncDisplay(previousLevel, previousResource);
+    }
+
+    private void loadStoredInfusion(NbtCompound data) {
         infusionResource = InfusionResource.byId(data.getInt("InfusionResource"));
         infusionAmount = infusionResource == InfusionResource.NONE ? 0
                 : Math.clamp(data.getInt("InfusionAmount"), 0, MAX_INFUSION);
         if (infusionAmount == 0) infusionResource = InfusionResource.NONE;
-        markDirty();
+    }
+
+    InfusionResource displayResource() {
+        return infusionResource;
+    }
+
+    int displayLevel() {
+        return Math.ceilDiv(infusionAmount * DISPLAY_ROWS, MAX_INFUSION);
+    }
+
+    private void syncDisplay(int previousLevel, InfusionResource previousResource) {
+        if (world instanceof ServerWorld serverWorld
+                && (displayLevel() != previousLevel || infusionResource != previousResource)) {
+            serverWorld.getChunkManager().markForUpdate(pos);
+        }
+    }
+
+    @Override public BlockEntityUpdateS2CPacket toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+    @Override public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup lookup) {
+        NbtCompound data = new NbtCompound();
+        data.putBoolean("InfusionDisplay", true);
+        writeStoredInfusion(data);
+        return data;
     }
 
     private boolean canAccept(Item result) {
@@ -210,14 +257,15 @@ public final class InfusionStationBlockEntity extends PEBlockEntity implements P
 
     @Override
     protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup lookup) {
+        if (nbt.getBoolean("InfusionDisplay")) {
+            loadStoredInfusion(nbt);
+            return;
+        }
         super.readNbt(nbt, lookup);
         items.clear();
         Inventories.readNbt(nbt, items, lookup);
         progress = Math.clamp(nbt.getInt("Progress"), 0, PROCESS_TIME - 1);
-        infusionResource = InfusionResource.byId(nbt.getInt("InfusionResource"));
-        infusionAmount = infusionResource == InfusionResource.NONE ? 0
-                : Math.clamp(nbt.getInt("InfusionAmount"), 0, MAX_INFUSION);
-        if (infusionAmount == 0) infusionResource = InfusionResource.NONE;
+        loadStoredInfusion(nbt);
         currentRecipe = recipeForInputs();
         if (currentRecipe == null || !nbt.getString("CurrentRecipeOutput").equals(
                 net.minecraft.registry.Registries.ITEM.getId(currentRecipe.output()).toString())) progress = 0;

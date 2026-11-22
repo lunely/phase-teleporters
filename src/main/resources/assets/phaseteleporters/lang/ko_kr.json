@@ -8,7 +8,7 @@
   "gui.phaseteleporters.inspection.infusion": "자원: %s — %s / %s",
   "item.phaseteleporters.steel_ingot": "강철 주괴",
   "item.phaseteleporters.glowstone_ingot": "발광석 주괴",
-  "block.phaseteleporters.machine_casing": "강철 케이싱",
+  "block.phaseteleporters.machine_casing": "기계 케이싱",
   "block.phaseteleporters.infusion_station": "주입 스테이션",
   "item.phaseteleporters.basic_alloy": "기본 합금",
   "item.phaseteleporters.advanced_alloy": "고급 합금",

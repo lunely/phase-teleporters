@@ -10,6 +10,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public final class EmergencyTeleportScreen<T extends EmergencyTeleportScreenHandler> extends HandledScreen<T> {
+    private static final int ENERGY_X = 151;
+    private static final int ENERGY_Y = 98;
     private static final Identifier TEXTURE = Identifier.of(PhaseTeleportersMod.MOD_ID,
             "textures/gui/emergency_teleporter.png");
     private static final Identifier REMOTE_TEXTURE = Identifier.of(PhaseTeleportersMod.MOD_ID,
@@ -121,7 +123,7 @@ public final class EmergencyTeleportScreen<T extends EmergencyTeleportScreenHand
         }
         super.render(context, mouseX, mouseY, delta);
         if (!handler.remote()) sidePanel.tooltip(context, textRenderer, x, y, backgroundWidth, mouseX, mouseY, handler);
-        if (!handler.remote() && mouseX >= x + 150 && mouseX < x + 169 && mouseY >= y + 97 && mouseY < y + 147)
+        if (!handler.remote() && EnergyBarRenderer.contains(x + ENERGY_X, y + ENERGY_Y, mouseX, mouseY))
             context.drawTooltip(textRenderer, Text.literal(PEGuiText.teleporterEnergy(handler.energy(), handler.capacity())), mouseX, mouseY);
         drawMouseoverTooltip(context, mouseX, mouseY);
     }
@@ -133,12 +135,7 @@ public final class EmergencyTeleportScreen<T extends EmergencyTeleportScreenHand
                 backgroundWidth, backgroundHeight, 256, 256);
         drawSettingsList(context);
         if (!handler.remote()) {
-            Identifier empty = texture("electric_furnace_energy_empty.png");
-            Identifier filled = texture("electric_furnace_energy_filled.png");
-            context.fill(x + 150, y + 97, x + 168, y + 147, 0xFF373737);
-            context.drawTexture(empty, x + 151, y + 98, 0, 0, 16, 48, 16, 48);
-            int amount = handler.capacity() <= 0 ? 0 : (int) Math.clamp(handler.energy() * 48 / handler.capacity(), 0, 48);
-            if (amount > 0) context.drawTexture(filled, x + 151, y + 146 - amount, 0, 48 - amount, 16, amount, 16, 48);
+            EnergyBarRenderer.draw(context, x + ENERGY_X, y + ENERGY_Y, handler.energy(), handler.capacity());
             if (handler.getSlot(0).getStack().isEmpty()) {
                 Identifier icon = texture("slot/chunkloader_slot.png");
                 client.getTextureManager().getTexture(icon).setFilter(false, false);

@@ -8,7 +8,7 @@
   "gui.phaseteleporters.inspection.infusion": "资源：%s — %s / %s",
   "item.phaseteleporters.steel_ingot": "钢锭",
   "item.phaseteleporters.glowstone_ingot": "荧石锭",
-  "block.phaseteleporters.machine_casing": "钢制机壳",
+  "block.phaseteleporters.machine_casing": "机器外壳",
   "block.phaseteleporters.infusion_station": "灌注站",
   "item.phaseteleporters.basic_alloy": "基础合金",
   "item.phaseteleporters.advanced_alloy": "高级合金",

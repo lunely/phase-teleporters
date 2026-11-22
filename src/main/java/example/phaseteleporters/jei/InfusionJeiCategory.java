@@ -1,6 +1,7 @@
 package example.phaseteleporters.jei;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import example.phaseteleporters.EnergyBarRenderer;
 import example.phaseteleporters.InfusionResource;
 import example.phaseteleporters.InfusionStationBlockEntity;
 import example.phaseteleporters.PhaseTeleportersMod;
@@ -29,10 +30,6 @@ public final class InfusionJeiCategory implements IRecipeCategory<InfusionStatio
             Identifier.of("phaseteleporters", "textures/gui/infusion_station.png");
     private static final Identifier ENERGY_SLOT_TEXTURE =
             Identifier.of("phaseteleporters", "textures/gui/slot/energy_slot.png");
-    private static final Identifier EMPTY_ENERGY_TEXTURE =
-            Identifier.of("phaseteleporters", "textures/gui/electric_furnace_energy_empty.png");
-    private static final Identifier FILLED_ENERGY_TEXTURE =
-            Identifier.of("phaseteleporters", "textures/gui/electric_furnace_energy_filled.png");
     private static final Identifier WATER_TEXTURE =
             Identifier.of("minecraft", "textures/block/water_still.png");
     private static final int BAR_Y = 8;
@@ -84,9 +81,7 @@ public final class InfusionJeiCategory implements IRecipeCategory<InfusionStatio
     public void draw(InfusionStationBlockEntity.InfusionRecipe recipe, IRecipeSlotsView slots,
             DrawContext context, double mouseX, double mouseY) {
         context.drawTexture(GUI_TEXTURE, 0, 0, 0, 0, 176, 83);
-        context.fill(7, 7, 25, 57, 0xFF373737);
-        context.drawTexture(EMPTY_ENERGY_TEXTURE, 8, BAR_Y, 0, 0, 16, BAR_HEIGHT, 16, BAR_HEIGHT);
-        context.drawTexture(FILLED_ENERGY_TEXTURE, 8, BAR_Y, 0, 0, 16, BAR_HEIGHT, 16, BAR_HEIGHT);
+        EnergyBarRenderer.draw(context, 8, BAR_Y, 1, 1);
         drawInfusionPreview(context, recipe.resource());
         context.drawTexture(ENERGY_SLOT_TEXTURE, 8, 62, 0, 0, 16, 16, 16, 16);
         context.drawTexture(GUI_TEXTURE, 100, 31, 180, 4, 22, 15, 256, 256);

@@ -2,7 +2,6 @@
   "parent": "minecraft:block/block",
   "textures": {
     "insulation": "phaseteleporters:block/basic_energy_cable_insulation",
-    "iron": "minecraft:block/iron_block",
     "particle": "phaseteleporters:block/basic_energy_cable_insulation"
   },
   "elements": [
@@ -24,7 +23,7 @@
           "uv": [
             0,
             0,
-            16,
+            8,
             16
           ]
         },
@@ -33,7 +32,7 @@
           "uv": [
             0,
             0,
-            16,
+            8,
             16
           ]
         },
@@ -44,8 +43,7 @@
             0,
             16,
             16
-          ],
-          "rotation": 90
+          ]
         },
         "west": {
           "texture": "#insulation",
@@ -54,8 +52,7 @@
             0,
             16,
             16
-          ],
-          "rotation": 90
+          ]
         },
         "up": {
           "texture": "#insulation",
@@ -64,7 +61,8 @@
             0,
             16,
             16
-          ]
+          ],
+          "rotation": 90
         },
         "down": {
           "texture": "#insulation",
@@ -73,7 +71,8 @@
             0,
             16,
             16
-          ]
+          ],
+          "rotation": 90
         }
       },
       "shade": true

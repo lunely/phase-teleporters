@@ -29,6 +29,7 @@ public final class PhaseTeleportersClient implements ClientModInitializer {
         TeleportationFrameMonitorClientNetworking.register();
         EnergyCubeRenderer.register();
         QuantumTeleportRenderer.register();
+        InfusionStationRenderer.register();
         BlockRenderLayerMap.INSTANCE.putBlock(PhaseTeleportersMod.QUANTUM_TELEPORT, RenderLayer.getCutout());
         HandledScreens.register(PhaseTeleportersMod.QUANTUM_TELEPORT_SCREEN_HANDLER, QuantumTeleportScreen::new);
         QuantumTeleportClientNetworking.register();

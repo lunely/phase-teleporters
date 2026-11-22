@@ -27,8 +27,6 @@ abstract class FramedTeleportScreenBase<T extends ScreenHandler & EnergySideScre
     private static final Identifier PUBLIC_SLOT = texture("textures/gui/slot/public_slot.png");
     private static final Identifier PRIVATE_LOCK = texture("textures/gui/slot/private_lock.png");
     private static final Identifier LIST_BACKGROUND = texture("textures/gui/frequency_list_background.png");
-    private static final Identifier EMPTY_ENERGY = texture("textures/gui/electric_furnace_energy_empty.png");
-    private static final Identifier FILLED_ENERGY = texture("textures/gui/electric_furnace_energy_filled.png");
     private static final Identifier ENERGY_SLOT_ICON = texture("textures/gui/slot/energy_slot.png");
     private static final Identifier CHUNKLOADER_SLOT_ICON = texture("textures/gui/slot/chunkloader_slot.png");
     private static final int PANEL_WIDTH = 135;
@@ -63,8 +61,6 @@ abstract class FramedTeleportScreenBase<T extends ScreenHandler & EnergySideScre
     private static final int CHECK_SIZE = 11;
     private static final int ENERGY_X = 152;
     private static final int ENERGY_Y = 100;
-    private static final int ENERGY_WIDTH = 16;
-    private static final int ENERGY_HEIGHT = 48;
     private static final int ENERGY_ITEM_X = 152;
     private static final int ENERGY_ITEM_Y = 79;
     private static final int CHUNKLOADER_X = 8;
@@ -251,20 +247,7 @@ abstract class FramedTeleportScreenBase<T extends ScreenHandler & EnergySideScre
     }
 
     private void drawEnergy(DrawContext context) {
-        int left = x + ENERGY_X;
-        int top = y + ENERGY_Y;
-        int bottom = top + ENERGY_HEIGHT;
-        context.fill(left - 1, top - 1, left + ENERGY_WIDTH + 1, bottom + 1, 0xFF373737);
-        context.drawTexture(EMPTY_ENERGY, left, top, 0, 0,
-                ENERGY_WIDTH, ENERGY_HEIGHT, ENERGY_WIDTH, ENERGY_HEIGHT);
-        long capacity = getMaxEnergy();
-        if (capacity <= 0) return;
-        int filled = (int) Math.min(ENERGY_HEIGHT,
-                Math.max(0, getEnergy()) * ENERGY_HEIGHT / capacity);
-        if (filled <= 0) return;
-        context.drawTexture(FILLED_ENERGY, left, bottom - filled,
-                0, ENERGY_HEIGHT - filled, ENERGY_WIDTH, filled,
-                ENERGY_WIDTH, ENERGY_HEIGHT);
+        EnergyBarRenderer.draw(context, x + ENERGY_X, y + ENERGY_Y, getEnergy(), getMaxEnergy());
     }
 
     private void drawFrequencyList(DrawContext context) {
@@ -567,8 +550,7 @@ abstract class FramedTeleportScreenBase<T extends ScreenHandler & EnergySideScre
             }
         }
         sidePanel.tooltip(context, textRenderer, x, y, backgroundWidth, mouseX, mouseY, handler);
-        if (inside(mouseX, mouseY, x + ENERGY_X - 1, y + ENERGY_Y - 1,
-                ENERGY_WIDTH + 2, ENERGY_HEIGHT + 2))
+        if (EnergyBarRenderer.contains(x + ENERGY_X, y + ENERGY_Y, mouseX, mouseY))
             context.drawTooltip(textRenderer,
                     Text.literal(PEGuiText.teleporterEnergy(getEnergy(), getMaxEnergy())),
                     mouseX, mouseY);

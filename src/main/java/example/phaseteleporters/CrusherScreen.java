@@ -13,14 +13,8 @@ public final class CrusherScreen extends HandledScreen<CrusherScreenHandler> {
             Identifier.of("phaseteleporters", "textures/gui/crusher.png");
     private static final Identifier ENERGY_SLOT_TEXTURE =
             Identifier.of("phaseteleporters", "textures/gui/slot/energy_slot.png");
-    private static final Identifier EMPTY_ENERGY_TEXTURE =
-            Identifier.of("phaseteleporters", "textures/gui/electric_furnace_energy_empty.png");
-    private static final Identifier FILLED_ENERGY_TEXTURE =
-            Identifier.of("phaseteleporters", "textures/gui/electric_furnace_energy_filled.png");
     private static final int ENERGY_X = 8;
     private static final int ENERGY_Y = 8;
-    private static final int ENERGY_WIDTH = 16;
-    private static final int ENERGY_HEIGHT = 48;
 
     public CrusherScreen(
             CrusherScreenHandler handler,
@@ -82,22 +76,7 @@ public final class CrusherScreen extends HandledScreen<CrusherScreenHandler> {
     }
 
     private void drawEnergy(DrawContext context) {
-        int left = x + ENERGY_X;
-        int top = y + ENERGY_Y;
-        int bottom = top + ENERGY_HEIGHT;
-        context.fill(left - 1, top - 1, left + ENERGY_WIDTH + 1, bottom + 1, 0xFF373737);
-        context.drawTexture(EMPTY_ENERGY_TEXTURE, left, top, 0, 0,
-                ENERGY_WIDTH, ENERGY_HEIGHT, ENERGY_WIDTH, ENERGY_HEIGHT);
-
-        long capacity = handler.getMaxEnergy();
-        if (capacity <= 0) return;
-        int filled = (int) Math.min(ENERGY_HEIGHT,
-                Math.max(0, handler.getEnergy()) * ENERGY_HEIGHT / capacity);
-        if (filled <= 0) return;
-
-        context.drawTexture(FILLED_ENERGY_TEXTURE, left, bottom - filled, 0,
-                ENERGY_HEIGHT - filled, ENERGY_WIDTH, filled,
-                ENERGY_WIDTH, ENERGY_HEIGHT);
+        EnergyBarRenderer.draw(context, x + ENERGY_X, y + ENERGY_Y, handler.getEnergy(), handler.getMaxEnergy());
     }
 
     private static void drawProgressArrow(
@@ -157,8 +136,7 @@ public final class CrusherScreen extends HandledScreen<CrusherScreenHandler> {
 
         drawMouseoverTooltip(context, mouseX, mouseY);
 
-        if (mouseX >= x + ENERGY_X && mouseX < x + ENERGY_X + ENERGY_WIDTH
-                && mouseY >= y + ENERGY_Y && mouseY < y + ENERGY_Y + ENERGY_HEIGHT) {
+        if (EnergyBarRenderer.contains(x + ENERGY_X, y + ENERGY_Y, mouseX, mouseY)) {
             context.drawTooltip(textRenderer,
                     Text.literal(PEGuiText.energy(handler.getEnergy(), handler.getMaxEnergy())),
                     mouseX, mouseY);

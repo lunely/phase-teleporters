@@ -8,7 +8,7 @@
   "gui.phaseteleporters.inspection.infusion": "المورد: %s — %s / %s",
   "item.phaseteleporters.steel_ingot": "سبيكة فولاذ",
   "item.phaseteleporters.glowstone_ingot": "سبيكة حجر مضيء",
-  "block.phaseteleporters.machine_casing": "هيكل فولاذي",
+  "block.phaseteleporters.machine_casing": "هيكل الآلة",
   "block.phaseteleporters.infusion_station": "محطة التشريب",
   "item.phaseteleporters.basic_alloy": "سبيكة أساسية",
   "item.phaseteleporters.advanced_alloy": "سبيكة متقدمة",

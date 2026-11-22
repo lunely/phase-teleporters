@@ -9,10 +9,8 @@ import net.minecraft.util.Identifier;
 public final class SolarPanelScreen extends HandledScreen<SolarPanelScreenHandler> {
     private final EnergySidePanel sidePanel = new EnergySidePanel();
     private static final Identifier BACKGROUND = texture("solar_panel");
-    private static final Identifier EMPTY = texture("electric_furnace_energy_empty");
-    private static final Identifier FILLED = texture("electric_furnace_energy_filled");
     private static final Identifier ENERGY_SLOT = texture("slot/energy_output");
-    private static final int ENERGY_X = 8, ENERGY_Y = 8, ENERGY_WIDTH = 16, ENERGY_HEIGHT = 48;
+    private static final int ENERGY_X = 8, ENERGY_Y = 8;
     private static Identifier texture(String name) { return Identifier.of(PhaseTeleportersMod.MOD_ID, "textures/gui/" + name + ".png"); }
     public SolarPanelScreen(SolarPanelScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -26,11 +24,7 @@ public final class SolarPanelScreen extends HandledScreen<SolarPanelScreenHandle
     @Override protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
         sidePanel.drawBehind(context, x, y, backgroundWidth, mouseX, mouseY, handler);
         context.drawTexture(BACKGROUND, x, y, 0, 0, 176, 166, 256, 256);
-        int left = x + ENERGY_X, top = y + ENERGY_Y, bottom = top + ENERGY_HEIGHT;
-        context.fill(left - 1, top - 1, left + ENERGY_WIDTH + 1, bottom + 1, 0xFF373737);
-        context.drawTexture(EMPTY, left, top, 0, 0, ENERGY_WIDTH, ENERGY_HEIGHT, ENERGY_WIDTH, ENERGY_HEIGHT);
-        int filled = handler.capacity() <= 0 ? 0 : (int) Math.clamp(handler.energy() * ENERGY_HEIGHT / handler.capacity(), 0, ENERGY_HEIGHT);
-        if (filled > 0) context.drawTexture(FILLED, left, bottom - filled, 0, ENERGY_HEIGHT - filled, ENERGY_WIDTH, filled, ENERGY_WIDTH, ENERGY_HEIGHT);
+        EnergyBarRenderer.draw(context, x + ENERGY_X, y + ENERGY_Y, handler.energy(), handler.capacity());
         if (!handler.getSlot(0).hasStack()) {
             context.drawTexture(ENERGY_SLOT, x + 7, y + 61, 0, 0, 18, 18, 18, 18);
         }
@@ -38,8 +32,7 @@ public final class SolarPanelScreen extends HandledScreen<SolarPanelScreenHandle
     @Override public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
         drawMouseoverTooltip(context, mouseX, mouseY);
-        if (mouseX >= x + ENERGY_X && mouseX < x + ENERGY_X + ENERGY_WIDTH
-                && mouseY >= y + ENERGY_Y && mouseY < y + ENERGY_Y + ENERGY_HEIGHT) {
+        if (EnergyBarRenderer.contains(x + ENERGY_X, y + ENERGY_Y, mouseX, mouseY)) {
             context.drawTooltip(textRenderer, java.util.List.of(
                     Text.translatable("gui.phaseteleporters.solar_panel.generation_rate", handler.generation())
                             .formatted(net.minecraft.util.Formatting.GREEN),

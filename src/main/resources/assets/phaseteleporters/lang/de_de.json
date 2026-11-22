@@ -8,7 +8,7 @@
   "gui.phaseteleporters.inspection.infusion": "Ressource: %s — %s / %s",
   "item.phaseteleporters.steel_ingot": "Stahlbarren",
   "item.phaseteleporters.glowstone_ingot": "Leuchtsteinbarren",
-  "block.phaseteleporters.machine_casing": "Stahlgehäuse",
+  "block.phaseteleporters.machine_casing": "Maschinengehäuse",
   "block.phaseteleporters.infusion_station": "Infusionsstation",
   "item.phaseteleporters.basic_alloy": "Basislegierung",
   "item.phaseteleporters.advanced_alloy": "Fortgeschrittene Legierung",
